@@ -1,0 +1,28 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  always_update_cookbooks: true
+  product_name: chef
+  product_version: 14.2.0
+  install_strategy: always
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-18.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[app_account_portal::default]
+    data_bags_path: "test/smoke/data_bags"
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+    includes:
+      - ubuntu-18.04
