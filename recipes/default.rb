@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-include_recipe 'se_baseline::default'
+include_recipe 'se-nix-baseline::default'

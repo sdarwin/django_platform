@@ -15,4 +15,4 @@ supports ubuntu
 
 chef_version '>= 13.0.0' if respond_to?(:chef_version)
 
-depends 'se_baseline', '=~ 0.2.0'
+depends 'se-nix-baseline'
