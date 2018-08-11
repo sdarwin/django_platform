@@ -5,3 +5,4 @@ include_recipe 'se-nix-baseline::default'
 
 include_recipe 'app_account_portal::firewall'
 
+include_recipe 'app_account_portal::apache'
