@@ -1,9 +1,6 @@
 ---
 driver:
   name: vagrant
-  network:
-    - ["forwarded_port", {guest: 80, host: 80}]
-    - ["forwarded_port", {guest: 443, host: 443}]
 
 provisioner:
   name: chef_zero
@@ -19,7 +16,16 @@ verifier:
   name: inspec
 
 platforms:
+  - name: centos-7.5
+    driver:
+      network:
+      - ["forwarded_port", {guest: 80, host: 8080, host_ip: "localhost"}]
+      - ["forwarded_port", {guest: 443, host: 8043, host_ip: "localhost"}]
   - name: ubuntu-18.04
+    driver:
+      network:
+      - ["forwarded_port", {guest: 80, host: 8180, host_ip: "localhost"}]
+      - ["forwarded_port", {guest: 443, host: 8143, host_ip: "localhost"}]
 
 suites:
   - name: default
@@ -31,4 +37,5 @@ suites:
         - test/smoke/default
     attributes:
     includes:
+      - centos-7.5
       - ubuntu-18.04
