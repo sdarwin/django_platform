@@ -17,3 +17,4 @@ chef_version '>= 13.0.0' if respond_to?(:chef_version)
 
 depends 'firewall'
 depends 'se-nix-baseline'
+depends 'se-nix-users'
