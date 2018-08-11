@@ -11,6 +11,9 @@ provisioner:
   product_name: chef
   product_version: 14.2.0
   install_strategy: always
+  attributes:
+    se-users:
+      remove_bootstrap: false
 
 verifier:
   name: inspec
