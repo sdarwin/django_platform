@@ -11,7 +11,8 @@ source_url 'https://github.alaska.edu/oit-cookbooks/app_account_portal' if respo
 
 version '0.1.0'
 
-supports ubuntu
+supports 'centos', '>= 7'
+supports 'ubuntu', '>= 18.04'
 
 chef_version '>= 13.0.0' if respond_to?(:chef_version)
 
