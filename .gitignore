@@ -36,3 +36,6 @@ Policyfile.lock.json
 
 # JetBrains
 .idea/*
+
+# Secrets
+test/smoke/data_bags/user_passwords/*

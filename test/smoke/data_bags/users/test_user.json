@@ -1,0 +1,10 @@
+{
+    "id": "tpayton1",
+    "ssh_keys": [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDgZI4kt+eLlWYK3gltoUfZHB5CnKqqFOu+FLNDgfiIhNGpmlzyJWABS6mMVVuYtkL1EGFHY0eKbXxgo+w1OtWBK+QQrn2x66ZJa6G5LaduVAjRitNGbFJenpva/KEdQXoPjblggHQeVfPsjB1ZFcD+qZ/jwXZ6IYcO8Ly9Bu+jMTkT6Evz1lH+hbIXxP7+IXcmH1aMrjbFu6CcvbGhi0ej6dpCFhIwS+iCu7eGLRbz5558Z+vwQqZFZAfppiytt7fhTwd/Fo5vEFAJIHbhfjEytcdeICb6n61NMs9tDrYTcTR+gAsWaGzsJu9NBUhJ3+r+c3fGRE5LBu+n4Dm6ygTLrBPEqdgXEk+PQXzrP5GFSis9di1eaCS2Fpnk4zcYf+zYNwjgc+cEAMLsr1nsoogYnIaV7i0pbVYP5kFxxWRbNQ48IWIR2EmKYcl/trMzx2QLStB1XJB31uOA5zING4Yt9jcFsqXZaGappIWf3V1hBozuZRNahvn2P7HZTyREfrqRLYS+2gU+KTnZOSj7n8jLAR3ki4tka3/TK+0yOP+hPe7NDipmPTE2RKmcnyCytO4UjxqLIeNKkJ8+bVkyQwryayVMRK18OEk25ivR/pk1NGZQYU90YHortYsv9DUMX3NBlQD+BWlFkM1H0NiNsfsi7nrxtmN+CyYFoVo2yNeE+w== tpayton1@alaska.edu"
+    ],
+    "groups": [ "se-admins" ],
+    "uid": 5001,
+    "shell": "\/bin\/bash",
+    "comment": "Local account for Travis"
+}
