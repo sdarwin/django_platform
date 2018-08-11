@@ -16,10 +16,12 @@ This cookbook requires Chef 13+
 
 Supported Platform Families:
 
+* CentOS
 * Ubuntu
 
 Platforms validated via Test Kitchen:
 
+* CentOS
 * Ubuntu
 
 ## Resources
