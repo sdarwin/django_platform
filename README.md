@@ -30,7 +30,7 @@ This cookbook provides no custom resources.
 
 ## Recipes
 
-### app_account_portal::default
+### se_django_app::default
 
 This recipe configures the host system and deploys the Django application.
 

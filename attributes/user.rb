@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tcb = 'app_account_portal'
+tcb = 'se_django_app'
 
 default[tcb]['apache_user'] = if platform_family?('debian')
                                 'root'

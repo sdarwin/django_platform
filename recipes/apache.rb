@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tcb = 'ua_account_sync'
+tcb = 'se_django_app'
 
 include_recipe 'yum-epel' if platform_family?('rhel')
 include_recipe 'apache2'

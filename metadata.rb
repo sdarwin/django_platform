@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-name 'app_account_portal'
+name 'se_django_app'
 maintainer 'OIT Systems Engineering'
 maintainer_email 'ua-oit-se@alaska.edu'
 license 'MIT'
-description 'Installs/Configures app_account_portal'
+description 'Installs/Configures the platform and deploys a Django Application from a git repository'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-issues_url 'https://github.alaska.edu/oit-cookbooks/app_account_portal/issues' if respond_to?(:issues_url)
-source_url 'https://github.alaska.edu/oit-cookbooks/app_account_portal' if respond_to?(:source_url)
+issues_url 'https://github.alaska.edu/oit-cookbooks/se_django_app/issues' if respond_to?(:issues_url)
+source_url 'https://github.alaska.edu/oit-cookbooks/se_django_app' if respond_to?(:source_url)
 
 version '0.1.0'
 

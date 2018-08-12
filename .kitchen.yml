@@ -30,7 +30,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[app_account_portal::default]
+      - recipe[se_django_app::default]
     data_bags_path: "test/smoke/data_bags"
     verifier:
       inspec_tests:
