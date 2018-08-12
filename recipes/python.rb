@@ -8,3 +8,16 @@ if platform_family?('debian')
 else
   python_runtime '3'
 end
+
+directory '/opt/django_app' do
+  owner 'django'
+  group 'django'
+  mode '0755'
+  recursive true
+end
+
+python_virtualenv '/opt/django_app/env' do
+  user 'django'
+  group 'django'
+  python '3'
+end
