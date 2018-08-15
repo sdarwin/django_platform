@@ -4,7 +4,7 @@ __Maintainer: OIT Systems Engineering__ (<ua-oit-se@alaska.edu>)
 
 ## Purpose
 
-This is an application cookbook to create an instance of the UA Account Portal.
+This is a baseline cookbook that installs/Configures the platform and deploys a Django Application from a git repository
 
 ## Requirements
 
