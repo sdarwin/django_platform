@@ -2,7 +2,7 @@
 
 tcb = 'se_django_app'
 
-default[tcb]['apache_service'] = if platform_family?('debian')
+default[tcb]['apache']['service_name'] = if platform_family?('debian')
                                    'apache2'
                                  else
                                    'httpd'
