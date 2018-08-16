@@ -17,6 +17,7 @@ supports 'ubuntu', '>= 18.04'
 chef_version '>= 13.0.0' if respond_to?(:chef_version)
 
 depends 'apache2'
+depends 'chef-vault'
 depends 'firewall'
 depends 'git'
 depends 'se-nix-baseline'
