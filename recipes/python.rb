@@ -48,3 +48,14 @@ file '/home/django/.ssh/id_rsa' do
   sensitive true
   content ssh_key
 end
+
+git '/home/django/app' do
+  user 'django'
+  group 'django'
+  repository node[tcb]['app_repo']['repository']
+  # enable_checkout false # use checkout_branch
+  revision node[tcb]['app_repo']['revision']
+  enable_submodules true
+  environment node[tcb]['app_repo']['environment']
+  notifies :restart, "service[#{node[tcb]['apache']['service_name']}]", :delayed
+end
