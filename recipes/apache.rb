@@ -10,4 +10,4 @@ node[tcb]['apache']['additional_modules_to_install'].each do |mod|
   include_recipe "apache2::#{mod}"
 end
 
-service node['apache']['service_name']
+service node[tcb]['apache']['service_name']
