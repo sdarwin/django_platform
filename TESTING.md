@@ -41,5 +41,5 @@ See .kitchen.yml for notes on failures.
 
 ## Secrets
 
-Some cookbooks require secrets to be placed in the `/test/integration/data_bags` directory.
+Some cookbooks require secrets to be placed in the `test/integration/data_bags` directory.
 Such tests typically fail with an HTTP 404 error when the appropriate data bag is not found.

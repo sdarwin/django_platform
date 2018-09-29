@@ -11,8 +11,8 @@ source_url 'https://github.alaska.edu/OIT-CSS/django_platform' if respond_to?(:s
 
 version '0.1.0'
 
-supports 'centos', '>= 7'
-supports 'ubuntu', '>= 18.04'
+supports 'ubuntu', '>= 16.0'
+supports 'centos', '>= 7.0'
 
 chef_version '>= 14.0' if respond_to?(:chef_version)
 
@@ -20,6 +20,4 @@ depends 'apache2'
 depends 'chef-vault'
 depends 'firewall'
 depends 'git'
-depends 'se-nix-baseline'
-depends 'se-nix-users'
 depends 'yum-epel'
