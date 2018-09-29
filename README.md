@@ -10,7 +10,7 @@ This is a baseline cookbook that installs/Configures the platform and deploys a 
 
 ### Chef
 
-This cookbook requires Chef 13+
+This cookbook requires Chef 14+
 
 ### Platforms
 
