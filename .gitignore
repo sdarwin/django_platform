@@ -38,6 +38,7 @@ Policyfile.lock.json
 .idea/*
 
 # Secrets
-test/smoke/data_bags/github/*
-test/smoke/data_bags/passwords/*
-test/smoke/data_bags/user_passwords/*
+test/integration/data_bags/github/*
+test/integration/data_bags/passwords/*
+test/integration/data_bags/sensu/*
+test/integration/data_bags/user_passwords/*
