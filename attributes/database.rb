@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tcb = 'se_django_app'
+tcb = 'django_platform'
 
 # Password for DB
 default[tcb]['db_password']['vault_data_bag'] = 'passwords' # The name of the vault data bag

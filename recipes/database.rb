@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tcb = 'se_django_app'
+tcb = 'django_platform'
 
 # Will raise 404 error if not found
 db_secret = chef_vault_item(

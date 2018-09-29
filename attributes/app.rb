@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tcb = 'se_django_app'
+tcb = 'django_platform'
 
 # The URL of the repo to clone in the app directory
 # For apps within cookbooks, this will be a bit of recursion

@@ -1,4 +1,4 @@
-# Changelog for Account Portal Application
+# Changelog for Django Platform
 
 ## 0.1.0
 

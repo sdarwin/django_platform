@@ -73,7 +73,7 @@ platforms:
 suites:
   - name: debian-based
     run_list:
-      - recipe[se_django_app::default]
+      - recipe[django_platform::default]
     data_bags_path: "test/integration/data_bags"
     verifier:
       inspec_tests:
@@ -83,7 +83,7 @@ suites:
       - ubuntu-18.04
   - name: rhel-based
     run_list:
-      - recipe[se_django_app::default]
+      - recipe[django_platform::default]
     data_bags_path: "test/integration/data_bags"
     verifier:
       inspec_tests:

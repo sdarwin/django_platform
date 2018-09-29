@@ -1,10 +1,10 @@
-# Account Portal Application
+# Django Platform
 
 __Maintainer: OIT Systems Engineering__ (<ua-oit-se@alaska.edu>)
 
 ## Purpose
 
-This is a baseline cookbook that installs/Configures the platform and deploys a Django Application from a git repository
+This is a baseline cookbook that installs/configures the platform and deploys a Django application from a git repository
 
 ## Requirements
 
@@ -30,9 +30,9 @@ This cookbook provides no custom resources.
 
 ## Recipes
 
-### se_django_app::default
+### django_platform::default
 
-This recipe configures the host system and deploys the Django application.
+This recipe configures the host platform and deploys a Django application.
 
 __Attributes__
 

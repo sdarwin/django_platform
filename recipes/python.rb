@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tcb = 'se_django_app'
+tcb = 'django_platform'
 
 # '3' works in CentOS 7 but not Ubuntu 18 as of August 2018
 if platform_family?('debian')
