@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
-tcb = 'django_platform'
-
 user 'django' do
   system true
   shell '/usr/sbin/nologin'
-  manage_home false # Owned resources are in /opt
+  manage_home false # Works on Ubuntu but CentOS does not grant group access
 end
 
 group 'django' do
-  members ['django', node[tcb]['apache_user']]
+  members ['django', apache_user]
+end
+
+directory '/home/django' do
+  owner 'django'
+  group 'django'
+  mode '0755'
+  recursive true
 end

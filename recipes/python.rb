@@ -11,13 +11,6 @@ else
   python_runtime '3'
 end
 
-directory '/home/django' do
-  owner 'django'
-  group 'django'
-  mode '0755'
-  recursive true
-end
-
 python_virtualenv '/home/django/env' do
   user 'django'
   group 'django'
