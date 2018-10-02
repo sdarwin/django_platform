@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+tcb = 'django_platform'
+
 user 'django' do
   system true
   shell '/usr/sbin/nologin'

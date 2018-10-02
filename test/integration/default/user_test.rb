@@ -27,3 +27,20 @@ describe directory('/home/django') do
   it { should be_owned_by 'django' }
   it { should be_grouped_into 'django' }
 end
+
+describe directory('/home/django/.ssh') do
+  it { should exist }
+  it { should be_directory }
+  it { should be_mode 0o700 }
+  it { should be_owned_by 'django' }
+  it { should be_grouped_into 'django' }
+end
+
+describe file('/home/django/.ssh/id_rsa') do
+  it { should exist }
+  it { should be_file }
+  it { should be_mode 0o700 }
+  it { should be_owned_by 'django' }
+  it { should be_grouped_into 'django' }
+  its(:content) { should match 'BEGIN OPENSSH PRIVATE KEY' }
+end
