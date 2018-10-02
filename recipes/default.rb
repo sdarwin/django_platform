@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+include_recipe 'http_platform::default'
+
 include_recipe 'django_platform::firewall'
 
 include_recipe 'django_platform::database'
