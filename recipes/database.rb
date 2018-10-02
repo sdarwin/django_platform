@@ -11,6 +11,7 @@ raise 'Unable to retrieve data bag for SSH key' if db_secret.nil?
 db_password = db_secret[node[tcb]['db_password']['vault_item_key']]
 raise 'Unable to retrieve SSH key' if db_password.nil?
 
-postgresql_server_install 'Install PostgreSQL' do
+postgresql_server_install 'Install PostgreSQL Server' do
+  version '10'
   password db_password
 end

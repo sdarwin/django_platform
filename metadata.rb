@@ -18,4 +18,5 @@ chef_version '>= 14.0' if respond_to?(:chef_version)
 
 depends 'chef-vault'
 depends 'http_platform'
+depends 'postgresql'
 depends 'yum-epel'

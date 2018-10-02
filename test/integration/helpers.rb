@@ -32,3 +32,25 @@ def apache_shell(node)
   end
   return shell
 end
+
+def postgresql_package(node)
+  if node['platform_family'] == 'debian'
+    package = 'postgresql-10'
+  elsif node['platform_family'] == 'rhel'
+    package = 'postgresql10-server'
+  else
+    raise "Platform family not recognized: #{node['platform_family']}"
+  end
+  return package
+end
+
+def postgresql_service(node)
+  if node['platform_family'] == 'debian'
+    service = 'postgresql'
+  elsif node['platform_family'] == 'rhel'
+    service = 'postgresql-10'
+  else
+    raise "Platform family not recognized: #{node['platform_family']}"
+  end
+  return service
+end
