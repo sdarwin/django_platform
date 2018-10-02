@@ -57,5 +57,5 @@ git '/home/django/app' do
   revision node[tcb]['app_repo']['revision']
   enable_submodules true
   environment node[tcb]['app_repo']['environment']
-  notifies :restart, "service[#{node[tcb]['apache']['service_name']}]", :delayed
+  notifies :restart, "service[#{apache_service}]", :delayed
 end
