@@ -17,8 +17,6 @@ python_virtualenv '/home/django/env' do
   python '3'
 end
 
-include_recipe 'git::default'
-
 # Will raise 404 error if not found
 ssh_secret = chef_vault_item(node[tcb]['git_ssh_key']['vault_data_bag'],
                              node[tcb]['git_ssh_key']['vault_bag_item'])
