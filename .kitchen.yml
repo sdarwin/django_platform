@@ -11,6 +11,8 @@ provisioner:
   attributes:
     nix_baseline:
       hostname: 'funny.business'
+    http_platform:
+      admin_email: 'fake-it@make-it'
 
 verifier:
   name: inspec
