@@ -16,9 +16,7 @@ supports 'centos', '>= 7.0'
 
 chef_version '>= 14.0' if respond_to?(:chef_version)
 
-depends 'apache2'
 depends 'chef-vault'
-depends 'firewall'
 depends 'git'
 depends 'http_platform'
 depends 'yum-epel'
