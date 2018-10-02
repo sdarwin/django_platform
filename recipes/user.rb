@@ -13,6 +13,6 @@ end
 directory '/home/django' do
   owner 'django'
   group 'django'
-  mode '0755'
+  mode '0750'
   recursive true
 end

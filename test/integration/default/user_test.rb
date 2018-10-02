@@ -19,3 +19,11 @@ describe user(apache_user(node)) do
   its('home') { should eq apache_home_dir(node) }
   its('shell') { should eq apache_shell(node) }
 end
+
+describe directory('/home/django') do
+  it { should exist }
+  it { should be_directory }
+  it { should be_mode 0o750 }
+  it { should be_owned_by 'django' }
+  it { should be_grouped_into 'django' }
+end
