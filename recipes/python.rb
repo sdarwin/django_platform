@@ -18,13 +18,16 @@ python_virtualenv '/home/django/env' do
   python '3'
 end
 
-git '/home/django/app' do
+app_repo = node[tcb]['app_repo']
+repo_url = "git@#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
+
+git '/home/django/repo' do
   user 'django'
   group 'django'
-  repository node[tcb]['app_repo']['repository']
+  repository repo_url
   # enable_checkout false # use checkout_branch
-  revision node[tcb]['app_repo']['revision']
+  revision app_repo['git_revision']
   enable_submodules true
-  environment node[tcb]['app_repo']['environment']
+  environment app_repo['environment']
   notifies :restart, "service[#{apache_service}]", :delayed
 end

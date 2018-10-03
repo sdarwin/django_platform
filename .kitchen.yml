@@ -13,6 +13,11 @@ provisioner:
       hostname: 'funny.business'
     http_platform:
       admin_email: 'fake-it@make-it'
+    django_platform:
+      app_repo:
+        git_host: 'github.alaska.edu'
+        git_user: 'OIT-CSS'
+        git_repo: 'ua-account-sync'
 
 verifier:
   name: inspec
