@@ -2,13 +2,14 @@
 
 tcb = 'django_platform'
 
-# '3' works in CentOS 7 but not Ubuntu 18 as of August 2018
-if platform_family?('debian')
-  python_runtime '3' do
-    options package_name: 'python3'
-  end
-else
-  python_runtime '3'
+# We want to run django 2.1
+# Django 2.1 requires python 3.5 and CentOS 7 ships with 3.3, so we must install non-standard python
+
+include_recipe 'yum-epel::default'
+include_recipe 'yum-ius::default' # Needed for Python 3.6
+
+python_runtime '3' do
+  options package_name: python_package_name
 end
 
 python_virtualenv '/home/django/env' do

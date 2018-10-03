@@ -14,6 +14,16 @@ module DjangoPlatform
         end
       return user
     end
+
+    def python_package_name
+      package =
+        if node['platform_family'] == 'debian'
+          'python3'
+        else
+          'python36u'
+        end
+      return package
+    end
   end
 end
 

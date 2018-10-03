@@ -54,3 +54,14 @@ def postgresql_service(node)
   end
   return service
 end
+
+def python_package(node)
+  if node['platform_family'] == 'debian'
+    package = 'python3'
+  elsif node['platform_family'] == 'rhel'
+    package = 'python36u'
+  else
+    raise "Platform family not recognized: #{node['platform_family']}"
+  end
+  return package
+end
