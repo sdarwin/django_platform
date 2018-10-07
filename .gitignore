@@ -41,4 +41,3 @@ Policyfile.lock.json
 test/integration/data_bags/github/*
 test/integration/data_bags/passwords/*
 test/integration/data_bags/sensu/*
-test/integration/data_bags/user_passwords/*
