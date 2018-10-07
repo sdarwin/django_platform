@@ -7,3 +7,5 @@ include_recipe 'django_platform::user'
 include_recipe 'django_platform::database'
 
 include_recipe 'django_platform::python'
+
+include_recipe 'django_platform::app'
