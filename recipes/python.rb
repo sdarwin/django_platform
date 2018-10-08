@@ -8,13 +8,24 @@ tcb = 'django_platform'
 include_recipe 'yum-epel::default'
 include_recipe 'yum-ius::default' # Needed for Python 3.6
 
+# We should use a virtual environment, but poise-python is busted as of pip 18.1 release
 python_runtime '3' do
   options package_name: python_package_name
+  pip_version false
+  setuptools_version false
+  wheel_version false
 end
+package python_package_name + '-pip' if busted_poise?
+package python_package_name + '-setuptools' if busted_poise?
+package python_package_name + '-wheel' if busted_poise?
 
 python_virtualenv '/home/django/env' do
   user 'django'
   group 'django'
   python '3'
+  pip_version true
+  setuptools_version true
+  wheel_version true
+  only_if { !busted_poise? }
 end
 

@@ -24,6 +24,10 @@ module DjangoPlatform
         end
       return package
     end
+
+    def busted_poise?
+      return true
+    end
   end
 end
 
