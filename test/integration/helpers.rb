@@ -65,3 +65,7 @@ def python_package(node)
   end
   return package
 end
+
+def busted_poise?
+  return true
+end
