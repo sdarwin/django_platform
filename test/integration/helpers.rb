@@ -59,7 +59,18 @@ def python_package(node)
   if node['platform_family'] == 'debian'
     package = 'python3'
   elsif node['platform_family'] == 'rhel'
-    package = 'python36u'
+    package = 'rh-python36'
+  else
+    raise "Platform family not recognized: #{node['platform_family']}"
+  end
+  return package
+end
+
+def python_package_prefix(node)
+  if node['platform_family'] == 'debian'
+    package = 'python3'
+  elsif node['platform_family'] == 'rhel'
+    package = 'rh-python36-python'
   else
     raise "Platform family not recognized: #{node['platform_family']}"
   end
