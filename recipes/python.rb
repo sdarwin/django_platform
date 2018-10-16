@@ -28,3 +28,10 @@ python_virtualenv '/home/django/env' do
   only_if { !busted_poise? }
 end
 
+node[tcb]['python']['packages_to_install'].each do |package, version|
+  python_package package do
+    python '3' if busted_poise?
+    virtualenv '/home/django/env' unless busted_poise?
+    version version if version
+  end
+end
