@@ -36,7 +36,7 @@ module DjangoPlatform
     end
 
     def busted_poise?
-      return true
+      return false
     end
   end
 end

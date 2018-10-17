@@ -78,5 +78,5 @@ def python_package_prefix(node)
 end
 
 def busted_poise?
-  return true
+  return false
 end
