@@ -17,7 +17,7 @@ provisioner:
       app_repo:
         git_host: 'github.alaska.edu'
         git_user: 'OIT-CSS'
-        git_repo: 'ua-account-sync'
+        git_repo: 'ua_account_site'
 
 verifier:
   name: inspec
