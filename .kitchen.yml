@@ -6,15 +6,17 @@ provisioner:
   name: chef_zero
   always_update_cookbooks: true
   product_name: chef
-  product_version: 14.5.33
+  product_version: 14.6.47
   install_strategy: always
   attributes:
     nix_baseline:
+      chef_client_version: 14.6.47
       hostname: 'funny.business'
     http_platform:
       admin_email: 'fake-it@make-it'
     django_platform:
       app_repo:
+        path_to_http_root: 'app'
         git_host: 'github.alaska.edu'
         git_user: 'OIT-CSS'
         git_repo: 'ua_account_site'
