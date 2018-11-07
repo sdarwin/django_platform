@@ -9,6 +9,8 @@ provisioner:
   product_version: 14.6.47
   install_strategy: always
   attributes:
+    se_baseline:
+      chef_client_version: '14.6.47'
     nix_baseline:
       chef_client_version: '14.6.47'
       hostname: 'funny.business'
