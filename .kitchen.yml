@@ -10,7 +10,7 @@ provisioner:
   install_strategy: always
   attributes:
     nix_baseline:
-      chef_client_version: 14.6.47
+      chef_client_version: '14.6.47'
       hostname: 'funny.business'
     http_platform:
       admin_email: 'fake-it@make-it'
