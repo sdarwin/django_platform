@@ -38,6 +38,12 @@ module DjangoPlatform
     def busted_poise?
       return false
     end
+
+    def django_http_root
+      doc_root = node[TCB]['app_repo']['path_to_http_root']
+      raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_http_root\'] must be set' if doc_root.nil?
+      return File.join('/home/django/app', doc_root)
+    end
   end
 end
 

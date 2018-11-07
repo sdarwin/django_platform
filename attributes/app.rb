@@ -16,3 +16,7 @@ default[tcb]['app_repo']['git_revision'] = 'master'
 
 # Hash of environment variables to pass to git repo
 default[tcb]['app_repo']['environment'] = {}
+
+# The relative path to the document root for the website
+# Must be set or an exception is raised
+default[tcb]['app_repo']['path_to_http_root'] = nil
