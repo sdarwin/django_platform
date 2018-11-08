@@ -77,11 +77,10 @@ def python_package_prefix(node)
   return package
 end
 
-def busted_poise?
-  return false
+def path_to_venv
+  return '/home/django/env'
 end
 
 def path_to_pip
-  return '' if busted_poise?
-  return '/home/django/env/bin/pip3'
+  return File.join(path_to_venv, 'bin/pip')
 end
