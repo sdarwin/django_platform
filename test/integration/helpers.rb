@@ -59,7 +59,7 @@ def python_package(node)
   if node['platform_family'] == 'debian'
     package = 'python3'
   elsif node['platform_family'] == 'rhel'
-    package = 'rh-python36'
+    package = 'python36'
   else
     raise "Platform family not recognized: #{node['platform_family']}"
   end
@@ -68,9 +68,9 @@ end
 
 def python_package_prefix(node)
   if node['platform_family'] == 'debian'
-    package = 'python3'
+    package = 'python3-'
   elsif node['platform_family'] == 'rhel'
-    package = 'rh-python36-python'
+    package = 'python36-'
   else
     raise "Platform family not recognized: #{node['platform_family']}"
   end
@@ -79,4 +79,9 @@ end
 
 def busted_poise?
   return false
+end
+
+def path_to_pip
+  return '' if busted_poise?
+  return '/home/django/env/bin/pip3'
 end
