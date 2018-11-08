@@ -17,6 +17,10 @@ default[tcb]['app_repo']['git_revision'] = 'master'
 # Hash of environment variables to pass to git repo
 default[tcb]['app_repo']['environment'] = {}
 
+# The relative path to the requirements document from repo root
+# If non-nil, pip will be used to install the requirements
+default[tcb]['app_repo']['path_to_pip_requirements'] = nil
+
 # The relative path to manage.py from repo root
 # Must be set or an exception is raised
 default[tcb]['app_repo']['path_to_manage.py'] = nil

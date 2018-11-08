@@ -20,6 +20,7 @@ provisioner:
       app_repo:
         path_to_manage_py: 'app/manage.py'
         path_to_http_root: 'app'
+        path_to_pip_requirements: 'requirements.txt'
         git_host: 'github.alaska.edu'
         git_user: 'OIT-CSS'
         git_repo: 'ua_account_site'
