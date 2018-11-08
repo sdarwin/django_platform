@@ -17,7 +17,7 @@ package "#{python_package_prefix}venv" do
 end
 
 bash 'Virtual Environment for Django' do
-  code "#{python_command} -m venv /home/django/env"
+  code "#{python_command} -m venv #{path_to_venv}"
   user 'django'
   group 'django'
   not_if { File.exist?(File.join(path_to_venv, 'bin/activate')) }
