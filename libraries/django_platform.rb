@@ -49,6 +49,10 @@ module DjangoPlatform
       return '/home/django/env'
     end
 
+    def path_to_venv_python
+      return File.join(path_to_venv, 'bin/python')
+    end
+
     def django_http_root
       doc_root = node[TCB]['app_repo']['path_to_http_root']
       raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_http_root\'] must be set' if doc_root.nil?

@@ -25,7 +25,7 @@ end
 
 node[tcb]['python']['packages_to_install'].each do |package, version|
   python_package package do
-    python File.join(path_to_venv, 'bin/python')
+    python path_to_venv_python
     user 'django'
     group 'django'
     version version if version
