@@ -20,7 +20,7 @@ module DjangoPlatform
         if node['platform_family'] == 'debian'
           'python3'
         else
-          'rh-python36'
+          'python36'
         end
       return package
     end
@@ -30,13 +30,23 @@ module DjangoPlatform
         if node['platform_family'] == 'debian'
           'python3-'
         else
-          'rh-python36-python-'
+          'python36-'
         end
       return package
     end
 
-    def busted_poise?
-      return false
+    def python_command
+      package =
+        if node['platform_family'] == 'debian'
+          'python3'
+        else
+          'python36'
+        end
+      return package
+    end
+
+    def path_to_venv
+      return '/home/django/env'
     end
 
     def django_http_root

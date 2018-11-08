@@ -9,4 +9,9 @@ default['poise-python']['options']['pip_version'] = '18.0'
 # A Hash of package name to version
 # If version is empty, the latest will be installed
 # Defaults to { 'Django' => '' } to install the latest version of Django
-default[tcb]['python']['packages_to_install'] = { 'Django' => '' }
+default[tcb]['python']['packages_to_install'] = {
+  pip: '',
+  wheel: '',
+  setuptools: '',
+  Django: ''
+}

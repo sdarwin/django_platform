@@ -7,31 +7,27 @@ tcb = 'django_platform'
 
 include_recipe 'yum-epel::default'
 
-# We should use a virtual environment, but poise-python is busted as of pip 18.1 release
-python_runtime '3' do
-  options package_name: python_package_name
-  pip_version false
-  setuptools_version false
-  wheel_version false
+# poise-python is busted:
+# Package detection does not work on Ubuntu or CentOS
+# Virtual environment creation is broken in CentOS
+# We use it only to manage packages
+package python_package_name
+package "#{python_package_prefix}venv" do
+  only_if { node['platform_family'] == 'debian' }
 end
-package python_package_prefix + 'pip' if busted_poise?
-package python_package_prefix + 'setuptools' if busted_poise?
-package python_package_prefix + 'wheel' if busted_poise?
 
-python_virtualenv '/home/django/env' do
+bash 'Virtual Environment for Django' do
+  code "#{python_command} -m venv /home/django/env"
   user 'django'
   group 'django'
-  python '3'
-  pip_version true
-  setuptools_version true
-  wheel_version true
-  only_if { !busted_poise? }
+  not_if { File.exist?(File.join(path_to_venv, 'bin/activate')) }
 end
 
 node[tcb]['python']['packages_to_install'].each do |package, version|
   python_package package do
-    python '3' if busted_poise?
-    virtualenv '/home/django/env' unless busted_poise?
+    python File.join(path_to_venv, 'bin/python')
+    user 'django'
+    group 'django'
     version version if version
   end
 end
