@@ -45,6 +45,10 @@ module DjangoPlatform
       return package
     end
 
+    def path_to_app_repo
+      return '/home/django/app'
+    end
+
     def path_to_venv
       return '/home/django/env'
     end
@@ -53,10 +57,16 @@ module DjangoPlatform
       return File.join(path_to_venv, 'bin/python')
     end
 
+    def path_to_manage_py
+      manage_py = node[TCB]['app_repo']['path_to_manage.py']
+      raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_manage.py\'] must be set' if doc_root.nil?
+      return File.join(path_to_app_repo, manage_py)
+    end
+
     def django_http_root
       doc_root = node[TCB]['app_repo']['path_to_http_root']
       raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_http_root\'] must be set' if doc_root.nil?
-      return File.join('/home/django/app', doc_root)
+      return File.join(path_to_app_repo, doc_root)
     end
   end
 end
