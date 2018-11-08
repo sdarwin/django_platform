@@ -46,7 +46,7 @@ module DjangoPlatform
     end
 
     def path_to_app_repo
-      return '/home/django/app'
+      return '/home/django/repo'
     end
 
     def path_to_venv
@@ -58,8 +58,8 @@ module DjangoPlatform
     end
 
     def path_to_manage_py
-      manage_py = node[TCB]['app_repo']['path_to_manage.py']
-      raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_manage.py\'] must be set' if doc_root.nil?
+      manage_py = node[TCB]['app_repo']['path_to_manage_py']
+      raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_manage_py\'] must be set' if manage_py.nil?
       return File.join(path_to_app_repo, manage_py)
     end
 

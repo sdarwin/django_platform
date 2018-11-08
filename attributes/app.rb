@@ -23,7 +23,7 @@ default[tcb]['app_repo']['path_to_pip_requirements'] = nil
 
 # The relative path to manage.py from repo root
 # Must be set or an exception is raised
-default[tcb]['app_repo']['path_to_manage.py'] = nil
+default[tcb]['app_repo']['path_to_manage_py'] = nil
 
 # The relative path to the document root for the website
 # Must be set or an exception is raised

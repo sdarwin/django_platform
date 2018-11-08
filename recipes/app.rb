@@ -15,7 +15,7 @@ ssh_known_hosts_entry app_repo['git_host'] do
   action [:create, :flush] # Write the entry to disk so the checkout succeeds the first time!
 end
 
-git '/home/django/repo' do
+git path_to_app_repo do
   user 'django'
   group 'django'
   repository repo_url
@@ -24,4 +24,16 @@ git '/home/django/repo' do
   enable_submodules true
   environment app_repo['environment']
   notifies :restart, "service[#{apache_service}]", :delayed
+end
+
+bash 'Update App Data' do
+  code <<-SCRIPT
+    source #{path_to_venv}/bin/activate
+    #{path_to_manage_py} migrate
+    #{path_to_manage_py} collectstatic --noinput
+  SCRIPT
+  user 'django'
+  group 'django'
+  action :nothing
+  subscribes :run, "git[#{path_to_app_repo}]", :immediate
 end
