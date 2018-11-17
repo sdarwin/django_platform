@@ -25,6 +25,7 @@ ssh_secret = chef_vault_item(
   node[tcb]['git_ssh_key']['vault_bag_item']
 )
 raise 'Unable to retrieve data bag for SSH key' if ssh_secret.nil?
+
 ssh_key = ssh_secret[node[tcb]['git_ssh_key']['vault_item_key']]
 raise 'Unable to retrieve SSH key' if ssh_key.nil?
 

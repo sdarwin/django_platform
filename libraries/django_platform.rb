@@ -60,12 +60,14 @@ module DjangoPlatform
     def path_to_manage_py
       manage_py = node[TCB]['app_repo']['path_to_manage_py']
       raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_manage_py\'] must be set' if manage_py.nil?
+
       return File.join(path_to_app_repo, manage_py)
     end
 
     def django_http_root
       doc_root = node[TCB]['app_repo']['path_to_http_root']
       raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_http_root\'] must be set' if doc_root.nil?
+
       return File.join(path_to_app_repo, doc_root)
     end
   end
