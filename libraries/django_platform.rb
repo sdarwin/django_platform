@@ -66,6 +66,20 @@ module DjangoPlatform
 
       return File.join(path_to_app_repo, doc_root)
     end
+
+    def vault_secret(bag, item, key)
+      # Will raise 404 error if not found
+      item = chef_vault_item(
+        bag,
+        item
+      )
+      raise 'Unable to retrieve vault item' if item.nil?
+
+      secret = item[key]
+      raise 'Unable to retrieve item key' if secret.nil?
+
+      return secret
+    end
   end
 end
 
