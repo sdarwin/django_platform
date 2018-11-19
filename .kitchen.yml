@@ -18,7 +18,7 @@ provisioner:
     django_platform:
       django_is_system_user: false
       app_repo:
-        path_to_manage_py: 'app/manage.py'
+        path_to_manage_py: 'app/account_site/manage.py'
         path_to_http_root: 'app'
         path_to_pip_requirements: 'requirements.txt'
         git_host: 'github.alaska.edu'
