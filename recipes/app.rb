@@ -31,12 +31,14 @@ git path_to_app_repo do
   notifies :restart, "service[#{apache_service}]", :delayed
 end
 
-bash 'Update App Data' do
-  code <<-SCRIPT
-    source #{path_to_venv}/bin/activate
-    #{path_to_manage_py} migrate
-    #{path_to_manage_py} collectstatic --noinput
-  SCRIPT
+update_script = <<~SCRIPT
+  '''#{path_to_manage_py} migrate
+  #{path_to_manage_py} collectstatic --noinput'''
+SCRIPT
+
+python_execute 'Update App Data' do
+  command update_script
+  virtualenv path_to_venv
   user 'django'
   group 'django'
   action :nothing
