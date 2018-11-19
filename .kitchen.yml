@@ -87,7 +87,7 @@ suites:
   - name: debian-based
     run_list:
       - recipe[se-nix-baseline::default]
-      - recipe[django_platform::default]
+      - recipe[django_test::default]
     data_bags_path: "test/integration/data_bags"
     verifier:
       inspec_tests:
@@ -98,7 +98,7 @@ suites:
   - name: rhel-based
     run_list:
       - recipe[se-nix-baseline::default]
-      - recipe[django_platform::default]
+      - recipe[django_test::default]
     data_bags_path: "test/integration/data_bags"
     verifier:
       inspec_tests:
