@@ -16,6 +16,7 @@ provisioner:
     http_platform:
       admin_email: 'fake-it@make-it'
     django_platform:
+      django_is_system_user: false
       app_repo:
         path_to_manage_py: 'app/manage.py'
         path_to_http_root: 'app'

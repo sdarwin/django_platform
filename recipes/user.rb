@@ -3,8 +3,9 @@
 tcb = 'django_platform'
 
 user 'django' do
-  system true
-  shell '/usr/sbin/nologin'
+  system node[tcb]['django_is_system_user']
+  shell '/usr/sbin/nologin' if node[tcb]['django_is_system_user']
+  shell '/bin/bash' unless node[tcb]['django_is_system_user']
   manage_home false # Works on Ubuntu but CentOS does not grant group access
 end
 
