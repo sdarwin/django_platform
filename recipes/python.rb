@@ -33,12 +33,3 @@ node[tcb]['python']['packages_to_install'].each do |package, version|
     virtualenv path_to_venv
   end
 end
-
-unless node[tcb]['path_to_pip_requirements'].nil?
-  pip_requirements 'Application requirements' do
-    path File.join(path_to_app_repo, node[tcb]['path_to_pip_requirements'])
-    user 'django'
-    group 'django'
-    virtualenv path_to_venv
-  end
-end
