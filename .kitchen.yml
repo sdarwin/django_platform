@@ -8,22 +8,6 @@ provisioner:
   product_name: chef
   product_version: 14.7.17
   install_strategy: always
-  attributes:
-    se_baseline:
-      chef_client_version: '14.7.17'
-    nix_baseline:
-      hostname: 'funny.business'
-    http_platform:
-      admin_email: 'fake-it@make-it'
-    django_platform:
-      django_is_system_user: false
-      app_repo:
-        path_to_manage_py: 'app/account_site/manage.py'
-        path_to_http_root: 'app'
-        path_to_pip_requirements: 'requirements.txt'
-        git_host: 'github.alaska.edu'
-        git_user: 'OIT-CSS'
-        git_repo: 'ua_account_site'
 
 verifier:
   name: inspec
