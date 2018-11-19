@@ -16,19 +16,21 @@ package "#{python_package_prefix}venv" do
   only_if { node['platform_family'] == 'debian' }
 end
 
-bash 'Virtual Environment for Django' do
-  code "#{python_command} -m venv #{path_to_venv}"
+python_virtualenv path_to_venv do
+  python path_to_system_python
+  pip_version true
+  setuptools_version true
+  wheel_version true
   user 'django'
   group 'django'
-  not_if { File.exist?(File.join(path_to_venv, 'bin/activate')) }
 end
 
 node[tcb]['python']['packages_to_install'].each do |package, version|
   python_package package do
-    python path_to_venv_python
+    version version if version
     user 'django'
     group 'django'
-    version version if version
+    virtualenv path_to_venv
   end
 end
 
@@ -37,6 +39,6 @@ unless node[tcb]['path_to_pip_requirements'].nil?
     path File.join(path_to_app_repo, node[tcb]['path_to_pip_requirements'])
     user 'django'
     group 'django'
-    python path_to_venv_python
+    virtualenv path_to_venv
   end
 end

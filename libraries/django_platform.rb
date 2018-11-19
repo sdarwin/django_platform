@@ -35,14 +35,14 @@ module DjangoPlatform
       return package
     end
 
-    def python_command
-      package =
+    def path_to_system_python
+      binary =
         if node['platform_family'] == 'debian'
-          'python3'
+          '/usr/bin/python3'
         else
-          'python36'
+          '/usr/bin/python36'
         end
-      return package
+      return binary
     end
 
     def path_to_app_repo
@@ -51,10 +51,6 @@ module DjangoPlatform
 
     def path_to_venv
       return '/home/django/env'
-    end
-
-    def path_to_venv_python
-      return File.join(path_to_venv, 'bin/python')
     end
 
     def path_to_manage_py
