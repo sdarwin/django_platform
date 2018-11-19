@@ -5,14 +5,19 @@ tcb = 'django_platform'
 app_repo = node[tcb]['app_repo']
 repo_url = "git@#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
 
-# This fails the first time because of a message saying the host was added (non-interactive) then succeeds
-
 ssh_known_hosts_entry app_repo['git_host'] do
   host app_repo['git_host']
   file_location '/home/django/.ssh/known_hosts'
   owner 'django'
   group 'django'
-  action [:create, :flush] # Write the entry to disk so the checkout succeeds the first time!
+end
+
+file 'First-Run Django Sentinel' do
+  path '/opt/chef/run_record/django_sentinel.txt'
+  content 'This is a sentinel to detect the first run of django_platform'
+  mode '0644'
+  # Write the entry to disk so the checkout succeeds the first time!
+  notifies :flush, "ssh_known_hosts_entry[#{app_repo['git_host']}]", :immediate
 end
 
 git path_to_app_repo do
