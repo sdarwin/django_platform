@@ -53,3 +53,22 @@ python_execute 'Update App Data' do
   action :nothing
   subscribes :run, "git[#{path_to_app_repo}]", :delayed # Must be after pip requirements
 end
+
+var_map = {
+  path_to_http_root: django_http_root,
+  path_to_library_root: File.join(path_to_venv, 'lib/python3.*/site-packages'),
+  path_to_site_directory: path_to_site_directory,
+  path_to_static_dir: path_to_static_dir,
+  path_to_wsgi_py: File.join(path_to_site_directory, 'wsgi.py')
+}
+
+# We use template because apache_conf does not support variables
+template 'Django Conf' do
+  path File.join(config_absolute_directory, 'django.conf')
+  source 'django.conf.erb'
+  variables var_map
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :restart, "service[#{apache_service}]", :delayed
+end

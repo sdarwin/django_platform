@@ -1,0 +1,16 @@
+Alias /static <%= @path_to_static_dir %>
+
+<Directory <%= @path_to_http_root %>/>
+    Require all granted
+</Directory>
+
+<Directory <%= @path_to_site_directory %>/>
+    <Files wsgi.py>
+        Require all granted
+    </Files>
+</Directory>
+
+WSGIDaemonProcess django python-path=<%= @path_to_http_root %>:<%= @path_to_library_root %>
+WSGIProcessGroup django
+WSGIScriptAlias / <%= @path_to_wsgi_py %>
+WSGISocketPrefix run/wsgi

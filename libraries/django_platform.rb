@@ -53,11 +53,18 @@ module DjangoPlatform
       return '/home/django/env'
     end
 
-    def path_to_manage_py
-      manage_py = node[TCB]['app_repo']['path_to_manage_py']
-      raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_manage_py\'] must be set' if manage_py.nil?
+    def path_to_site_directory
+      site_dir = node[TCB]['app_repo']['path_to_site_directory']
+      raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_site_directory\'] must be set' if site_dir.nil?
 
-      return File.join(path_to_app_repo, manage_py)
+      return File.join(path_to_app_repo, site_dir)
+    end
+
+    def path_to_static_dir
+      static_dir = node[TCB]['app_repo']['path_to_static_directory']
+      raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_static_directory\'] must be set' if static_dir.nil?
+
+      return File.join(path_to_app_repo, static_dir)
     end
 
     def django_http_root
@@ -65,6 +72,10 @@ module DjangoPlatform
       raise 'node[\'django_platform\'][\'app_repo\'][\'path_to_http_root\'] must be set' if doc_root.nil?
 
       return File.join(path_to_app_repo, doc_root)
+    end
+
+    def path_to_manage_py
+      return File.join(django_http_root, 'manage.py')
     end
 
     def vault_secret(bag, item, key)
