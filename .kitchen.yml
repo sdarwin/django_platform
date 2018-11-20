@@ -8,6 +8,9 @@ provisioner:
   product_name: chef
   product_version: 14.7.17
   install_strategy: always
+  attributes:
+    se_baseline:
+      chef_client_version: '14.7.17'
 
 verifier:
   name: inspec

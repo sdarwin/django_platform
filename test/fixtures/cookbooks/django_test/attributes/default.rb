@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-default['se_baseline']['chef_client_version'] = '14.7.17'
 default['nix_baseline']['hostname'] = 'funny.business'
 
 default['http_platform']['admin_email'] = 'fake-it@make-it'
