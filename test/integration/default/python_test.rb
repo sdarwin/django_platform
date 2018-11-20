@@ -25,17 +25,14 @@ end
 
 describe pip('pip', path_to_pip) do
   it { should be_installed }
-  # its('version') { should match(/^18\./) }
 end
 
 describe pip('wheel', path_to_pip) do
   it { should be_installed }
-  its('version') { should match(/^0\.32\./) }
 end
 
 describe pip('setuptools', path_to_pip) do
   it { should be_installed }
-  its('version') { should match(/^39\.0/) }
 end
 
 describe pip('Django', path_to_pip) do
