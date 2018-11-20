@@ -69,6 +69,6 @@ template 'Django Conf' do
   variables var_map
   owner 'root'
   group 'root'
-  mode '0644'
+  mode '0440'
   notifies :restart, "service[#{apache_service}]", :delayed
 end

@@ -33,6 +33,12 @@ def apache_shell(node)
   return shell
 end
 
+def path_to_conf_directory(node)
+  return '/etc/apache2/conf.d' if node['platform_family'] == 'debian'
+
+  return '/etc/httpd/conf.d'
+end
+
 def postgresql_package(node)
   if node['platform_family'] == 'debian'
     package = 'postgresql-10'
