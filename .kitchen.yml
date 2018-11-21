@@ -17,6 +17,9 @@ provisioner:
       apache:
         install_test_suite: true
       www:
+        additional_aliases:
+          funny.business:
+            log_level: 'info'
         remove_default_index: false
         create_default_index: true
     django_platform:
