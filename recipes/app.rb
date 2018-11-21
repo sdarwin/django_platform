@@ -31,9 +31,9 @@ git path_to_app_repo do
   notifies :restart, "service[#{apache_service}]", :delayed
 end
 
-unless node[tcb]['app_repo']['path_to_pip_requirements'].nil?
+unless node[tcb]['app_repo']['rel_path_to_pip_requirements'].nil?
   pip_requirements 'Application requirements' do
-    path File.join(path_to_app_repo, node[tcb]['app_repo']['path_to_pip_requirements'])
+    path File.join(path_to_app_repo, node[tcb]['app_repo']['rel_path_to_pip_requirements'])
     user 'django'
     group 'django'
     virtualenv path_to_venv
@@ -41,12 +41,13 @@ unless node[tcb]['app_repo']['path_to_pip_requirements'].nil?
 end
 
 update_script = <<~SCRIPT
-  '''#{path_to_manage_py} migrate
-  #{path_to_manage_py} collectstatic --noinput'''
+  '''#{rel_path_to_manage_py} migrate
+  #{rel_path_to_manage_py} collectstatic --noinput'''
 SCRIPT
 
 python_execute 'Update App Data' do
   command update_script
+  cwd path_to_app_repo
   virtualenv path_to_venv
   user 'django'
   group 'django'

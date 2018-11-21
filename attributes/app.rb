@@ -19,16 +19,16 @@ default[tcb]['app_repo']['environment'] = {}
 
 # The relative path to the requirements document, from repo root
 # If non-nil, pip will be used to install the requirements
-default[tcb]['app_repo']['path_to_pip_requirements'] = nil
+default[tcb]['app_repo']['rel_path_to_pip_requirements'] = nil
 
 # The relative path to the directory that contains manage.py, from repo root
 # Must be set or an exception is raised
-default[tcb]['app_repo']['path_to_http_root'] = nil
+default[tcb]['app_repo']['rel_path_to_http_root'] = nil
 
 # The relative path to the directory that contains wsgi.py, from repo root
 # Must be set or an exception is raised
-default[tcb]['app_repo']['path_to_site_directory'] = nil
+default[tcb]['app_repo']['rel_path_to_site_directory'] = nil
 
-# The relative path to the static directory (the target of collectstatic)
+# The relative path to the static directory (the target of collectstatic), from repo root
 # Must be set or an exception is raised
-default[tcb]['app_repo']['path_to_static_directory'] = nil
+default[tcb]['app_repo']['rel_path_to_static_directory'] = nil

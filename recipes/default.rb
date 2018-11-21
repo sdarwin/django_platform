@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-node.default['http_platform']['www']['document_root'] = django_http_root
+node.default['http_platform']['www']['document_root'] = File.join(path_to_app_repo, rel_path_to_http_root)
 
 include_recipe 'http_platform::default'
 
