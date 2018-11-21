@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-default['http_platform']['admin_email'] = 'fake-it@make-it'
+default['http_platform']['admin_email'] = 'ua-oit-se@alaska.edu'
 
 default['django_platform']['app_repo']['path_to_http_root'] = 'app'
 default['django_platform']['app_repo']['path_to_site_directory'] = 'app/account_site'
