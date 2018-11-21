@@ -56,11 +56,12 @@ python_execute 'Update App Data' do
 end
 
 var_map = {
-  path_to_http_root: django_http_root,
-  path_to_library_root: File.join(path_to_venv, 'lib/python3.*/site-packages'),
-  path_to_site_directory: path_to_site_directory,
-  path_to_static_dir: path_to_static_dir,
-  path_to_wsgi_py: File.join(path_to_site_directory, 'wsgi.py')
+  path_to_http_root: File.join(path_to_app_repo, rel_path_to_http_root),
+  path_to_static_directory: File.join(path_to_app_repo, rel_path_to_static_directory),
+  path_to_venv: path_to_venv,
+  path_to_wsgi_py: File.join(path_to_app_repo, rel_path_to_site_directory, 'wsgi.py'),
+  rel_path_to_site_directory: rel_path_to_site_directory,
+  rel_path_to_static_directory: rel_path_to_static_directory
 }
 
 # We use template because apache_conf does not support variables
