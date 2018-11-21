@@ -11,6 +11,8 @@ provisioner:
   attributes:
     se_baseline:
       chef_client_version: '14.7.17'
+    nix_baseline:
+      hostname: 'funny.business'
 
 verifier:
   name: inspec

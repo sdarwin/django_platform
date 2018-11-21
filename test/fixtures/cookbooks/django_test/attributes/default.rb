@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-default['nix_baseline']['hostname'] = 'funny.business'
-
 default['http_platform']['admin_email'] = 'fake-it@make-it'
 
 default['django_platform']['django_is_system_user'] = false
