@@ -2,7 +2,7 @@
 
 def apache_user(node)
   if node['platform_family'] == 'debian'
-    user = 'root'
+    user = 'www-data'
   elsif node['platform_family'] == 'rhel'
     user = 'apache'
   else
@@ -13,7 +13,7 @@ end
 
 def apache_home_dir(node)
   if node['platform_family'] == 'debian'
-    dir = '/root'
+    dir = '/var/www'
   elsif node['platform_family'] == 'rhel'
     dir = '/usr/share/httpd'
   else
@@ -24,7 +24,7 @@ end
 
 def apache_shell(node)
   if node['platform_family'] == 'debian'
-    shell = '/bin/bash'
+    shell = '/usr/sbin/nologin'
   elsif node['platform_family'] == 'rhel'
     shell = '/sbin/nologin'
   else

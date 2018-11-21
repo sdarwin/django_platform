@@ -8,7 +8,7 @@ module DjangoPlatform
     def apache_user
       user =
         if node['platform_family'] == 'debian'
-          'root'
+          'www-data'
         else
           'apache'
         end
