@@ -9,7 +9,8 @@ describe user('django') do
   its('group') { should eq 'django' }
   its('groups') { should eq ['django'] }
   its('home') { should eq '/home/django' }
-  its('shell') { should eq '/usr/sbin/nologin' }
+  its('shell') { should eq '/bin/bash' }
+  # its('shell') { should eq '/usr/sbin/nologin' }
 end
 
 describe user(apache_user(node)) do
