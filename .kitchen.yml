@@ -13,6 +13,8 @@ provisioner:
       chef_client_version: '14.7.17'
     nix_baseline:
       hostname: 'funny.business'
+    django_platform:
+      django_is_system_user: false
 
 verifier:
   name: inspec
