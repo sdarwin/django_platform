@@ -22,6 +22,8 @@ describe file("#{path_to_conf_directory(node)}/django.conf") do
   its(:content) { should match('Alias /static /home/django/repo/app/static') }
   its(:content) { should match('<Directory /home/django/repo/app/>') }
   its(:content) { should match('<Directory /home/django/repo/app/account_site/>') }
+  # rubocop:disable Metrics/LineLength
   its(:content) { should match('WSGIDaemonProcess django python-path=/home/django/repo/app:/home/django/env/lib/python3\.\*/site-packages') }
+  # rubocop:enable Metrics/LineLength
   its(:content) { should match('WSGIScriptAlias / /home/django/repo/app/account_site/wsgi\.py') }
 end
