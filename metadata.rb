@@ -6,8 +6,10 @@ maintainer_email 'ua-oit-se@alaska.edu'
 license 'MIT'
 description 'Installs/configures the platform and deploys a Django application from a git repository'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-issues_url 'https://github.alaska.edu/OIT-CSS/django_platform/issues' if respond_to?(:issues_url)
-source_url 'https://github.alaska.edu/OIT-CSS/django_platform' if respond_to?(:source_url)
+
+git_url = 'https://github.alaska.edu/oit-cookbooks/django_platform'
+source_url git_url if respond_to?(:source_url)
+issues_url "#{git_url}/issues" if respond_to?(:issues_url)
 
 version '0.1.0'
 
