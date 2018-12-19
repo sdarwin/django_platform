@@ -17,8 +17,12 @@ provisioner:
       configure_update: false
       hostname: 'funny.business'
     http_platform:
+      admin_email: 'fake-it@make-it'
       apache:
         install_test_suite: true
+      cert:
+        organization: 'fake_org'
+        org_unit: 'fake_unit'
       www:
         additional_aliases:
           funny.business:
