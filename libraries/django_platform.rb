@@ -60,6 +60,10 @@ module DjangoPlatform
       return site_dir
     end
 
+    def path_to_settings_py
+      return File.join(path_to_app_repo, rel_path_to_site_directory, 'settings.py')
+    end
+
     def rel_path_to_static_directory
       static_dir = node[TCB]['app_repo']['rel_path_to_static_directory']
       raise 'node[\'django_platform\'][\'app_repo\'][\'rel_path_to_static_directory\'] must be set' if static_dir.nil?

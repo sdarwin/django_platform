@@ -40,19 +40,29 @@ unless node[tcb]['app_repo']['rel_path_to_pip_requirements'].nil?
   end
 end
 
-update_script = <<~SCRIPT
-  '''#{rel_path_to_manage_py} migrate
-  #{rel_path_to_manage_py} collectstatic --noinput'''
-SCRIPT
+code = "#{rel_path_to_manage_py} migrate"
 
-python_execute 'Update App Data' do
-  command update_script
+python_execute 'Migrate App Data' do
+  command code
   cwd path_to_app_repo
   virtualenv path_to_venv
   user 'django'
   group 'django'
   action :nothing
   subscribes :run, "git[#{path_to_app_repo}]", :delayed # Must be after pip requirements
+end
+
+code = "#{rel_path_to_manage_py} collectstatic --noinput"
+
+python_execute 'Collect Static' do
+  command code
+  cwd path_to_app_repo
+  virtualenv path_to_venv
+  user 'django'
+  group 'django'
+  action :nothing
+  subscribes :run, 'python_execute[Migrate App Data]', :delayed
+  only_if { File.open(path_to_settings_py).read =~ /STATIC_ROOT/ }
 end
 
 var_map = {
