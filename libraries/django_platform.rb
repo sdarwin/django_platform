@@ -25,6 +25,16 @@ module DjangoPlatform
       return package
     end
 
+    def python_dev_package_name
+      package =
+        if node['platform_family'] == 'debian'
+          'python3-dev'
+        else
+          'python36-devel'
+        end
+      return package
+    end
+
     def python_package_prefix
       package =
         if node['platform_family'] == 'debian'

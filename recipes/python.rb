@@ -16,6 +16,10 @@ package "#{python_package_prefix}venv" do
   only_if { node['platform_family'] == 'debian' }
 end
 
+# We may need to build some wheels from source
+package 'gcc'
+package python_dev_package_name
+
 python_virtualenv path_to_venv do
   python path_to_system_python
   pip_version true
