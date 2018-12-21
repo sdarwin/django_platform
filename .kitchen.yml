@@ -88,25 +88,29 @@ platforms:
       name: winrm
 
 suites:
-  - name: debian-based
+  - name: account
     run_list:
       - recipe[se-nix-baseline::default]
-      - recipe[django_test::default]
+      - recipe[account_site::default]
     data_bags_path: "test/integration/data_bags"
     verifier:
       inspec_tests:
         - test/integration/default
+        - test/integration/account
     attributes:
     includes:
       - ubuntu-18.04
-  - name: rhel-based
+      - centos-7.5
+  - name: faculty
     run_list:
       - recipe[se-nix-baseline::default]
-      - recipe[django_test::default]
+      - recipe[faculty_site::default]
     data_bags_path: "test/integration/data_bags"
     verifier:
       inspec_tests:
         - test/integration/default
+        - test/integration/faculty
     attributes:
     includes:
+      - ubuntu-18.04
       - centos-7.5
