@@ -5,10 +5,11 @@ require_relative '../helpers'
 node = json('/opt/chef/run_record/last_chef_run_node.json')['automatic']
 
 describe file('/home/django/.ssh/known_hosts') do
-  it { should exist }
-  it { should be_file }
-  it { should be_mode 0o644 }
-  it { should be_owned_by 'django' }
-  it { should be_grouped_into 'django' }
+  # Basics tested in default suite
   its(:content) { should match(/github\.com ssh-rsa/) }
+end
+
+describe file("#{path_to_conf_directory(node)}/django.conf") do
+  # Basics tested in default suite
+  its(:content) { should match('WSGIScriptAlias / /home/django/repo/app/faculty_site/wsgi\.py') }
 end

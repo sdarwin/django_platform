@@ -4,6 +4,14 @@ require_relative '../helpers'
 
 node = json('/opt/chef/run_record/last_chef_run_node.json')['automatic']
 
+describe file('/home/django/.ssh/known_hosts') do
+  it { should exist }
+  it { should be_file }
+  it { should be_mode 0o644 }
+  it { should be_owned_by 'django' }
+  it { should be_grouped_into 'django' }
+end
+
 describe file("#{path_to_conf_directory(node)}/django.conf") do
   it { should exist }
   it { should be_file }
@@ -16,5 +24,4 @@ describe file("#{path_to_conf_directory(node)}/django.conf") do
   # rubocop:disable Metrics/LineLength
   its(:content) { should match('WSGIDaemonProcess django python-path=/home/django/repo/app python-home=/home/django/env') }
   # rubocop:enable Metrics/LineLength
-  its(:content) { should match('WSGIScriptAlias / /home/django/repo/app/account_site/wsgi\.py') }
 end
