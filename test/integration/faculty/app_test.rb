@@ -11,5 +11,6 @@ end
 
 describe file("#{path_to_conf_directory(node)}/django.conf") do
   # Basics tested in default suite
+  its(:content) { should match('<Directory app/faculty_site>') }
   its(:content) { should match('WSGIScriptAlias / /home/django/repo/app/faculty_site/wsgi\.py') }
 end
