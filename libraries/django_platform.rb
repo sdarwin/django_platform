@@ -83,7 +83,7 @@ module DjangoPlatform
     end
 
     def manage_command(command)
-      return "#{rel_path_to_manage_py} command"
+      return "#{rel_path_to_manage_py} #{command}"
     end
 
     def vault_secret(bag, item, key)

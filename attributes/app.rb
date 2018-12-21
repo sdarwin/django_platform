@@ -35,3 +35,6 @@ default[tcb]['app_repo']['rel_path_to_static_directory'] = nil
 
 # An array of management commands to call when the repo updates, after migration and (possibly) collectstatic
 default[tcb]['app_repo']['additional_management_commands'] = []
+
+# An array of relative paths to bash scripts to execute when the repo updates, after all management commands
+default[tcb]['app_repo']['additional_shell_scripts'] = []

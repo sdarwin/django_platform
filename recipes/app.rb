@@ -40,10 +40,8 @@ unless node[tcb]['app_repo']['rel_path_to_pip_requirements'].nil?
   end
 end
 
-code = manage_command('migrate')
-
 python_execute 'Migrate App Data' do
-  command code
+  command manage_command('migrate')
   cwd path_to_app_repo
   virtualenv path_to_venv
   user 'django'
@@ -52,10 +50,8 @@ python_execute 'Migrate App Data' do
   subscribes :run, "git[#{path_to_app_repo}]", :delayed # Must be after pip requirements
 end
 
-code = manage_command('collectstatic --noinput')
-
 python_execute 'Collect Static' do
-  command code
+  command manage_command('collectstatic --noinput')
   cwd path_to_app_repo
   virtualenv path_to_venv
   user 'django'
@@ -71,6 +67,17 @@ node[tcb]['app_repo']['additional_management_commands'].each do |code|
     command cmd
     cwd path_to_app_repo
     virtualenv path_to_venv
+    user 'django'
+    group 'django'
+    action :nothing
+    subscribes :run, "git[#{path_to_app_repo}]", :delayed
+  end
+end
+
+node[tcb]['app_repo']['additional_shell_scripts'].each do |script|
+  bash "Shell Script: #{script}" do
+    code script
+    cwd path_to_app_repo
     user 'django'
     group 'django'
     action :nothing
