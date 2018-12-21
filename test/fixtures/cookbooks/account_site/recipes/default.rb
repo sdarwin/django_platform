@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tcb = 'django_test'
+tcb = 'account_site'
 
 include_recipe 'django_platform::default'
 

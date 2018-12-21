@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-tcb = 'django_test'
+tcb = 'account_site'
 
 template_file = File.join(path_to_app_repo, 'app/shared/conf/config.ini')
 

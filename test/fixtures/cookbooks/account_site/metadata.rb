@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-name 'django_test'
+name 'account_site'
 maintainer 'OIT Systems Engineering'
 maintainer_email 'ua-oit-se@alaska.edu'
 license 'MIT'
