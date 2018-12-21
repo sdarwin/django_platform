@@ -82,6 +82,10 @@ module DjangoPlatform
       return File.join(rel_path_to_http_root, 'manage.py')
     end
 
+    def manage_command(command)
+      return "#{rel_path_to_manage_py} command"
+    end
+
     def vault_secret(bag, item, key)
       # Will raise 404 error if not found
       item = chef_vault_item(

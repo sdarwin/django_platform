@@ -40,7 +40,7 @@ unless node[tcb]['app_repo']['rel_path_to_pip_requirements'].nil?
   end
 end
 
-code = "#{rel_path_to_manage_py} migrate"
+code = manage_command('migrate')
 
 python_execute 'Migrate App Data' do
   command code
@@ -52,7 +52,7 @@ python_execute 'Migrate App Data' do
   subscribes :run, "git[#{path_to_app_repo}]", :delayed # Must be after pip requirements
 end
 
-code = "#{rel_path_to_manage_py} collectstatic --noinput"
+code = manage_command('collectstatic --noinput')
 
 python_execute 'Collect Static' do
   command code
