@@ -44,7 +44,8 @@ __Attributes__
 
 ## Examples
 
-This is an application cookbook; no custom resources are provided.  See recipes and attributes for details of what this cookbook does.
+This is an application cookbook; no custom resources are provided.
+See recipes and attributes for details of what this cookbook does.
 
 ## Development
 
