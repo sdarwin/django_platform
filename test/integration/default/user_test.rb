@@ -43,5 +43,5 @@ describe file('/home/django/.ssh/id_rsa') do
   it { should be_mode 0o700 }
   it { should be_owned_by 'django' }
   it { should be_grouped_into 'django' }
-  its(:content) { should match 'BEGIN OPENSSH PRIVATE KEY' }
+  its(:content) { should match(/BEGIN OPENSSH PRIVATE KEY|BEGIN RSA PRIVATE KEY/) }
 end
