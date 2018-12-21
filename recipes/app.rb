@@ -61,8 +61,21 @@ python_execute 'Collect Static' do
   user 'django'
   group 'django'
   action :nothing
-  subscribes :run, 'python_execute[Migrate App Data]', :delayed
+  subscribes :run, "git[#{path_to_app_repo}]", :delayed
   only_if { File.open(path_to_settings_py).read =~ /STATIC_ROOT/ }
+end
+
+node[tcb]['app_repo']['additional_management_commands'].each do |code|
+  cmd = manage_command(code)
+  python_execute "Manage Command: #{cmd}" do
+    command cmd
+    cwd path_to_app_repo
+    virtualenv path_to_venv
+    user 'django'
+    group 'django'
+    action :nothing
+    subscribes :run, "git[#{path_to_app_repo}]", :delayed
+  end
 end
 
 var_map = {

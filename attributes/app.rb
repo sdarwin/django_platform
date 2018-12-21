@@ -32,3 +32,6 @@ default[tcb]['app_repo']['rel_path_to_site_directory'] = nil
 # The relative path to the static directory (the target of collectstatic), from repo root
 # Must be set or an exception is raised
 default[tcb]['app_repo']['rel_path_to_static_directory'] = nil
+
+# An array of management commands to call when the repo updates, after migration and (possibly) collectstatic
+default[tcb]['app_repo']['additional_management_commands'] = []
