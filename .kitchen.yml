@@ -92,7 +92,7 @@ suites:
     run_list:
       - recipe[se-nix-baseline::default]
       - recipe[account_site::default]
-    data_bags_path: "test/integration/data_bags"
+    data_bags_path: "test/data_bags"
     verifier:
       inspec_tests:
         - test/integration/default
@@ -105,7 +105,7 @@ suites:
     run_list:
       - recipe[se-nix-baseline::default]
       - recipe[faculty_site::default]
-    data_bags_path: "test/integration/data_bags"
+    data_bags_path: "test/data_bags"
     verifier:
       inspec_tests:
         - test/integration/default
