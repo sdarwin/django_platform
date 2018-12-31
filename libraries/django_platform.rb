@@ -89,6 +89,8 @@ module DjangoPlatform
     end
 
     def rel_path_to_manage_py
+      return 'manage.py' unless rel_path_to_http_root
+
       return File.join(rel_path_to_http_root, 'manage.py')
     end
 
