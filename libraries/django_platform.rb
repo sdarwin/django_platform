@@ -89,13 +89,17 @@ module DjangoPlatform
     end
 
     def rel_path_to_manage_py
-      return 'manage.py' unless rel_path_to_http_root
+      return 'manage.py' unless rel_path_to_http_root && !rel_path_to_http_root.empty?
 
       return File.join(rel_path_to_http_root, 'manage.py')
     end
 
+    def path_to_manage_py
+      return File.join(path_to_app_repo, rel_path_to_manage_py)
+    end
+
     def manage_command(command)
-      return "#{rel_path_to_manage_py} #{command}"
+      return "#{path_to_manage_py} #{command}"
     end
 
     def vault_secret(bag, item, key)

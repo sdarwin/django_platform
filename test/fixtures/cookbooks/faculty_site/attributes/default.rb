@@ -2,7 +2,7 @@
 
 default['http_platform']['admin_email'] = 'ua-oit-se@alaska.edu'
 
-default['django_platform']['app_repo']['rel_path_to_http_root'] = ''
+default['django_platform']['app_repo']['rel_path_to_http_root'] = 'app'
 default['django_platform']['app_repo']['rel_path_to_site_directory'] = 'app/faculty_site'
 default['django_platform']['app_repo']['rel_path_to_pip_requirements'] = 'requirements.txt'
 default['django_platform']['app_repo']['rel_path_to_static_directory'] = 'app/static'
