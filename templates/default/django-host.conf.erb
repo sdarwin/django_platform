@@ -1,0 +1,12 @@
+# This file is managed with Chef. For changes to persist, edit django_platform/templates/django-host.conf.erb
+
+Alias /static <%= @path_to_static_directory %>
+<Directory <%= @rel_path_to_static_directory %>>
+  Require all granted
+</Directory>
+
+<Directory <%= @rel_path_to_site_directory %>>
+  <Files wsgi.py>
+    Require all granted
+  </Files>
+</Directory>

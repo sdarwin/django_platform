@@ -94,10 +94,30 @@ var_map = {
   rel_path_to_static_directory: rel_path_to_static_directory
 }
 
+django_conf = File.join(conf_available_directory, 'django.conf')
+
 # We use template because apache_conf does not support variables
 template 'Django Conf' do
-  path File.join(config_absolute_directory, 'django.conf')
+  path django_conf
   source 'django.conf.erb'
+  variables var_map
+  owner 'root'
+  group 'root'
+  mode '0440'
+  notifies :restart, "service[#{apache_service}]", :delayed
+end
+
+link 'Link for Django Conf' do
+  target_file File.join(conf_enabled_directory, 'django.conf')
+  to django_conf
+  owner 'root'
+  group 'root'
+  notifies :restart, "service[#{apache_service}]", :delayed
+end
+
+template 'Django Host' do
+  path File.join(config_absolute_directory, 'django-host.conf')
+  source 'django-host.conf.erb'
   variables var_map
   owner 'root'
   group 'root'
