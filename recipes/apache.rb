@@ -4,5 +4,6 @@ node.default['http_platform']['www']['document_root'] = File.join(path_to_app_re
 
 include_recipe 'http_platform::default'
 
-# Needed for pip install of wsgi
+# Apache cookbook mod_wsgi does not support Python 3
+# This is used for pip install of wsgi
 package apache_dev_package_name

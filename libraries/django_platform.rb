@@ -73,6 +73,10 @@ module DjangoPlatform
       return '/home/django/env'
     end
 
+    def path_to_wsgi_installer
+      return File.join(path_to_venv, 'bin/mod_wsgi-express')
+    end
+
     def rel_path_to_site_directory
       site_dir = node[TCB]['app_repo']['rel_path_to_site_directory']
       raise 'node[\'django_platform\'][\'app_repo\'][\'rel_path_to_site_directory\'] must be set' if site_dir.nil?
