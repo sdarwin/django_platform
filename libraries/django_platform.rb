@@ -73,6 +73,10 @@ module DjangoPlatform
       return '/home/django/env'
     end
 
+    def path_to_venv_activate
+      return File.join(path_to_venv, 'bin/activate')
+    end
+
     def path_to_wsgi_installer
       return File.join(path_to_venv, 'bin/mod_wsgi-express')
     end

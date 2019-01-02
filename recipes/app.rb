@@ -75,8 +75,9 @@ node[tcb]['app_repo']['additional_management_commands'].each do |code|
 end
 
 node[tcb]['app_repo']['additional_shell_scripts'].each do |script|
+  code = "source #{path_to_venv_activate}\n. #{script}"
   bash "Shell Script: #{script}" do
-    code script
+    code code
     cwd path_to_app_repo
     user 'django'
     group 'django'
