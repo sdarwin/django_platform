@@ -29,6 +29,24 @@ python_virtualenv path_to_venv do
   group 'django'
 end
 
+# This is a kludge because wsgi fails to build on CentOS
+# However, running the same command succeeds?!
+packages = node[tcb]['python']['packages_to_install']
+install_wsgi = !packages['mod_wsgi'].nil?
+wsgi_version =
+  if install_wsgi && !packages['mod_wsgi'].empty?
+    "==#{packages['mod_wsgi']}"
+  else
+    ''
+  end
+code = "#{File.join(path_to_venv, 'bin/python')} -m pip.__main__ install mod_wsgi#{wsgi_version}"
+bash 'Compile WSGI' do
+  code code
+  only_if { install_wsgi }
+  not_if 'apachectl -M | grep wsgi'
+  notifies :restart, "service[#{apache_service}]", :delayed
+end
+
 node[tcb]['python']['packages_to_install'].each do |package, version|
   python_package package do
     version version if version
