@@ -47,6 +47,10 @@ def path_to_host_directory(node)
   return File.join(path_to_base_conf_dir(node), 'conf.d')
 end
 
+def path_to_http_host(node)
+  return File.join(path_to_host_directory(node), 'ssl-host.conf')
+end
+
 def path_to_django_conf(node)
   return File.join(path_to_conf_directory(node), 'django.conf')
 end
