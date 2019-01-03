@@ -9,8 +9,12 @@ describe file('/home/django/.ssh/known_hosts') do
   its(:content) { should match(/github\.com ssh-rsa/) }
 end
 
-describe file("#{path_to_conf_directory(node)}/django.conf") do
+describe file(path_to_django_host(node)) do
   # Basics tested in default suite
   its(:content) { should match('<Directory app/faculty_site>') }
+end
+
+describe file(path_to_django_conf(node)) do
+  # Basics tested in default suite
   its(:content) { should match('WSGIScriptAlias / /home/django/repo/app/faculty_site/wsgi\.py') }
 end

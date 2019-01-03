@@ -12,7 +12,7 @@ describe file('/home/django/.ssh/known_hosts') do
   it { should be_grouped_into 'django' }
 end
 
-describe file("#{path_to_conf_directory(node)}/django.conf") do
+describe file(path_to_django_host(node)) do
   it { should exist }
   it { should be_file }
   it { should be_mode 0o440 }
@@ -20,8 +20,16 @@ describe file("#{path_to_conf_directory(node)}/django.conf") do
   it { should be_grouped_into 'root' }
   its(:content) { should match('Alias /static /home/django/repo/app/static') }
   its(:content) { should match('<Directory app/static>') }
+end
+
+describe file(path_to_django_conf(node)) do
+  it { should exist }
+  it { should be_file }
+  it { should be_mode 0o440 }
+  it { should be_owned_by 'root' }
+  it { should be_grouped_into 'root' }
   # rubocop:disable Metrics/LineLength
-  its(:content) { should match('WSGIDaemonProcess django python-path=/home/django/repo/app python-home=/home/django/env') }
+  its(:content) { should match('WSGIDaemonProcess django python-home=/home/django/env python-path=/home/django/repo/app') }
   # rubocop:enable Metrics/LineLength
 end
 

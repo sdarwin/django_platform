@@ -33,10 +33,26 @@ def apache_shell(node)
   return shell
 end
 
-def path_to_conf_directory(node)
-  return '/etc/apache2/conf.d' if node['platform_family'] == 'debian'
+def path_to_base_conf_dir(node)
+  return '/etc/apache2' if node['platform_family'] == 'debian'
 
-  return '/etc/httpd/conf.d'
+  return '/etc/httpd'
+end
+
+def path_to_conf_directory(node)
+  return File.join(path_to_base_conf_dir(node), 'conf-available')
+end
+
+def path_to_host_directory(node)
+  return File.join(path_to_base_conf_dir(node), 'conf.d')
+end
+
+def path_to_django_conf(node)
+  return File.join(path_to_conf_directory(node), 'django.conf')
+end
+
+def path_to_django_host(node)
+  return File.join(path_to_host_directory(node), 'django-host.conf')
 end
 
 def postgresql_package(node)
