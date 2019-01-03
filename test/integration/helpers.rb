@@ -59,6 +59,12 @@ def path_to_django_host(node)
   return File.join(path_to_host_directory(node), 'django-host.conf')
 end
 
+def apache_dev_package_name(node)
+  return 'apache2-dev' if node['platform_family'] == 'debian'
+
+  return 'httpd-devel'
+end
+
 def postgresql_package(node)
   if node['platform_family'] == 'debian'
     package = 'postgresql-10'
