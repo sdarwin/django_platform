@@ -7,6 +7,8 @@ __Maintainer: OIT Systems Engineering__ (<ua-oit-se@alaska.edu>)
 This is a baseline cookbook that installs/configures a platform consisting of Python 3 and Django 2.
 It then deploys a Django application from a git repository.
 
+Django is run on an Apache instance that is configured using [http_platform](https://github.com/ualaska-it/http_platform).
+
 ## Requirements
 
 ### Chef

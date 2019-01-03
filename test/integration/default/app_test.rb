@@ -19,7 +19,7 @@ describe file(path_to_django_host(node)) do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
   its(:content) { should match('Alias /static /home/django/repo/app/static') }
-  its(:content) { should match('<Directory app/static>') }
+  its(:content) { should match(%r{<Directory app/static>\s+Require all granted}) }
 end
 
 describe file(path_to_django_conf(node)) do
