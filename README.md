@@ -4,7 +4,8 @@ __Maintainer: OIT Systems Engineering__ (<ua-oit-se@alaska.edu>)
 
 ## Purpose
 
-This is a baseline cookbook that installs/configures the platform and deploys a Django application from a git repository
+This is a baseline cookbook that installs/configures a platform consisting of Python 3 and Django 2.
+It then deploys a Django application from a git repository.
 
 ## Requirements
 
@@ -28,7 +29,8 @@ Platforms validated via Test Kitchen:
 
 ### Dependencies
 
-This cookbook does not constrain its dependencies because it is intended as a utility library.  It should ultimately be used within a wrapper cookbook.
+This cookbook does not constrain its dependencies because it is intended as a utility library.
+It should ultimately be used within a wrapper cookbook.
 
 ## Resources
 
