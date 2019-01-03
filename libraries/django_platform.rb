@@ -81,6 +81,12 @@ module DjangoPlatform
       return File.join(path_to_venv, 'bin/mod_wsgi-express')
     end
 
+    def path_to_apache_mod_libs
+      return '/usr/lib/apache2/modules' if node['platform_family'] == 'debian'
+
+      return '/usr/lib64/httpd/modules'
+    end
+
     def rel_path_to_site_directory
       site_dir = node[TCB]['app_repo']['rel_path_to_site_directory']
       raise 'node[\'django_platform\'][\'app_repo\'][\'rel_path_to_site_directory\'] must be set' if site_dir.nil?

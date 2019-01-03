@@ -38,15 +38,16 @@ node[tcb]['python']['packages_to_install'].each do |package, version|
   end
 end
 
+module_name = 'mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so'
+
 if node[tcb]['python']['packages_to_install'].include?('mod_wsgi')
   bash 'Install WSGI' do
     code "#{path_to_wsgi_installer} install-module"
-    action :nothing
-    subscribes :run, 'python_package[mod_wsgi]', :immediate
+    not_if "[ -f #{File.join(path_to_apache_mod_libs, module_name)} ]"
     notifies :restart, "service[#{apache_service}]", :delayed
   end
 
   apache_module 'wsgi' do
-    filename 'mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so'
+    filename module_name
   end
 end
