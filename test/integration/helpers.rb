@@ -63,6 +63,10 @@ def path_to_django_host(node)
   return File.join(path_to_host_directory(node), 'django-host.conf')
 end
 
+def path_to_vhost(node)
+  return File.join(path_to_base_conf_dir(node), 'sites-available/ssl-site.conf')
+end
+
 def apache_dev_package_name(node)
   return 'apache2-dev' if node['platform_family'] == 'debian'
 
