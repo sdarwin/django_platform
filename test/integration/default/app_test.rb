@@ -37,6 +37,14 @@ describe file('/home/django/repo/db.sqlite3') do
   it { should be_grouped_into 'django' }
 end
 
+describe file('/home/django/repo/app/static/admin') do
+  it { should exist }
+  it { should be_directory }
+  it { should be_mode 0o755 }
+  it { should be_owned_by 'django' }
+  it { should be_grouped_into 'django' }
+end
+
 describe file(path_to_django_host(node)) do
   it { should exist }
   it { should be_file }
