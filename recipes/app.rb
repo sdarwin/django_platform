@@ -37,6 +37,8 @@ unless node[tcb]['app_repo']['rel_path_to_pip_requirements'].nil?
     user 'django'
     group 'django'
     virtualenv path_to_venv
+    action :nothing
+    subscribes :install, "git[#{path_to_app_repo}]", :immediate # Must be before migrations
   end
 end
 
@@ -47,7 +49,7 @@ python_execute 'Migrate App Data' do
   user 'django'
   group 'django'
   action :nothing
-  subscribes :run, "git[#{path_to_app_repo}]", :delayed # Must be after pip requirements
+  subscribes :run, "git[#{path_to_app_repo}]", :immediate # Must be after pip requirements
 end
 
 python_execute 'Collect Static' do
@@ -57,7 +59,7 @@ python_execute 'Collect Static' do
   user 'django'
   group 'django'
   action :nothing
-  subscribes :run, "git[#{path_to_app_repo}]", :delayed
+  subscribes :run, "git[#{path_to_app_repo}]", :immediate
   only_if { File.open(path_to_settings_py).read =~ /STATIC_ROOT/ }
 end
 
@@ -70,7 +72,7 @@ node[tcb]['app_repo']['additional_management_commands'].each do |code|
     user 'django'
     group 'django'
     action :nothing
-    subscribes :run, "git[#{path_to_app_repo}]", :delayed
+    subscribes :run, "git[#{path_to_app_repo}]", :immediate
   end
 end
 
@@ -82,7 +84,21 @@ node[tcb]['app_repo']['additional_shell_scripts'].each do |script|
     user 'django'
     group 'django'
     action :nothing
-    subscribes :run, "git[#{path_to_app_repo}]", :delayed
+    subscribes :run, "git[#{path_to_app_repo}]", :immediate
+  end
+end
+
+if node[tcb]['app_repo']['rel_path_to_sqlite_db']
+  # Django group must have write permissions in the directory and on the file
+  directory path_to_app_repo do
+    user 'django'
+    group 'django'
+    mode '0770'
+  end
+  file path_to_sqlite_db do
+    user 'django'
+    group 'django'
+    mode '0660'
   end
 end
 

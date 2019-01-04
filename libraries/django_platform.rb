@@ -112,6 +112,17 @@ module DjangoPlatform
       return doc_root
     end
 
+    def rel_path_to_sqlite_db
+      path = node[TCB]['app_repo']['rel_path_to_sqlite_db']
+      raise 'node[\'django_platform\'][\'app_repo\'][\'rel_path_to_sqlite_db\'] must be set' if path.nil?
+
+      return path
+    end
+
+    def path_to_sqlite_db
+      return File.join(path_to_app_repo, rel_path_to_sqlite_db)
+    end
+
     def rel_path_to_manage_py
       return 'manage.py' unless rel_path_to_http_root && !rel_path_to_http_root.empty?
 

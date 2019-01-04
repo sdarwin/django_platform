@@ -38,3 +38,7 @@ default[tcb]['app_repo']['additional_management_commands'] = []
 
 # An array of relative paths to bash scripts to execute when the repo updates, after all management commands
 default[tcb]['app_repo']['additional_shell_scripts'] = []
+
+# The relative path to the sqlite database, from repo root
+# If non-nil, permissions of this file will be managed, after all management commands and scripts have run
+default[tcb]['app_repo']['rel_path_to_sqlite_db'] = nil
