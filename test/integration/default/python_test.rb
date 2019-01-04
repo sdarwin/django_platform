@@ -18,9 +18,10 @@ describe package(python_package(node)) do
   its(:version) { should match '^3.6' }
 end
 
-if node['platform_family'] == 'debian'
-  describe package(python_package_prefix(node) + 'venv') do
-    it { should be_installed }
+describe package(python_package_prefix(node) + 'venv') do
+  it { should be_installed }
+  before do
+    skip if node['platform_family'] != 'debian'
   end
 end
 
