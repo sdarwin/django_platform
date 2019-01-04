@@ -25,7 +25,7 @@ default[tcb]['app_repo']['rel_path_to_pip_requirements'] = nil
 # Must be set or an exception is raised
 default[tcb]['app_repo']['rel_path_to_manage_directory'] = nil
 
-# The relative path to the directory that contains wsgi.py, from repo root
+# The relative path to the directory that contains settings.py and wsgi.py, from repo root
 # Must be set or an exception is raised
 default[tcb]['app_repo']['rel_path_to_site_directory'] = nil
 

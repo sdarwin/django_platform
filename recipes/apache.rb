@@ -11,8 +11,6 @@ var_map = {
   path_to_static_directory: File.join(path_to_app_repo, rel_path_to_static_directory),
   path_to_venv: path_to_venv,
   path_to_wsgi_py: File.join(path_to_app_repo, rel_path_to_site_directory, 'wsgi.py'),
-  rel_path_to_site_directory: rel_path_to_site_directory,
-  rel_path_to_static_directory: rel_path_to_static_directory
 }
 
 template 'Django Host' do
