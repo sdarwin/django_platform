@@ -105,9 +105,9 @@ module DjangoPlatform
       return static_dir
     end
 
-    def rel_path_to_http_root
-      doc_root = node[TCB]['app_repo']['rel_path_to_http_root']
-      raise 'node[\'django_platform\'][\'app_repo\'][\'rel_path_to_http_root\'] must be set' if doc_root.nil?
+    def rel_path_to_manage_directory
+      doc_root = node[TCB]['app_repo']['rel_path_to_manage_directory']
+      raise 'node[\'django_platform\'][\'app_repo\'][\'rel_path_to_manage_directory\'] must be set' if doc_root.nil?
 
       return doc_root
     end
@@ -124,9 +124,10 @@ module DjangoPlatform
     end
 
     def rel_path_to_manage_py
-      return 'manage.py' unless rel_path_to_http_root && !rel_path_to_http_root.empty?
+      dir = rel_path_to_manage_directory
+      return 'manage.py' unless dir && !dir.empty?
 
-      return File.join(rel_path_to_http_root, 'manage.py')
+      return File.join(dir, 'manage.py')
     end
 
     def path_to_manage_py

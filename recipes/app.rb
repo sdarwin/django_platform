@@ -103,7 +103,7 @@ if node[tcb]['app_repo']['rel_path_to_sqlite_db']
 end
 
 var_map = {
-  path_to_http_root: File.join(path_to_app_repo, rel_path_to_http_root),
+  path_to_manage_dir: File.join(path_to_app_repo, rel_path_to_manage_directory),
   path_to_static_directory: File.join(path_to_app_repo, rel_path_to_static_directory),
   path_to_venv: path_to_venv,
   path_to_wsgi_py: File.join(path_to_app_repo, rel_path_to_site_directory, 'wsgi.py'),

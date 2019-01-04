@@ -1,7 +1,7 @@
 # This file is managed with Chef. For changes to persist, edit django_platform/templates/django.conf.erb
 
 <IfModule mod_wsgi.c>
-  WSGIDaemonProcess django python-home=<%= @path_to_venv %> python-path=<%= @path_to_http_root %>
+  WSGIDaemonProcess django python-home=<%= @path_to_venv %> python-path=<%= @path_to_manage_dir %>
   WSGIProcessGroup django
   WSGIScriptAlias / <%= @path_to_wsgi_py %>
   # WSGISocketPrefix run/wsgi
