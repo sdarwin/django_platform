@@ -55,6 +55,10 @@ def path_to_django_conf(node)
   return File.join(path_to_conf_directory(node), 'django.conf')
 end
 
+def path_to_django_conf_link(node)
+  return File.join(path_to_base_conf_dir(node), 'conf-enabled/django.conf')
+end
+
 def path_to_django_host(node)
   return File.join(path_to_host_directory(node), 'django-host.conf')
 end
