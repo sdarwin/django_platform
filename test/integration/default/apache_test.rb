@@ -23,6 +23,12 @@ describe file(path_to_http_host(node)) do
   # its(:content) { should match('DocumentRoot /home/django/repo/app') }
 end
 
+describe bash('apachectl -M') do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should eq '' }
+  its(:stdout) { should match 'alias_module' }
+end
+
 describe package(apache_dev_package_name(node)) do
   it { should be_installed }
   its(:version) { should match(/^2\.4/) }
