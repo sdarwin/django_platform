@@ -71,3 +71,16 @@ describe pip('Django', path_to_pip) do
   it { should be_installed }
   its('version') { should match(/^2\.1/) }
 end
+
+apache_lib_dir =
+  if node['platform_family'] == 'debian'
+    '/usr/lib/apache2/modules'
+  else
+    '/usr/lib64/httpd/modules'
+  end
+
+describe bash("ls #{apache_lib_dir}") do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should eq '' }
+  its(:stdout) { should match 'mod_wsgi' }
+end
