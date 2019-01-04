@@ -13,6 +13,14 @@ describe file('/home/django/.ssh/known_hosts') do
   its(:content) { should match('github\.com ssh-rsa') }
 end
 
+describe file('/opt/chef/run_record/django_sentinel.txt') do
+  it { should exist }
+  it { should be_file }
+  it { should be_mode 0o644 }
+  it { should be_owned_by 'root' }
+  it { should be_grouped_into 'root' }
+end
+
 describe file(path_to_django_host(node)) do
   it { should exist }
   it { should be_file }
