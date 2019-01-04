@@ -45,6 +45,16 @@ describe file('/home/django/repo/app/static/admin') do
   it { should be_grouped_into 'django' }
 end
 
+describe file(path_to_django_host(node)) do
+  it { should exist }
+  it { should be_file }
+  it { should be_mode 0o440 }
+  it { should be_owned_by 'root' }
+  it { should be_grouped_into 'root' }
+  its(:content) { should match('Alias /static /home/django/repo/app/static') }
+  its(:content) { should match(%r{<Directory app/static>\s+Require all granted}) }
+end
+
 describe file(path_to_django_conf(node)) do
   it { should exist }
   it { should be_file }
@@ -63,14 +73,4 @@ describe file(path_to_django_conf_link(node)) do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
   its(:link_path) { should eq path_to_django_conf(node) }
-end
-
-describe file(path_to_django_host(node)) do
-  it { should exist }
-  it { should be_file }
-  it { should be_mode 0o440 }
-  it { should be_owned_by 'root' }
-  it { should be_grouped_into 'root' }
-  its(:content) { should match('Alias /static /home/django/repo/app/static') }
-  its(:content) { should match(%r{<Directory app/static>\s+Require all granted}) }
 end
