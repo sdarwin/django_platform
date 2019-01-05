@@ -5,15 +5,15 @@
 user = <%= @domain_user  %>
 password = <%= @domain_password  %>
 base = DC=ua,DC=ad,DC=alaska,DC=edu
-inst = prod
+instance = prod
 
 # Email server connection for app warnings; host is user!
 [EMAIL]
-host = <%= @email_user  %>
+username = <%= @email_user  %>
 password = <%= @email_password  %>
 
 # Test user for app testing; this is a regular AD user
 [User]
-user = <%= @local_user  %>
+username = <%= @local_user  %>
 password = <%= @local_password  %>
-mail = <%= @local_email  %>
+email_address = <%= @local_email  %>
