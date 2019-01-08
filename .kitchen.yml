@@ -30,6 +30,7 @@ provisioner:
         remove_default_index: false
         create_default_index: true
     django_platform:
+      configure_postgres: true
       django_is_system_user: false
 
 verifier:
