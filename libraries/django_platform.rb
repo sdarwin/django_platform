@@ -138,7 +138,17 @@ module DjangoPlatform
       return "#{path_to_manage_py} #{command}"
     end
 
+    def validate_secret_attributes(bag, item, key)
+      raise 'Data bag for vault secret must be set' if bag.nil?
+
+      raise 'Bag item for vault secret must be set' if item.nil?
+
+      raise 'Item key for vault secret must be set' if key.nil?
+    end
+
     def vault_secret(bag, item, key)
+      validate_secret_attributes(bag, item, key)
+
       # Will raise 404 error if not found
       item = chef_vault_item(
         bag,

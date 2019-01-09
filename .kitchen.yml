@@ -32,6 +32,10 @@ provisioner:
     django_platform:
       configure_postgres: true
       django_is_system_user: false
+      git_ssh_key:
+        vault_data_bag: 'github'
+        vault_bag_item: 'ualaska'
+        vault_item_key: 'oit-se-github-user-key'
 
 verifier:
   name: inspec

@@ -173,6 +173,28 @@ A Hash of package name to version.
 If version is empty, the latest version will be installed
 Clients should merge this attribute rather than overwrite because mod_wsgi and Django are required for the server to function.
 
+### User
+
+* `node['django_platform']['django_is_system_user']`.
+Defaults to `true`.
+If false, the django user will be configured with a shell, mostly for development and debugging.
+
+# SSH private key for git user
+* `node['django_platform']['git_ssh_key']['vault_data_bag']`.
+Defaults to `nil`.
+The name of the vault data bag from which to fetch the SSH key.
+Must be set or an exception is raised.
+
+* `node['django_platform']['git_ssh_key']['vault_bag_item']`.
+Defaults to `nil`.
+The item inside the data bag (json file).
+Must be set or an exception is raised.
+
+* `node['django_platform']['git_ssh_key']['vault_item_key']`.
+Defaults to `nil`.
+The hash key for referencing the SSH key within the json object.
+Must be set or an exception is raised.
+
 ## Examples
 
 This is an application cookbook; no custom resources are provided.
