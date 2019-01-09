@@ -11,3 +11,7 @@ default['django_platform']['app_repo']['rel_path_to_sqlite_db'] = 'db.sqlite3'
 default['django_platform']['app_repo']['git_host'] = 'github.alaska.edu'
 default['django_platform']['app_repo']['git_user'] = 'OIT-CSS'
 default['django_platform']['app_repo']['git_repo'] = 'ua_account_site'
+
+default['django_platform']['git_ssh_key']['vault_data_bag'] = 'github'
+default['django_platform']['git_ssh_key']['vault_bag_item'] = 'ualaska'
+default['django_platform']['git_ssh_key']['vault_item_key'] = 'oit-se-github-user-key'
