@@ -75,6 +75,7 @@ __Git checkout__
 
 This cookbook assumes the django application is contained in a git repo.
 Due to limitations of the built-in [git resource](https://docs.chef.io/resource_git.html), only SSH access is supported.
+Submodules will be checked out recursively.
 
 * `node['django_platform']['app_repo']['git_host']`.
 Defaults to `'github.com'`.
@@ -145,6 +146,32 @@ Defaults to `nil`.
 The relative path to the sqlite database, from repo root.
 If non-nil, permissions of this file will be managed, after all management commands and scripts have run.
 Management of Postgres has not yet been implemented. 
+
+### Python
+
+The version of Pip is fixed using a poise-python attribute.
+
+* `default['poise-python']['options']['pip_version']`.
+Defaults to '18.0'.
+The version of Pip to install; Set to `true` for the latest.
+As of poise-python v1.7.0, Pip 18.1 breaks the install, so this version should not be updated until poise-python is.
+
+* `node['django_platform']['python']['packages_to_install']`.
+Defaults to
+```
+{
+  # These are included so that they can be upgraded; they are always installed on the first run
+  pip: '',
+  wheel: '',
+  setuptools: '',
+  # Pip install is used because CentOS/EPEL does not supply a package for WSGI that supports Python 3
+  mod_wsgi: '',
+  Django: ''
+}
+```
+A Hash of package name to version.
+If version is empty, the latest version will be installed
+Clients should merge this attribute rather than overwrite because mod_wsgi and Django are required for the server to function.
 
 ## Examples
 
