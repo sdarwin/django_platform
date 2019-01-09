@@ -6,7 +6,7 @@ include_recipe "#{tcb}::_apache"
 
 include_recipe "#{tcb}::_user"
 
-include_recipe "#{tcb}::_database" if [tcb]['configure_postgres']
+include_recipe "#{tcb}::_database" if node[tcb]['configure_postgres']
 
 include_recipe "#{tcb}::_python"
 
