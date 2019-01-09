@@ -60,7 +60,7 @@ python_execute 'Collect Static' do
   group 'django'
   action :nothing
   subscribes :run, "git[#{path_to_app_repo}]", :immediate
-  only_if { File.open(path_to_settings_py).read =~ /STATIC_ROOT/ }
+  only_if { File.open(path_to_settings_py).read =~ /\n\s*STATIC_ROOT/ }
 end
 
 node[tcb]['app_repo']['additional_management_commands'].each do |code|
