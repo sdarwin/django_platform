@@ -161,6 +161,10 @@ module DjangoPlatform
 
       return secret
     end
+
+    def vault_secret_hash(object)
+      return vault_secret(object['vault_data_bag'], object['vault_bag_item'], object['vault_item_key'])
+    end
   end
 end
 
