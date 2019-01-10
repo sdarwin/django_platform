@@ -2,7 +2,7 @@
 
 tcb = 'account_site'
 
-template_file = File.join(path_to_app_repo, 'app/shared/conf/config.ini')
+template_file = File.join(path_to_app_repo, 'app/shared_app/conf/config.ini')
 
 var_map = {
   domain_user: node[tcb]['domain_user'],
