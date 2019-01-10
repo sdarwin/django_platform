@@ -2,7 +2,9 @@
 
 tcb = 'account_site'
 
-default[tcb]['domain_user'] = 'seadmin'
+# rubocop:disable Metrics/LineLength
+default[tcb]['domain_user'] = 'CN=oit account admin,OU=Account Provisioning,OU=Services,OU=SW,DC=ua,DC=ad,DC=alaska,DC=edu'
+# rubocop:enable Metrics/LineLength
 
 default[tcb]['domain_password']['vault_data_bag'] = 'passwords'
 default[tcb]['domain_password']['vault_bag_item'] = 'oit-account-admin'
