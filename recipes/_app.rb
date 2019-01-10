@@ -2,6 +2,17 @@
 
 tcb = 'django_platform'
 
+node[tcb]['app_repo']['additional_access_directories'].each do |dir, options|
+  directory dir do
+    owner 'django'
+    group 'django'
+    mode '775' unless options.is_a?(hash) && options['mode']
+    mode options['mode'] if options.is_a?(hash) && options['mode']
+    recursive false unless options.is_a?(hash) && options['recursive']
+    recursive options['recursive'] if options.is_a?(hash) && options['recursive']
+  end
+end
+
 app_repo = node[tcb]['app_repo']
 repo_url = "git@#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
 

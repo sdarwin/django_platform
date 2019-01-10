@@ -147,6 +147,21 @@ The relative path to the sqlite database, from repo root.
 If non-nil, permissions of this file will be managed, after all management commands and scripts have run.
 Management of Postgres has not yet been implemented. 
 
+* `node['django_platform']['app_repo']['additional_access_directories']`.
+Defaults to `{}`.
+A hash of paths to options.
+For an example of all options and default values, see below.
+```ruby
+{
+  'var/log/django' => {
+    'mode' => '755',
+    'recursive' => false
+  }
+}
+```
+This is frequently used for logging and data directories so that these can be created after the django user is created, but before the app is initialized.
+Directories will be created before checking out the application repo, and given appropriate permissions to permit apache/wsgi access.
+
 ### Python
 
 The version of Pip is fixed using a poise-python attribute.

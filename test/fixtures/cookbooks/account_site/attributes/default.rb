@@ -16,3 +16,5 @@ default['django_platform']['app_repo']['git_revision'] = 'clean_release'
 default['django_platform']['git_ssh_key']['vault_data_bag'] = 'github'
 default['django_platform']['git_ssh_key']['vault_bag_item'] = 'ualaska'
 default['django_platform']['git_ssh_key']['vault_item_key'] = 'oit-se-github-user-key'
+
+default['django_platform']['app_repo']['additional_access_directories'] = {'/var/log/django' => {}}
