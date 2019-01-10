@@ -5,7 +5,7 @@ tcb = 'account_site'
 default[tcb]['domain_user'] = 'seadmin'
 
 default[tcb]['domain_password']['vault_data_bag'] = 'passwords'
-default[tcb]['domain_password']['vault_bag_item'] = 'seadmin'
+default[tcb]['domain_password']['vault_bag_item'] = 'oit-account-admin'
 default[tcb]['domain_password']['vault_item_key'] = 'password'
 
 default[tcb]['email_user'] = 'calsev'
