@@ -1,0 +1,19 @@
+# This file is managed with Chef. For changes to persist, edit account_site/templates/config.ini.erb
+
+# AD interface for app; provide credentials for a domain admin
+[AD]
+user = <%= @domain_user  %>
+password = <%= @domain_password  %>
+base = DC=ua,DC=ad,DC=alaska,DC=edu
+instance = prod
+
+# Email server connection for app warnings; host is user!
+[EMAIL]
+username = <%= @email_user  %>
+password = <%= @email_password  %>
+
+# Test user for app testing; this is a regular AD user
+[User]
+username = <%= @local_user  %>
+password = <%= @local_password  %>
+email_address = <%= @local_email  %>

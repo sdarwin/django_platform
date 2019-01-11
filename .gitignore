@@ -36,3 +36,7 @@ Policyfile.lock.json
 
 # JetBrains
 .idea/*
+
+# Secrets
+test/data_bags/*
+test/integration/data_bags/*
