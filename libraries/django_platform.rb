@@ -89,10 +89,9 @@ module DjangoPlatform
 
     def all_git_hosts
       app_repo = node[TCB]['app_repo']
-      hosts = {}
-      hosts.merge(app_repo['git_host'] => '')
+      hosts = { app_repo['git_host'] => '' }
       app_repo['git_submodule_hosts'].each do |host|
-        hosts.merge(host => '')
+        hosts = hosts.merge(host => '')
       end
       return hosts
     end
