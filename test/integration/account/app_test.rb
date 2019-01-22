@@ -15,6 +15,11 @@ describe file('/home/django/.ssh/known_hosts') do
   its(:content) { should match(/github\.alaska\.edu ssh-rsa/) }
 end
 
+describe file('/opt/chef/run_record/django_sentinel.txt') do
+  # Basics tested in default suite
+  its(:content) { should match('github.alaska.edu') }
+end
+
 describe pip('django-python3-ldap', path_to_pip) do
   it { should be_installed }
 end

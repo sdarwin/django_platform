@@ -17,6 +17,7 @@ describe file('/opt/chef/run_record/django_sentinel.txt') do
   it { should be_mode 0o644 }
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
+  its(:content) { should match('github.com') }
 end
 
 describe file('/home/django/repo') do

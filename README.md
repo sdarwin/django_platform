@@ -94,6 +94,11 @@ Defaults to `'master'`.
 The branch, tag, or commit to check out.
 This is often changed during development and testing, e.g. 'staging', 'deploy'.
 
+* `node['django_platform']['app_repo']['git_submodule_hosts']`.
+Defaults to `['github.com']`.
+A list of hosts from which submodules are cloned.
+Used to build the known hosts file so the first attempt to clone the repo succeeds.
+
 * `node['django_platform']['app_repo']['environment']`.
 Defaults to `{}`.
 A hash of environment variables that is passed to the [git resource](https://docs.chef.io/resource_git.html).

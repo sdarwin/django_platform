@@ -10,6 +10,8 @@ default[tcb]['app_repo']['git_repo'] = nil
 
 default[tcb]['app_repo']['git_revision'] = 'master'
 
+default[tcb]['app_repo']['git_submodule_hosts'] = ['github.com']
+
 default[tcb]['app_repo']['environment'] = {}
 
 default[tcb]['app_repo']['rel_path_to_pip_requirements'] = nil

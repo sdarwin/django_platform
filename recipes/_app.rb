@@ -22,10 +22,21 @@ ssh_known_hosts_entry app_repo['git_host'] do
   owner 'django'
   group 'django'
 end
+all_hosts = "#{app_repo['git_host']}\n"
+
+node[tcb]['app_repo']['git_submodule_hosts'].each do |host|
+  ssh_known_hosts_entry host do
+    host host
+    file_location '/home/django/.ssh/known_hosts'
+    owner 'django'
+    group 'django'
+  end
+  all_hosts += "#{host}\n"
+end
 
 file 'First-Run Django Sentinel' do
   path '/opt/chef/run_record/django_sentinel.txt'
-  content 'This is a sentinel to detect the first run of django_platform'
+  content "This is a sentinel to detect new git hosts\n#{all_hosts}"
   mode '0644'
   # Write the entry to disk so the checkout succeeds the first time!
   notifies :flush, "ssh_known_hosts_entry[#{app_repo['git_host']}]", :immediate
