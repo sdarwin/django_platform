@@ -8,10 +8,10 @@ describe file('/home/django/.ssh/known_hosts') do
   it { should be_mode 0o644 }
   it { should be_owned_by 'django' }
   it { should be_grouped_into 'django' }
-  # Content checked in app tests
+  its(:content) { should match(/github\.com ssh-rsa/) }
 end
 
-describe file('/opt/chef/run_record/django_sentinel.txt') do
+describe file('/opt/chef/idempotence/known_host_github.com.txt') do
   it { should exist }
   it { should be_file }
   it { should be_mode 0o644 }
