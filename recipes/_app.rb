@@ -18,7 +18,7 @@ end
 directory '/opt/chef/idempotence'
 
 host_content = 'This is a sentinel to detect new git hosts\n'
-all_git_hosts.each do |host|
+all_git_hosts.each do |host, _|
   ssh_known_hosts_entry host do
     host host
     file_location '/home/django/.ssh/known_hosts'
