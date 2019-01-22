@@ -17,8 +17,8 @@ var_map = {
 template template_file do
   source 'config.ini.erb'
   variables var_map
-  owner 'django'
-  group 'django'
+  owner django_user
+  group django_group
   mode '440'
   sensitive true
 end

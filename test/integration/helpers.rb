@@ -11,6 +11,14 @@ def apache_user(node)
   return user
 end
 
+def django_user
+  return 'django'
+end
+
+def django_group
+  return 'django'
+end
+
 def apache_home_dir(node)
   if node['platform_family'] == 'debian'
     dir = '/var/www'

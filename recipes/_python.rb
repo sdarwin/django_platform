@@ -25,8 +25,8 @@ python_virtualenv path_to_venv do
   pip_version true
   setuptools_version true
   wheel_version true
-  user 'django'
-  group 'django'
+  user django_user
+  group django_group
 end
 
 # This is a kludge because wsgi fails to build on CentOS
@@ -50,8 +50,8 @@ end
 node[tcb]['python']['packages_to_install'].each do |package, version|
   python_package package do
     version version if version
-    user 'django'
-    group 'django'
+    user django_user
+    group django_group
     virtualenv path_to_venv
   end
 end

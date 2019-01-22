@@ -15,6 +15,14 @@ module DjangoPlatform
       return user
     end
 
+    def django_user
+      return 'django'
+    end
+
+    def django_group
+      return 'django'
+    end
+
     def apache_dev_package_name
       package =
         if node['platform_family'] == 'debian'

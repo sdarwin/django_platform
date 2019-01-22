@@ -6,8 +6,8 @@ describe file('/home/django/repo/app/shared_app/conf/config.ini') do
   it { should exist }
   it { should be_file }
   it { should be_mode 0o440 }
-  it { should be_owned_by 'django' }
-  it { should be_grouped_into 'django' }
+  it { should be_owned_by django_user }
+  it { should be_grouped_into django_group }
   # rubocop:disable Metrics/LineLength
   its(:content) { should match(/user = CN=oit account admin,OU=Account Provisioning,OU=Services,OU=SW,DC=ua,DC=ad,DC=alaska,DC=edu/) }
   # rubocop:enable Metrics/LineLength

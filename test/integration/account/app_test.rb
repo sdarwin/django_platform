@@ -6,8 +6,8 @@ describe file('/var/log/django') do
   it { should exist }
   it { should be_directory }
   it { should be_mode 0o775 }
-  it { should be_owned_by 'django' }
-  it { should be_grouped_into 'django' }
+  it { should be_owned_by django_user }
+  it { should be_grouped_into django_group }
 end
 
 describe file('/home/django/.ssh/known_hosts') do

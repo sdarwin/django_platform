@@ -6,8 +6,8 @@ app_repo = node[tcb]['app_repo']
 
 app_repo['additional_access_directories'].each do |dir, options|
   directory dir do
-    owner 'django'
-    group 'django'
+    owner django_user
+    group django_group
     mode '775' unless options.is_a?(Hash) && options['mode']
     mode options['mode'] if options.is_a?(Hash) && options['mode']
     recursive false unless options.is_a?(Hash) && options['recursive']
@@ -22,8 +22,8 @@ all_git_hosts.each do |host, _|
   ssh_known_hosts_entry host do
     host host
     file_location '/home/django/.ssh/known_hosts'
-    owner 'django'
-    group 'django'
+    owner django_user
+    group django_group
   end
   file "/opt/chef/idempotence/known_host_#{host}.txt" do
     content "#{host_content}#{host}\n"
@@ -36,8 +36,8 @@ end
 repo_url = "git@#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
 
 git path_to_app_repo do
-  user 'django'
-  group 'django'
+  user django_user
+  group django_group
   repository repo_url
   # enable_checkout false # use checkout_branch
   revision app_repo['git_revision']
@@ -49,8 +49,8 @@ end
 unless app_repo['rel_path_to_pip_requirements'].nil?
   pip_requirements 'Application requirements' do
     path File.join(path_to_app_repo, app_repo['rel_path_to_pip_requirements'])
-    user 'django'
-    group 'django'
+    user django_user
+    group django_group
     virtualenv path_to_venv
     action :nothing
     subscribes :install, "git[#{path_to_app_repo}]", :immediate # Must be before migrations
@@ -61,8 +61,8 @@ python_execute 'Migrate App Data' do
   command manage_command('migrate')
   cwd path_to_app_repo
   virtualenv path_to_venv
-  user 'django'
-  group 'django'
+  user django_user
+  group django_group
   action :nothing
   subscribes :run, "git[#{path_to_app_repo}]", :immediate # Must be after pip requirements
 end
@@ -71,8 +71,8 @@ python_execute 'Collect Static' do
   command manage_command('collectstatic --noinput')
   cwd path_to_app_repo
   virtualenv path_to_venv
-  user 'django'
-  group 'django'
+  user django_user
+  group django_group
   action :nothing
   subscribes :run, "git[#{path_to_app_repo}]", :immediate
   only_if { File.open(path_to_settings_py).read =~ /\n\s*STATIC_ROOT/ }
@@ -84,8 +84,8 @@ app_repo['additional_management_commands'].each do |code|
     command cmd
     cwd path_to_app_repo
     virtualenv path_to_venv
-    user 'django'
-    group 'django'
+    user django_user
+    group django_group
     action :nothing
     subscribes :run, "git[#{path_to_app_repo}]", :immediate
   end
@@ -96,8 +96,8 @@ app_repo['additional_shell_scripts'].each do |script|
   bash "Shell Script: #{script}" do
     code code
     cwd path_to_app_repo
-    user 'django'
-    group 'django'
+    user django_user
+    group django_group
     action :nothing
     subscribes :run, "git[#{path_to_app_repo}]", :immediate
   end
@@ -106,13 +106,13 @@ end
 if app_repo['rel_path_to_sqlite_db']
   # Django group must have write permissions in the directory and on the file
   directory path_to_app_repo do
-    user 'django'
-    group 'django'
+    user django_user
+    group django_group
     mode '0770'
   end
   file path_to_sqlite_db do
-    user 'django'
-    group 'django'
+    user django_user
+    group django_group
     mode '0660'
   end
 end
