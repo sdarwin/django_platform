@@ -35,7 +35,7 @@ describe file('/home/django/repo/db.sqlite3') do
   it { should be_grouped_into 'django' }
 end
 
-describe file('/home/django/repo/app/static/admin') do
+describe file('/home/django/repo/static/admin') do
   it { should exist }
   it { should be_directory }
   it { should be_mode 0o755 }
