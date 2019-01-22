@@ -15,6 +15,8 @@ app_repo['additional_access_directories'].each do |dir, options|
   end
 end
 
+directory '/opt/chef/idempotence'
+
 host_content = 'This is a sentinel to detect new git hosts\n'
 all_git_hosts.each do |host|
   ssh_known_hosts_entry host do
@@ -23,15 +25,12 @@ all_git_hosts.each do |host|
     owner 'django'
     group 'django'
   end
-  host_content += "#{host}\n"
-end
-
-file 'First-Run Django Sentinel' do
-  path '/opt/chef/run_record/django_sentinel.txt'
-  content host_content
-  mode '0644'
-  # Write the entry to disk so the checkout succeeds the first time!
-  notifies :flush, "ssh_known_hosts_entry[#{app_repo['git_host']}]", :immediate
+  file "/opt/chef/idempotence/known_host_#{host}.txt" do
+    content "#{host_content}#{host}\n"
+    mode '0644'
+    # Write the entry to disk so the checkout succeeds the first time!
+    notifies :flush, "ssh_known_hosts_entry[#{host}]", :immediate
+  end
 end
 
 repo_url = "git@#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
