@@ -87,6 +87,16 @@ module DjangoPlatform
       return '/usr/lib64/httpd/modules'
     end
 
+    def all_git_hosts
+      app_repo = node[TCB]['app_repo']
+      hosts = {}
+      hosts.merge(app_repo['git_host'] => '')
+      app_repo['git_submodule_hosts'].each do |host|
+        hosts.merge(host => '')
+      end
+      return hosts
+    end
+
     def rel_path_to_site_directory
       site_dir = node[TCB]['app_repo']['rel_path_to_site_directory']
       raise 'node[\'django_platform\'][\'app_repo\'][\'rel_path_to_site_directory\'] must be set' if site_dir.nil?
