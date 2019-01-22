@@ -2,7 +2,9 @@
 
 tcb = 'django_platform'
 
-node[tcb]['app_repo']['additional_access_directories'].each do |dir, options|
+app_repo = node[tcb]['app_repo']
+
+app_repo['additional_access_directories'].each do |dir, options|
   directory dir do
     owner 'django'
     group 'django'
@@ -13,7 +15,6 @@ node[tcb]['app_repo']['additional_access_directories'].each do |dir, options|
   end
 end
 
-app_repo = node[tcb]['app_repo']
 repo_url = "git@#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
 
 ssh_known_hosts_entry app_repo['git_host'] do
@@ -24,7 +25,7 @@ ssh_known_hosts_entry app_repo['git_host'] do
 end
 all_hosts = "#{app_repo['git_host']}\n"
 
-node[tcb]['app_repo']['git_submodule_hosts'].each do |host|
+app_repo['git_submodule_hosts'].each do |host|
   ssh_known_hosts_entry host do
     host host
     file_location '/home/django/.ssh/known_hosts'
@@ -53,9 +54,9 @@ git path_to_app_repo do
   notifies :restart, "service[#{apache_service}]", :delayed
 end
 
-unless node[tcb]['app_repo']['rel_path_to_pip_requirements'].nil?
+unless app_repo['rel_path_to_pip_requirements'].nil?
   pip_requirements 'Application requirements' do
-    path File.join(path_to_app_repo, node[tcb]['app_repo']['rel_path_to_pip_requirements'])
+    path File.join(path_to_app_repo, app_repo['rel_path_to_pip_requirements'])
     user 'django'
     group 'django'
     virtualenv path_to_venv
@@ -85,7 +86,7 @@ python_execute 'Collect Static' do
   only_if { File.open(path_to_settings_py).read =~ /\n\s*STATIC_ROOT/ }
 end
 
-node[tcb]['app_repo']['additional_management_commands'].each do |code|
+app_repo['additional_management_commands'].each do |code|
   cmd = manage_command(code)
   python_execute "Manage Command: #{cmd}" do
     command cmd
@@ -98,7 +99,7 @@ node[tcb]['app_repo']['additional_management_commands'].each do |code|
   end
 end
 
-node[tcb]['app_repo']['additional_shell_scripts'].each do |script|
+app_repo['additional_shell_scripts'].each do |script|
   code = "source #{path_to_venv_activate}\n. #{script}"
   bash "Shell Script: #{script}" do
     code code
@@ -110,7 +111,7 @@ node[tcb]['app_repo']['additional_shell_scripts'].each do |script|
   end
 end
 
-if node[tcb]['app_repo']['rel_path_to_sqlite_db']
+if app_repo['rel_path_to_sqlite_db']
   # Django group must have write permissions in the directory and on the file
   directory path_to_app_repo do
     user 'django'
