@@ -11,6 +11,14 @@ def apache_user(node)
   return user
 end
 
+def django_user
+  return 'django'
+end
+
+def django_group
+  return 'django'
+end
+
 def apache_home_dir(node)
   if node['platform_family'] == 'debian'
     dir = '/var/www'
@@ -93,6 +101,12 @@ def postgresql_service(node)
     raise "Platform family not recognized: #{node['platform_family']}"
   end
   return service
+end
+
+def python_version(node)
+  return '3.5' if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
+
+  return '3.6'
 end
 
 def python_package(node)

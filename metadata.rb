@@ -11,7 +11,7 @@ git_url = 'https://github.alaska.edu/oit-cookbooks/django_platform'
 source_url git_url if respond_to?(:source_url)
 issues_url "#{git_url}/issues" if respond_to?(:issues_url)
 
-version '0.1.0'
+version '1.0.0'
 
 supports 'ubuntu', '>= 16.0'
 supports 'centos', '>= 7.0'

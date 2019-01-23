@@ -2,6 +2,12 @@
 
 tcb = 'account_site'
 
+directory '/var/log/django' do
+  owner django_user
+  group django_group
+  mode '775'
+end
+
 template_file = File.join(path_to_app_repo, 'app/shared_app/conf/config.ini')
 
 var_map = {
@@ -17,8 +23,8 @@ var_map = {
 template template_file do
   source 'config.ini.erb'
   variables var_map
-  owner 'django'
-  group 'django'
+  owner django_user
+  group django_group
   mode '440'
   sensitive true
 end

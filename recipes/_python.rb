@@ -25,8 +25,8 @@ python_virtualenv path_to_venv do
   pip_version true
   setuptools_version true
   wheel_version true
-  user 'django'
-  group 'django'
+  user django_user
+  group django_group
 end
 
 # This is a kludge because wsgi fails to build on CentOS
@@ -50,13 +50,18 @@ end
 node[tcb]['python']['packages_to_install'].each do |package, version|
   python_package package do
     version version if version
-    user 'django'
-    group 'django'
+    user django_user
+    group django_group
     virtualenv path_to_venv
   end
 end
 
-module_name = 'mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so'
+module_name =
+  if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
+    'mod_wsgi-py35.cpython-35m-x86_64-linux-gnu.so'
+  else
+    'mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so'
+  end
 
 if node[tcb]['python']['packages_to_install'].include?('mod_wsgi')
   bash 'Install WSGI' do

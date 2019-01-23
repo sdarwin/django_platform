@@ -15,7 +15,7 @@ end
 
 describe package(python_package(node)) do
   it { should be_installed }
-  its(:version) { should match '^3.6' }
+  its(:version) { should match python_version(node) }
 end
 
 describe package(python_package_prefix(node) + 'venv') do
@@ -38,15 +38,15 @@ python_dev_package =
 
 describe package(python_dev_package) do
   it { should be_installed }
-  its(:version) { should match '^3.6' }
+  its(:version) { should match python_version(node) }
 end
 
 describe file(File.join(path_to_venv, 'bin/activate')) do
   it { should exist }
   it { should be_file }
   it { should be_mode 0o644 }
-  it { should be_owned_by 'django' }
-  it { should be_grouped_into 'django' }
+  it { should be_owned_by django_user }
+  it { should be_grouped_into django_group }
 end
 
 describe pip('pip', path_to_pip) do

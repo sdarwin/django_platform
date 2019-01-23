@@ -15,6 +15,14 @@ module DjangoPlatform
       return user
     end
 
+    def django_user
+      return 'django'
+    end
+
+    def django_group
+      return 'django'
+    end
+
     def apache_dev_package_name
       package =
         if node['platform_family'] == 'debian'
@@ -85,6 +93,15 @@ module DjangoPlatform
       return '/usr/lib/apache2/modules' if node['platform_family'] == 'debian'
 
       return '/usr/lib64/httpd/modules'
+    end
+
+    def all_git_hosts
+      app_repo = node[TCB]['app_repo']
+      hosts = { app_repo['git_host'] => '' }
+      app_repo['git_submodule_hosts'].each do |host|
+        hosts = hosts.merge(host => '')
+      end
+      return hosts
     end
 
     def rel_path_to_site_directory

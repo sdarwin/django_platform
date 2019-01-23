@@ -2,38 +2,35 @@
 
 tcb = 'django_platform'
 
-node[tcb]['app_repo']['additional_access_directories'].each do |dir, options|
-  directory dir do
-    owner 'django'
-    group 'django'
-    mode '775' unless options.is_a?(Hash) && options['mode']
-    mode options['mode'] if options.is_a?(Hash) && options['mode']
-    recursive false unless options.is_a?(Hash) && options['recursive']
-    recursive options['recursive'] if options.is_a?(Hash) && options['recursive']
+app_repo = node[tcb]['app_repo']
+
+app_repo['additional_recipes_before_checkout'].each do |recipe|
+  include_recipe recipe
+end
+
+directory '/opt/chef/idempotence'
+
+host_content = 'This is a sentinel to detect new git hosts\n'
+all_git_hosts.each do |host, _|
+  ssh_known_hosts_entry host do
+    host host
+    file_location '/home/django/.ssh/known_hosts'
+    owner django_user
+    group django_group
+  end
+  file "/opt/chef/idempotence/known_host_#{host}.txt" do
+    content "#{host_content}#{host}\n"
+    mode '0644'
+    # Write the entry to disk so the checkout succeeds the first time!
+    notifies :flush, "ssh_known_hosts_entry[#{host}]", :immediate
   end
 end
 
-app_repo = node[tcb]['app_repo']
 repo_url = "git@#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
 
-ssh_known_hosts_entry app_repo['git_host'] do
-  host app_repo['git_host']
-  file_location '/home/django/.ssh/known_hosts'
-  owner 'django'
-  group 'django'
-end
-
-file 'First-Run Django Sentinel' do
-  path '/opt/chef/run_record/django_sentinel.txt'
-  content 'This is a sentinel to detect the first run of django_platform'
-  mode '0644'
-  # Write the entry to disk so the checkout succeeds the first time!
-  notifies :flush, "ssh_known_hosts_entry[#{app_repo['git_host']}]", :immediate
-end
-
 git path_to_app_repo do
-  user 'django'
-  group 'django'
+  user django_user
+  group django_group
   repository repo_url
   # enable_checkout false # use checkout_branch
   revision app_repo['git_revision']
@@ -42,73 +39,84 @@ git path_to_app_repo do
   notifies :restart, "service[#{apache_service}]", :delayed
 end
 
-unless node[tcb]['app_repo']['rel_path_to_pip_requirements'].nil?
-  pip_requirements 'Application requirements' do
-    path File.join(path_to_app_repo, node[tcb]['app_repo']['rel_path_to_pip_requirements'])
-    user 'django'
-    group 'django'
-    virtualenv path_to_venv
-    action :nothing
-    subscribes :install, "git[#{path_to_app_repo}]", :immediate # Must be before migrations
+ruby_block 'Git Repo Synced' do
+  block do
+    node.default[tcb]['app_repo']['git_repo_updated'] = true
   end
+  action :nothing
+  subscribes :run, "git[#{path_to_app_repo}]", :immediate
+end
+
+app_repo['additional_recipes_before_install'].each do |recipe|
+  include_recipe recipe
+end
+
+unless app_repo['rel_path_to_pip_requirements'].nil?
+  pip_requirements 'Application requirements' do
+    path File.join(path_to_app_repo, app_repo['rel_path_to_pip_requirements'])
+    user django_user
+    group django_group
+    virtualenv path_to_venv
+    only_if { node[tcb]['app_repo']['git_repo_updated'] }
+  end
+end
+
+app_repo['additional_recipes_before_migration'].each do |recipe|
+  include_recipe recipe
 end
 
 python_execute 'Migrate App Data' do
   command manage_command('migrate')
   cwd path_to_app_repo
   virtualenv path_to_venv
-  user 'django'
-  group 'django'
-  action :nothing
-  subscribes :run, "git[#{path_to_app_repo}]", :immediate # Must be after pip requirements
+  user django_user
+  group django_group
+  only_if { node[tcb]['app_repo']['git_repo_updated'] }
 end
 
 python_execute 'Collect Static' do
   command manage_command('collectstatic --noinput')
   cwd path_to_app_repo
   virtualenv path_to_venv
-  user 'django'
-  group 'django'
-  action :nothing
-  subscribes :run, "git[#{path_to_app_repo}]", :immediate
+  user django_user
+  group django_group
+  only_if { node[tcb]['app_repo']['git_repo_updated'] }
   only_if { File.open(path_to_settings_py).read =~ /\n\s*STATIC_ROOT/ }
 end
 
-node[tcb]['app_repo']['additional_management_commands'].each do |code|
+app_repo['additional_management_commands'].each do |code|
   cmd = manage_command(code)
   python_execute "Manage Command: #{cmd}" do
     command cmd
     cwd path_to_app_repo
     virtualenv path_to_venv
-    user 'django'
-    group 'django'
-    action :nothing
-    subscribes :run, "git[#{path_to_app_repo}]", :immediate
+    user django_user
+    group django_group
+    only_if { node[tcb]['app_repo']['git_repo_updated'] }
   end
 end
 
-node[tcb]['app_repo']['additional_shell_scripts'].each do |script|
+app_repo['additional_shell_scripts'].each do |script|
   code = "source #{path_to_venv_activate}\n. #{script}"
   bash "Shell Script: #{script}" do
     code code
     cwd path_to_app_repo
-    user 'django'
-    group 'django'
-    action :nothing
-    subscribes :run, "git[#{path_to_app_repo}]", :immediate
+    user django_user
+    group django_group
+    only_if { node[tcb]['app_repo']['git_repo_updated'] }
   end
 end
 
-if node[tcb]['app_repo']['rel_path_to_sqlite_db']
-  # Django group must have write permissions in the directory and on the file
-  directory path_to_app_repo do
-    user 'django'
-    group 'django'
-    mode '0770'
-  end
-  file path_to_sqlite_db do
-    user 'django'
-    group 'django'
-    mode '0660'
-  end
+# Django group must have write permissions in the directory and on the file
+directory path_to_app_repo do
+  user django_user
+  group django_group
+  mode '0770'
+  only_if { app_repo['rel_path_to_sqlite_db'] }
+end
+file path_to_sqlite_db do
+  user django_user
+  group django_group
+  mode '0660'
+  only_if { app_repo['rel_path_to_sqlite_db'] }
 end
