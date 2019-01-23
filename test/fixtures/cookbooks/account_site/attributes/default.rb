@@ -13,7 +13,7 @@ default['django_platform']['app_repo']['git_user'] = 'OIT-CSS'
 default['django_platform']['app_repo']['git_repo'] = 'ua_account_site'
 default['django_platform']['app_repo']['git_revision'] = 'clean_release'
 
-default['django_platform']['app_repo']['additional_recipes_before_migration'] = ['account_site::config']
+default['django_platform']['app_repo']['additional_recipes_before_migration'] = ['account_site::_config']
 
 default['django_platform']['git_ssh_key']['vault_data_bag'] = 'github'
 default['django_platform']['git_ssh_key']['vault_bag_item'] = 'ualaska'
