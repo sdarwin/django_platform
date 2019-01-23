@@ -140,37 +140,36 @@ The relative path to the directory from which static files are to be served, fro
 If `STATIC_ROOT` is set in settings.py, `manage.py collectstatic` will be run every time the git repo changes.
 Must be set or an exception is raised.
 
+* `node['django_platform']['app_repo']['additional_recipes_before_checkout']`.
+Defaults to `[]`.
+A list of recipes to include after the django user is created, but before cloning the repo.
+
+* `node['django_platform']['app_repo']['additional_recipes_before_install']`.
+Defaults to `[]`.
+A list of recipes to include after cloning the repo, but before installing requirements.
+
+* `node['django_platform']['app_repo']['additional_recipes_before_migration']`.
+Defaults to `[]`.
+A list of recipes to include after installing requirements, but before migrating the database.
+
 * `node['django_platform']['app_repo']['additional_management_commands']`.
 Defaults to `[]`.
 An array of management commands to call after the repo updates.
 Commands are executed in order, after migration and (possibly) collectstatic.
+This attribute is included to support limited cases where an application can be deployed using only node attributes.
 
 * `node['django_platform']['app_repo']['additional_shell_scripts']`.
 Defaults to `[]`.
 An array of paths to bash scripts, from repo root, to execute after the repo updates.
 Scripts are executed in order, after all management commands.
 Scripts are executed in a context where the Python environment for the Django app is activated.
+This attribute is included to support limited cases where an application can be deployed using only node attributes.
 
 * `node['django_platform']['app_repo']['rel_path_to_sqlite_db']`.
 Defaults to `nil`.
 The relative path to the sqlite database, from repo root.
 If non-nil, permissions of this file will be managed, after all management commands and scripts have run.
 Management of Postgres has not yet been implemented. 
-
-* `node['django_platform']['app_repo']['additional_access_directories']`.
-Defaults to `{}`.
-A hash of paths to options.
-For an example of all options and default values, see below.
-```ruby
-{
-  'var/log/django' => {
-    'mode' => '755',
-    'recursive' => false
-  }
-}
-```
-This is frequently used for logging and data directories so that these can be created after the django user is created, but before the app is initialized.
-Directories will be created before checking out the application repo, and given appropriate permissions to permit apache/wsgi access.
 
 ### Python
 

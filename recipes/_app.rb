@@ -4,15 +4,8 @@ tcb = 'django_platform'
 
 app_repo = node[tcb]['app_repo']
 
-app_repo['additional_access_directories'].each do |dir, options|
-  directory dir do
-    owner django_user
-    group django_group
-    mode '775' unless options.is_a?(Hash) && options['mode']
-    mode options['mode'] if options.is_a?(Hash) && options['mode']
-    recursive false unless options.is_a?(Hash) && options['recursive']
-    recursive options['recursive'] if options.is_a?(Hash) && options['recursive']
-  end
+app_repo['additional_recipes_before_checkout'].each do |recipe|
+  include_recipe recipe
 end
 
 directory '/opt/chef/idempotence'
@@ -46,6 +39,10 @@ git path_to_app_repo do
   notifies :restart, "service[#{apache_service}]", :delayed
 end
 
+app_repo['additional_recipes_before_install'].each do |recipe|
+  include_recipe recipe
+end
+
 unless app_repo['rel_path_to_pip_requirements'].nil?
   pip_requirements 'Application requirements' do
     path File.join(path_to_app_repo, app_repo['rel_path_to_pip_requirements'])
@@ -55,6 +52,10 @@ unless app_repo['rel_path_to_pip_requirements'].nil?
     action :nothing
     subscribes :install, "git[#{path_to_app_repo}]", :immediate # Must be before migrations
   end
+end
+
+app_repo['additional_recipes_before_migration'].each do |recipe|
+  include_recipe recipe
 end
 
 python_execute 'Migrate App Data' do

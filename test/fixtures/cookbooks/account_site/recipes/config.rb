@@ -2,6 +2,11 @@
 
 tcb = 'account_site'
 
+directory '/var/log/django' do
+  owner django_user
+  group django_group
+end
+
 template_file = File.join(path_to_app_repo, 'app/shared_app/conf/config.ini')
 
 var_map = {
