@@ -15,7 +15,7 @@ end
 
 describe package(python_package(node)) do
   it { should be_installed }
-  its(:version) { should match '^3.6' }
+  its(:version) { should match python_version(node) }
 end
 
 describe package(python_package_prefix(node) + 'venv') do
@@ -38,7 +38,7 @@ python_dev_package =
 
 describe package(python_dev_package) do
   it { should be_installed }
-  its(:version) { should match '^3.6' }
+  its(:version) { should match python_version(node) }
 end
 
 describe file(File.join(path_to_venv, 'bin/activate')) do

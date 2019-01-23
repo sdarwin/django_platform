@@ -103,6 +103,12 @@ def postgresql_service(node)
   return service
 end
 
+def python_version(node)
+  return '3.5' if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
+
+  return '3.6'
+end
+
 def python_package(node)
   if node['platform_family'] == 'debian'
     package = 'python3'
