@@ -115,6 +115,10 @@ The checkout workflow is as follows.
   * Run a list of custom management commands `manage.py *********`
   * Run a list of custom bash scripts, with the python environment for Django activated
 
+Hooks are included for running additional code during deployment, see below.
+For the apache/wsgi server to gain access, all directories and files must have the appropriate user and group permissions.
+Helpers are provided for the user (`django_user`) and group (`django_group`) for any file accessed by the server.
+
 * `node['django_platform']['app_repo']['rel_path_to_pip_requirements']`.
 Defaults to `nil`.
 The relative path to the requirements document, from repo root.
@@ -138,11 +142,12 @@ Must be set or an exception is raised.
 
 * `node['django_platform']['app_repo']['additional_management_commands']`.
 Defaults to `[]`.
-An array of management commands to call when the repo updates, after migration and (possibly) collectstatic.
+An array of management commands to call after the repo updates.
+Commands are executed in order, after migration and (possibly) collectstatic.
 
 * `node['django_platform']['app_repo']['additional_shell_scripts']`.
 Defaults to `[]`.
-An array of paths to bash scripts, from repo root.
+An array of paths to bash scripts, from repo root, to execute after the repo updates.
 Scripts are executed in order, after all management commands.
 Scripts are executed in a context where the Python environment for the Django app is activated.
 
