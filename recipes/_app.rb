@@ -104,16 +104,16 @@ app_repo['additional_shell_scripts'].each do |script|
   end
 end
 
-if app_repo['rel_path_to_sqlite_db']
-  # Django group must have write permissions in the directory and on the file
-  directory path_to_app_repo do
-    user django_user
-    group django_group
-    mode '0770'
-  end
-  file path_to_sqlite_db do
-    user django_user
-    group django_group
-    mode '0660'
-  end
+# Django group must have write permissions in the directory and on the file
+directory path_to_app_repo do
+  user django_user
+  group django_group
+  mode '0770'
+  only_if { app_repo['rel_path_to_sqlite_db'] }
+end
+file path_to_sqlite_db do
+  user django_user
+  group django_group
+  mode '0660'
+  only_if { app_repo['rel_path_to_sqlite_db'] }
 end
