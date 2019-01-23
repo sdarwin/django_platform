@@ -4,6 +4,7 @@
 
 * Parallelized test cases
 * Added support for multiple git hosts
+* Added hooks for recipes
 
 ## 0.1.0
 
