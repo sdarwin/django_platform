@@ -75,7 +75,7 @@ __Git checkout__
 
 This cookbook assumes the django application is contained in a git repo.
 Due to limitations of the built-in [git resource](https://docs.chef.io/resource_git.html), only SSH access is supported.
-Submodules will be checked out recursively.
+Submodules will be checked out recursively, and these can use HTTP.
 
 * `node['django_platform']['app_repo']['git_host']`.
 Defaults to `'github.com'`.
@@ -103,21 +103,9 @@ Used to build the known hosts file so the first attempt to clone the repo succee
 Defaults to `{}`.
 A hash of environment variables that is passed to the [git resource](https://docs.chef.io/resource_git.html).
 
-__Deployment__
+__Server hooks__
 
 Deployment of the app requires several hooks into the application repo so that server paths can be set.
-The checkout workflow is as follows.
-* Synchronize the repo
-* If the repo changed
-  * Install requirements.txt, if the cookbook is configured to do so
-  * Migrate the database `manage.py migrate`
-  * Collect static files `manage.py collectstatic`, if the Django app is configured for it
-  * Run a list of custom management commands `manage.py *********`
-  * Run a list of custom bash scripts, with the python environment for Django activated
-
-Hooks are included for running additional code during deployment, see below.
-For the apache/wsgi server to gain access, all directories and files must have the appropriate user and group permissions.
-Helpers are provided for the user (`django_user`) and group (`django_group`) for any file accessed by the server.
 
 * `node['django_platform']['app_repo']['rel_path_to_pip_requirements']`.
 Defaults to `nil`.
@@ -140,13 +128,47 @@ The relative path to the directory from which static files are to be served, fro
 If `STATIC_ROOT` is set in settings.py, `manage.py collectstatic` will be run every time the git repo changes.
 Must be set or an exception is raised.
 
+* `node['django_platform']['app_repo']['rel_path_to_sqlite_db']`.
+Defaults to `nil`.
+The relative path to the sqlite database, from repo root.
+If non-nil, permissions of this file will be managed, after all management commands and scripts have run.
+Management of Postgres has not yet been implemented.
+
+__Deployment hooks__
+
+The platform supplies several hooks so clients can run custom code during deployment.
+The checkout workflow is as follows.
+
+* Run pre-checkout recipes, see `node['django_platform']['app_repo']['additional_recipes_before_checkout']`
+* Synchronize the git repo
+* Run pre-install recipes, see `node['django_platform']['app_repo']['additional_recipes_before_checkout']`
+* If the git repo changed
+  * Install all entries in `requirements.txt`, if the cookbook is configured to do so
+* Run pre-migrate recipes, `node['django_platform']['app_repo']['additional_recipes_before_install']`
+* If the git repo changed
+  * Migrate the database `manage.py migrate`
+  * Collect static files `manage.py collectstatic`, if the Django app is configured for it
+  * Run a list of custom management commands, see `node['django_platform']['app_repo']['additional_management_commands']`
+  * Run a list of custom bash scripts, with the python environment for Django activated, `node['django_platform']['app_repo']['additional_shell_scripts']`
+
+Pre-checkout, pre-install, and pre-migrate recipes are run _unconditionally_.
+A flag is provided to indicate if the repo updated.
+
+* `node['django_platform']['app_repo']['git_repo_updated']`.
+Defaults to `false`.
+Set to true within a recipe if the git repo updated.
+Typically used within only_if blocks to trigger deployment code on update.
+
+For the apache/wsgi server to gain access to any file system resources, all directories and files must have the appropriate permissions.
+Helpers specify the user (`django_user`) and group (`django_group`) used by the platform for file resources that are to be accessed by the server.
+
 * `node['django_platform']['app_repo']['additional_recipes_before_checkout']`.
 Defaults to `[]`.
-A list of recipes to include after the django user is created, but before cloning the repo.
+A list of recipes to include after the `django_user` is created, but before cloning the git repo.
 
 * `node['django_platform']['app_repo']['additional_recipes_before_install']`.
 Defaults to `[]`.
-A list of recipes to include after cloning the repo, but before installing requirements.
+A list of recipes to include after cloning the git repo, but before installing requirements.
 
 * `node['django_platform']['app_repo']['additional_recipes_before_migration']`.
 Defaults to `[]`.
@@ -160,16 +182,10 @@ This attribute is included to support limited cases where an application can be 
 
 * `node['django_platform']['app_repo']['additional_shell_scripts']`.
 Defaults to `[]`.
-An array of paths to bash scripts, from repo root, to execute after the repo updates.
+An array of relative paths to bash scripts, from repo root, to execute after the repo updates.
 Scripts are executed in order, after all management commands.
 Scripts are executed in a context where the Python environment for the Django app is activated.
 This attribute is included to support limited cases where an application can be deployed using only node attributes.
-
-* `node['django_platform']['app_repo']['rel_path_to_sqlite_db']`.
-Defaults to `nil`.
-The relative path to the sqlite database, from repo root.
-If non-nil, permissions of this file will be managed, after all management commands and scripts have run.
-Management of Postgres has not yet been implemented. 
 
 ### Python
 

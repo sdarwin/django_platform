@@ -39,6 +39,14 @@ git path_to_app_repo do
   notifies :restart, "service[#{apache_service}]", :delayed
 end
 
+ruby_block 'Git Repo Synced' do
+  block do
+    node.default[tcb]['app_repo']['git_repo_updated'] = true
+  end
+  action :nothing
+  subscribes :run, "git[#{path_to_app_repo}]", :immediate
+end
+
 app_repo['additional_recipes_before_install'].each do |recipe|
   include_recipe recipe
 end
@@ -49,8 +57,7 @@ unless app_repo['rel_path_to_pip_requirements'].nil?
     user django_user
     group django_group
     virtualenv path_to_venv
-    action :nothing
-    subscribes :install, "git[#{path_to_app_repo}]", :immediate # Must be before migrations
+    only_if { node[tcb]['app_repo']['git_repo_updated'] }
   end
 end
 
@@ -64,8 +71,7 @@ python_execute 'Migrate App Data' do
   virtualenv path_to_venv
   user django_user
   group django_group
-  action :nothing
-  subscribes :run, "git[#{path_to_app_repo}]", :immediate # Must be after pip requirements
+  only_if { node[tcb]['app_repo']['git_repo_updated'] }
 end
 
 python_execute 'Collect Static' do
@@ -74,8 +80,7 @@ python_execute 'Collect Static' do
   virtualenv path_to_venv
   user django_user
   group django_group
-  action :nothing
-  subscribes :run, "git[#{path_to_app_repo}]", :immediate
+  only_if { node[tcb]['app_repo']['git_repo_updated'] }
   only_if { File.open(path_to_settings_py).read =~ /\n\s*STATIC_ROOT/ }
 end
 
@@ -87,8 +92,7 @@ app_repo['additional_management_commands'].each do |code|
     virtualenv path_to_venv
     user django_user
     group django_group
-    action :nothing
-    subscribes :run, "git[#{path_to_app_repo}]", :immediate
+    only_if { node[tcb]['app_repo']['git_repo_updated'] }
   end
 end
 
@@ -99,8 +103,7 @@ app_repo['additional_shell_scripts'].each do |script|
     cwd path_to_app_repo
     user django_user
     group django_group
-    action :nothing
-    subscribes :run, "git[#{path_to_app_repo}]", :immediate
+    only_if { node[tcb]['app_repo']['git_repo_updated'] }
   end
 end
 

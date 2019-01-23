@@ -33,3 +33,5 @@ default[tcb]['app_repo']['additional_management_commands'] = []
 default[tcb]['app_repo']['additional_shell_scripts'] = []
 
 default[tcb]['app_repo']['rel_path_to_sqlite_db'] = nil
+
+default[tcb]['app_repo']['git_repo_updated'] = false
