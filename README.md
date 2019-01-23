@@ -144,10 +144,10 @@ The checkout workflow is as follows.
 
 * Run pre-checkout recipes, see `node['django_platform']['app_repo']['additional_recipes_before_checkout']`
 * Synchronize the git repo
-* Run pre-install recipes, see `node['django_platform']['app_repo']['additional_recipes_before_checkout']`
+* Run pre-install recipes, see `node['django_platform']['app_repo']['additional_recipes_before_install']`
 * If the git repo changed
   * Install all entries in `requirements.txt`, if the cookbook is configured to do so
-* Run pre-migrate recipes, `node['django_platform']['app_repo']['additional_recipes_before_install']`
+* Run pre-migrate recipes, `node['django_platform']['app_repo']['additional_recipes_before_migration']`
 * If the git repo changed
   * Migrate the database `manage.py migrate`
   * Collect static files `manage.py collectstatic`, if the Django app is configured for it
