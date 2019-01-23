@@ -109,8 +109,8 @@ suites:
         - test/integration/account
     attributes:
     includes:
-      - ubuntu-16.04
-      - centos-7.5
+      - ubuntu-18.04
+      - centos-7.6
   - name: faculty
     run_list:
       - recipe[se-nix-baseline::default]
@@ -122,5 +122,5 @@ suites:
         - test/integration/faculty
     attributes:
     includes:
-      - ubuntu-18.04
-      - centos-7.6
+      - ubuntu-16.04
+      - centos-7.5
