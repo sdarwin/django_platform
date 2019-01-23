@@ -152,7 +152,7 @@ The checkout workflow is as follows.
   * Migrate the database `manage.py migrate`
   * Collect static files `manage.py collectstatic`, if the Django app is configured for it
   * Run a list of custom management commands, see `node['django_platform']['app_repo']['additional_management_commands']`
-  * Run a list of custom bash scripts, with the python environment for Django activated, `node['django_platform']['app_repo']['additional_shell_scripts']`
+  * Run a list of custom bash scripts, with the Python environment for Django activated, `node['django_platform']['app_repo']['additional_shell_scripts']`
 
 Pre-checkout, pre-install, and pre-migrate recipes are run _unconditionally_.
 A flag is provided to indicate if the repo updated.
@@ -192,12 +192,35 @@ This attribute is included to support limited cases where an application can be 
 
 ### Python
 
+Currently, the system Python version determines the version of Python used by the platform.
+This is done to take advantage of more consistent security updates than those provided by PPAs (or to a custom Python installed by this cookbook).
+the versions are as follows.
+
+<table>
+  <tr>
+    <th>Platform</th>
+    <th>Python</th>
+  </tr>
+  <tr>
+    <td>Ubuntu 18.04</td>
+    <td>3.6</td>
+  </tr>
+  <tr>
+    <td>Ubuntu 16.04</td>
+    <td>3.5</td>
+  </tr>
+  <tr>
+    <td>CentOS 7</td>
+    <td>3.6</td>
+  </tr>
+</table>
+
 The version of Pip is fixed using a poise-python attribute.
 
 * `default['poise-python']['options']['pip_version']`.
 Defaults to '18.0'.
 The version of Pip to install; Set to `true` for the latest.
-As of poise-python v1.7.0, Pip 18.1 breaks the install, so this version should not be updated until poise-python is.
+As of poise-python v1.7.0, Pip 18.1 breaks the install, so this version should not be updated until poise-python is updated.
 
 * `node['django_platform']['python']['packages_to_install']`.
 Defaults to
