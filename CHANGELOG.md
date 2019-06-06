@@ -1,8 +1,14 @@
 # Changelog for Django Platform Cookbook
 
+## 2.0.0
+
+* Updated to apache2 7 cookbook
+* Added Appveyor pipeline
+* Cleanup for Supermarket
+
 ## 1.0.1
 
-* Cleanup for Supermarket
+* Updated kitchen to use EC2
 
 ## 1.0.0
 

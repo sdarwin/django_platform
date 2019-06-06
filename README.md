@@ -194,7 +194,7 @@ This attribute is included to support limited cases where an application can be 
 
 Currently, the system Python version determines the version of Python used by the platform.
 This is done to take advantage of more consistent security updates than those provided by PPAs (or to a custom Python installed by this cookbook).
-the versions are as follows.
+The versions are as follows.
 
 <table>
   <tr>
