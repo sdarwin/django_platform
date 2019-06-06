@@ -19,10 +19,10 @@ provisioner:
   install_strategy: once
   attributes:
     se_baseline:
-      chef_client_version: '14.8.12'
+      chef_client_version: '14.10.9'
       configure_monitoring: false
     nix_baseline:
-      chef_client_version: '14.8.12'
+      chef_client_version: '14.10.9'
       configure_update: false
       hostname: 'funny.business'
     http_platform:
