@@ -58,11 +58,11 @@ platforms:
   - name: fedora-29
   - name: fedora-28
   - name: amazon2
-  - name: amazon-
+  - name: amazon2-2018
   - name: sles-15
   - name: windows-2019
     driver:
-      image_id: ami-087efd22b572d6bc1
+      image_id: ami-004a782f694e8dde2
     transport:
       name: winrm
   - name: windows-2016
@@ -80,7 +80,7 @@ suites:
     run_list:
       - recipe[se-nix-baseline::default]
       - recipe[account_site::default]
-    data_bags_path: "test/data_bags"
+    data_bags_path: 'test/data_bags'
     verifier:
       inspec_tests:
         - test/integration/default
@@ -94,7 +94,7 @@ suites:
     run_list:
       - recipe[se-nix-baseline::default]
       - recipe[faculty_site::default]
-    data_bags_path: "test/data_bags"
+    data_bags_path: 'test/data_bags'
     verifier:
       inspec_tests:
         - test/integration/default
