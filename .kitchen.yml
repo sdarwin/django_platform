@@ -30,7 +30,6 @@ provisioner:
             port: 22
       initial_reboot: true
     http_platform:
-      admin_email: 'fake-it@make-it'
       apache:
         install_test_suite: true
       cert:
