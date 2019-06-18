@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-default['nix_baseline']['domain'] = 'mcs'
-default['nix_baseline']['hostname'] = 'calsev.com'
+default['nix_baseline']['hostname'] = 'mcs'
+default['nix_baseline']['domain'] = 'calsev.com'
 
 default['http_platform']['admin_email'] = 'webmaster.calsev@gmail.com'
 default['http_platform']['cert']['organization'] = 'CalSev'

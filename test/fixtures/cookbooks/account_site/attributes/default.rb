@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-default['nix_baseline']['domain'] = 'account'
-default['nix_baseline']['hostname'] = 'io.alaska.edu'
+default['nix_baseline']['hostname'] = 'account'
+default['nix_baseline']['domain'] = 'io.alaska.edu'
 
 default['http_platform']['admin_email'] = 'ua-oit-se@alaska.edu'
 default['http_platform']['cert']['organization'] = 'University of Alaska'
