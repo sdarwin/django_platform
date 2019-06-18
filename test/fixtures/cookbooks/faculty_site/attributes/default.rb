@@ -2,7 +2,10 @@
 
 default['nix_baseline']['domain'] = 'mcs'
 default['nix_baseline']['hostname'] = 'calsev.com'
+
 default['http_platform']['admin_email'] = 'webmaster.calsev@gmail.com'
+default['http_platform']['cert']['organization'] = 'CalSev'
+default['http_platform']['cert']['org_unit'] = 'MCS'
 
 default['django_platform']['app_repo']['rel_path_to_manage_directory'] = 'app'
 default['django_platform']['app_repo']['rel_path_to_site_directory'] = 'app/faculty_site'
