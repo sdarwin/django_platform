@@ -69,7 +69,7 @@ end
 
 describe pip('Django', path_to_pip) do
   it { should be_installed }
-  its('version') { should match(/^2\.1/) }
+  its('version') { should match(/^2\.2/) }
 end
 
 apache_lib_dir =
