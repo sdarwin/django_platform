@@ -34,13 +34,16 @@ provisioner:
         org_unit: 'fake_unit'
       www:
         additional_aliases:
-          funny.business:
+          me.also:
             log_level: 'info'
         remove_default_index: false
         create_default_index: true
     django_platform:
       configure_postgres: true
       django_is_system_user: false
+  environments_path: test/environments
+  client_rb:
+    environment: aws_test
 
 verifier:
   name: inspec
