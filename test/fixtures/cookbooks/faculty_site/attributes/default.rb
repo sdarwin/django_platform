@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+default['nix_baseline']['domain'] = 'mcs'
+default['nix_baseline']['hostname'] = 'calsev.com'
 default['http_platform']['admin_email'] = 'ua-oit-se@alaska.edu'
 
 default['django_platform']['app_repo']['rel_path_to_manage_directory'] = 'app'

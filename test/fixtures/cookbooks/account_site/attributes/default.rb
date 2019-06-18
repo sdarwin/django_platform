@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+default['nix_baseline']['domain'] = 'account'
+default['nix_baseline']['hostname'] = 'io.alaska.edu'
 default['http_platform']['admin_email'] = 'ua-oit-se@alaska.edu'
 
 default['django_platform']['app_repo']['rel_path_to_manage_directory'] = 'app'
