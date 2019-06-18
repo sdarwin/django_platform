@@ -11,7 +11,7 @@ default['django_platform']['app_repo']['rel_path_to_sqlite_db'] = 'db.sqlite3'
 default['django_platform']['app_repo']['git_host'] = 'github.alaska.edu'
 default['django_platform']['app_repo']['git_user'] = 'OIT-CSS'
 default['django_platform']['app_repo']['git_repo'] = 'ua_account_site'
-default['django_platform']['app_repo']['git_revision'] = 'clean_release'
+default['django_platform']['app_repo']['git_revision'] = 'deploy_fixes'
 
 default['django_platform']['app_repo']['additional_recipes_before_migration'] = ['account_site::_config']
 
