@@ -7,11 +7,11 @@ license 'MIT'
 description 'Installs/configures the platform and deploys a Django application from a git repository'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 
-git_url = 'https://github.alaska.edu/oit-cookbooks/django_platform'
+git_url = 'https://github.com/ualaska-it/django_platform'
 source_url git_url if respond_to?(:source_url)
 issues_url "#{git_url}/issues" if respond_to?(:issues_url)
 
-version '1.0.0'
+version '1.0.1'
 
 supports 'ubuntu', '>= 16.0'
 supports 'centos', '>= 7.0'

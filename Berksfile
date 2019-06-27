@@ -4,8 +4,6 @@ source 'https://supermarket.chef.io'
 
 metadata
 
-cookbook 'http_platform', git: 'git@github.alaska.edu:oit-cookbooks/http_platform'
-
 group :test do
   cookbook 'account_site', path: 'test/fixtures/cookbooks/account_site'
   cookbook 'faculty_site', path: 'test/fixtures/cookbooks/faculty_site'
