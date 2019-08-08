@@ -232,6 +232,7 @@ Defaults to
   setuptools: '',
   # Pip install is used because CentOS/EPEL does not supply a package for WSGI that supports Python 3
   mod_wsgi: '',
+  # This is unpinned; 2.2 is the latest LTS release
   Django: ''
 }
 ```
