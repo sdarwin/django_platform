@@ -209,6 +209,25 @@ For comparison, Ubuntu 16 comes with only Python 3.5, but it is compiled with SQ
 For consistency, a local Python install is used.
 The version to install is controlled by one attribute.
 
+* `node['django_platform']['openssl']['version_to_install']`.
+Defaults to `nil`,
+The version of OpenSSL to install.
+If nil, the default version for [openssl_install](https://github.com/UAlaska-IT/openssl_install) will be used.
+
+* `node['django_platform']['sqlite']['version_to_install']`.
+Defaults to `nil`,
+The version of SQLite to install.
+If nil, the default version for [sqlite_install](https://github.com/UAlaska-IT/openssl_install) will be used.
+
+* `node['django_platform']['python']['version_to_install']`.
+Defaults to `nil`,
+The version of Python to install.
+If nil, the default version for [python_install](https://github.com/UAlaska-IT/python_install) will be used.
+
+Note:
+
+* Compile times for a full Python stack can be long, the first run will take a while.
+Django support for Python and SQLite can be found [here](https://www.djangoproject.com/download/#supported-versions).
 
 The version of Pip is fixed using a poise-python attribute.
 
