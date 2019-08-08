@@ -202,28 +202,13 @@ This attribute is included to support limited cases where an application can be 
 
 ### Python
 
-Currently, the system Python version determines the version of Python used by the platform.
-This is done to take advantage of more consistent security updates than those provided by PPAs (or to a custom Python installed by this cookbook).
-The versions are as follows.
+RHEL and Django approaches don't align well.
+The latest 2.2 LTS release of Django requires Python 3.5 and SQLite 3.8 or higher.
+RHEL + EPEL provides Python 3.6, but it is compiled with an old SQLite 3.7.
+For comparison, Ubuntu 16 comes with only Python 3.5, but it is compiled with SQLite 3.11.
+For consistency, a local Python install is used.
+The version to install is controlled by one attribute.
 
-<table>
-  <tr>
-    <th>Platform</th>
-    <th>Python</th>
-  </tr>
-  <tr>
-    <td>Ubuntu 18.04</td>
-    <td>3.6</td>
-  </tr>
-  <tr>
-    <td>Ubuntu 16.04</td>
-    <td>3.5</td>
-  </tr>
-  <tr>
-    <td>CentOS 7</td>
-    <td>3.6</td>
-  </tr>
-</table>
 
 The version of Pip is fixed using a poise-python attribute.
 
