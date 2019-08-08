@@ -83,6 +83,9 @@ module DjangoPlatform
 
     def path_to_venv
       return '/home/django/env'
+
+    def path_to_python_binary
+      File.join(path_to_venv, 'bin/python')
     end
 
     def path_to_venv_activate

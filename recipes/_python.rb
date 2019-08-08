@@ -52,7 +52,7 @@ node[tcb]['python']['packages_to_install'].each do |package, version|
     version version if version
     user django_user
     group django_group
-    virtualenv path_to_venv
+    python path_to_python_binary
   end
 end
 
