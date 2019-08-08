@@ -2,15 +2,6 @@
 
 tcb = 'django_platform'
 
-# We want to run django 2.1
-# Django 2.1 requires python 3.5 and CentOS 7 ships with 3.3, so we must install non-standard python
-
-include_recipe 'yum-epel::default'
-
-# poise-python is busted:
-# Package detection does not work on Ubuntu or CentOS
-# Virtual environment creation is broken in CentOS
-# We use it only to manage packages
 package python_package_name
 package "#{python_package_prefix}venv" do
   only_if { node['platform_family'] == 'debian' }
