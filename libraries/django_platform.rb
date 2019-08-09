@@ -81,19 +81,20 @@ module DjangoPlatform
       return '/home/django/repo'
     end
 
-    def path_to_venv
-      return '/home/django/env'
+    def path_to_python_env
+      return '/home/django/python'
+    end
 
     def path_to_python_binary
-      File.join(path_to_venv, 'bin/python')
+      File.join(path_to_python_env, 'bin/python')
     end
 
     def path_to_venv_activate
-      return File.join(path_to_venv, 'bin/activate')
+      return File.join(path_to_python_env, 'bin/activate')
     end
 
     def path_to_wsgi_installer
-      return File.join(path_to_venv, 'bin/mod_wsgi-express')
+      return File.join(path_to_python_env, 'bin/mod_wsgi-express')
     end
 
     def path_to_apache_mod_libs

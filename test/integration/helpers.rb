@@ -131,10 +131,10 @@ def python_package_prefix(node)
   return package
 end
 
-def path_to_venv
-  return '/home/django/env'
+def path_to_python_env
+  return "/home/django/python"
 end
 
 def path_to_pip
-  return File.join(path_to_venv, 'bin/pip')
+  return File.join(path_to_python_env, 'bin/pip')
 end

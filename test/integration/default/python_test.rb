@@ -41,7 +41,7 @@ describe package(python_dev_package) do
   its(:version) { should match python_version(node) }
 end
 
-describe file(File.join(path_to_venv, 'bin/activate')) do
+describe file(File.join(path_to_python_env, 'bin/activate')) do
   it { should exist }
   it { should be_file }
   it { should be_mode 0o644 }
