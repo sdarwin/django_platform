@@ -27,6 +27,9 @@ chef_version '>= 14.0' if respond_to?(:chef_version)
 
 depends 'chef-vault'
 depends 'http_platform'
+depends 'openssl_install'
 depends 'poise-python'
 depends 'postgresql'
+depends 'python_install'
 depends 'selinux'
+depends 'sqlite_install'
