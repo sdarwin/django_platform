@@ -47,12 +47,8 @@ node[tcb]['python']['packages_to_install'].each do |package, version|
   end
 end
 
-module_name =
-  if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
-    'mod_wsgi-py35.cpython-35m-x86_64-linux-gnu.so'
-  else
-    'mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so'
-  end
+python_revision = python_revision
+module_name = "mod_wsgi-py#{python_revision}.cpython-#{python_revision}m-x86_64-linux-gnu.so"
 
 if node[tcb]['python']['packages_to_install'].include?('mod_wsgi')
   bash 'Install WSGI' do
@@ -62,7 +58,6 @@ if node[tcb]['python']['packages_to_install'].include?('mod_wsgi')
   end
 
   apache2_module 'wsgi' do
-    #filename module_name
     mod_name module_name
   end
 end

@@ -61,6 +61,12 @@ module DjangoPlatform
       return '/usr/lib64/httpd/modules'
     end
 
+    def python_revision
+      version_array = node[TCB]['python']['version_to_install'].split('.')
+      revision = "#{version_array[0]}#{version_array[1]}"
+      return revision
+    end
+
     def all_git_hosts
       app_repo = node[TCB]['app_repo']
       hosts = { app_repo['git_host'] => '' }
