@@ -6,8 +6,28 @@ provisioner:
   name: chef_zero
   always_update_cookbooks: true
   product_name: chef
-  product_version: 15.1.36
-  install_strategy: always
+  product_version: 15.3.14
+  install_strategy: once
+  attributes:
+    se_baseline:
+      chef_client_version: '15.3.14'
+      configure_monitoring: false
+    nix_baseline:
+      chef_client_version: '15.3.14'
+      firewall:
+        additional_rules:
+          - name: 'Allow all SSH'
+            port: 22
+      initial_reboot: true
+    http_platform:
+      apache:
+        install_test_suite: true
+    django_platform:
+      configure_postgres: true
+      django_is_system_user: false
+  environments_path: test/environments
+  client_rb:
+    environment: aws_test
 
 verifier:
   name: inspec
