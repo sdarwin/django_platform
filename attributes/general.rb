@@ -1,0 +1,3 @@
+
+default['selinux']['state'] = "permissive"
+

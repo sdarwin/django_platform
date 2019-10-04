@@ -61,7 +61,7 @@ Clients should merge this attribute rather than overwrite because mod alias is r
 In addition, mod_wsgi is installed by Pip.
 
 * `node['http_platform']['apache']['paths_to_additional_configs']`.
-Defaults to `node['http_platform']['apache']['paths_to_additional_configs'].merge('conf.d/django-host.conf' => '')`.
+Defaults to `node['http_platform']['apache']['paths_to_additional_configs'].merge('conf-available/django-host.conf' => '')`.
 The list of config files to enable on the virtual host,
 As with the default from the [http_platform](https://github.com/ualaska-it/http_platform), this should be merged instead of overridden unless a custom server configuration is desired.
 

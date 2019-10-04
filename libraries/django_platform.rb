@@ -64,12 +64,16 @@ module DjangoPlatform
     end
 
     def path_to_system_python
-      binary =
-        if node['platform_family'] == 'debian'
-          '/usr/bin/python3'
-        else
-          '/usr/bin/python36'
-        end
+      binary = '/usr/bin/python3'
+
+      #Note: both rhel and debian use /usr/bin/python3 and not python36. This conditional may need to be revised.
+      #binary =
+      #  if node['platform_family'] == 'debian'
+      #    '/usr/bin/python3'
+      #  else
+      #    '/usr/bin/python36'
+      #  end
+
       return binary
     end
 

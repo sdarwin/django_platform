@@ -44,7 +44,7 @@ bash 'Compile WSGI' do
   code code
   only_if { install_wsgi }
   not_if 'apachectl -M | grep wsgi'
-  notifies :restart, "service[#{apache_service}]", :delayed
+  notifies :restart, "service[apache2]", :delayed
 end
 
 node[tcb]['python']['packages_to_install'].each do |package, version|
@@ -67,10 +67,11 @@ if node[tcb]['python']['packages_to_install'].include?('mod_wsgi')
   bash 'Install WSGI' do
     code "#{path_to_wsgi_installer} install-module"
     not_if "[ -f #{File.join(path_to_apache_mod_libs, module_name)} ]"
-    notifies :restart, "service[#{apache_service}]", :delayed
+    notifies :restart, "service[apache2]", :delayed
   end
 
-  apache_module 'wsgi' do
-    filename module_name
+  apache2_module 'wsgi' do
+    #filename module_name
+    mod_name module_name
   end
 end

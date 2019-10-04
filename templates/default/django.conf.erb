@@ -5,4 +5,5 @@
   WSGIProcessGroup django
   WSGIScriptAlias / <%= @path_to_wsgi_py %>
   # WSGISocketPrefix run/wsgi
+  WSGISocketPrefix <%= @wsgi_socket_prefix %>
 </IfModule>

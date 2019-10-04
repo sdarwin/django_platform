@@ -2,6 +2,8 @@
 
 tcb = 'django_platform'
 
+include_recipe "#{tcb}::_general"
+
 include_recipe "#{tcb}::_apache"
 
 include_recipe "#{tcb}::_user"
