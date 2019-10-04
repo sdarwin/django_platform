@@ -3,7 +3,7 @@
 default['nix_baseline']['hostname'] = 'mcs'
 default['nix_baseline']['domain'] = 'calsev.com'
 
-default['http_platform']['admin_email'] = 'webmaster.calsev@gmail.com'
+default['http_platform']['admin_email'] = 'webmaster@calsev.com'
 default['http_platform']['cert']['organization'] = 'CalSev'
 default['http_platform']['cert']['org_unit'] = 'MCS'
 
