@@ -29,7 +29,7 @@ template 'Django Host' do
   owner 'root'
   group 'root'
   mode '0440'
-  notifies :restart, "service[apache2]", :delayed
+  notifies :restart, 'service[apache2]', :delayed
 end
 
 django_conf = File.join(conf_available_directory, 'django.conf')
@@ -42,7 +42,7 @@ template 'Django Conf' do
   owner 'root'
   group 'root'
   mode '0440'
-  notifies :restart, "service[apache2]", :delayed
+  notifies :restart, 'service[apache2]', :delayed
 end
 
 link 'Link for Django Conf' do
@@ -50,5 +50,5 @@ link 'Link for Django Conf' do
   to django_conf
   owner 'root'
   group 'root'
-  notifies :restart, "service[apache2]", :delayed
+  notifies :restart, 'service[apache2]', :delayed
 end
