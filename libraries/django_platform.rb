@@ -33,59 +33,17 @@ module DjangoPlatform
       return package
     end
 
-    def python_package_name
-      package =
-        if node['platform_family'] == 'debian'
-          'python3'
-        else
-          'python36'
-        end
-      return package
-    end
-
-    def python_dev_package_name
-      package =
-        if node['platform_family'] == 'debian'
-          'python3-dev'
-        else
-          'python36-devel'
-        end
-      return package
-    end
-
-    def python_package_prefix
-      package =
-        if node['platform_family'] == 'debian'
-          'python3-'
-        else
-          'python36-'
-        end
-      return package
-    end
-
-    def path_to_system_python
-      binary = '/usr/bin/python3'
-
-      #Note: both rhel and debian use /usr/bin/python3 and not python36. This conditional may need to be revised.
-      #binary =
-      #  if node['platform_family'] == 'debian'
-      #    '/usr/bin/python3'
-      #  else
-      #    '/usr/bin/python36'
-      #  end
-
-      return binary
-    end
-
     def path_to_app_repo
       return '/home/django/repo'
     end
 
     def path_to_python_env
-      return '/home/django/python'
+      # Must match python_install
+      return "/opt/python/#{node[TCB]['python']['version_to_install']}"
     end
 
     def path_to_python_binary
+      # Must match python_install
       File.join(path_to_python_env, 'bin/python')
     end
 

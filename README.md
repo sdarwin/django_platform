@@ -218,9 +218,8 @@ The version of SQLite to install.
 If nil, the default version for [sqlite_install](https://github.com/UAlaska-IT/openssl_install) will be used.
 
 * `node['django_platform']['python']['version_to_install']`.
-Defaults to `nil`,
+Defaults to `3.7.4`,
 The version of Python to install.
-If nil, the default version for [python_install](https://github.com/UAlaska-IT/python_install) will be used.
 
 Note:
 
