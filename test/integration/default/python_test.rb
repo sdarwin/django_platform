@@ -13,18 +13,6 @@ describe bash('yum repolist') do
   end
 end
 
-describe package(python_package(node)) do
-  it { should be_installed }
-  its(:version) { should match python_version(node) }
-end
-
-describe package(python_package_prefix(node) + 'venv') do
-  it { should be_installed }
-  before do
-    skip if node['platform_family'] != 'debian'
-  end
-end
-
 describe package('gcc') do
   it { should be_installed }
 end
@@ -52,14 +40,6 @@ end
 describe pip('pip', path_to_pip) do
   it { should be_installed }
   its(:version) { should match '^18\.0' }
-end
-
-describe pip('wheel', path_to_pip) do
-  it { should be_installed }
-end
-
-describe pip('setuptools', path_to_pip) do
-  it { should be_installed }
 end
 
 describe pip('mod_wsgi', path_to_pip) do

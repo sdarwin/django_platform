@@ -103,36 +103,8 @@ def postgresql_service(node)
   return service
 end
 
-def python_version(node)
-  return '3.5' if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
-
-  return '3.6'
-end
-
-def python_package(node)
-  if node['platform_family'] == 'debian'
-    package = 'python3'
-  elsif node['platform_family'] == 'rhel'
-    package = 'python36'
-  else
-    raise "Platform family not recognized: #{node['platform_family']}"
-  end
-  return package
-end
-
-def python_package_prefix(node)
-  if node['platform_family'] == 'debian'
-    package = 'python3-'
-  elsif node['platform_family'] == 'rhel'
-    package = 'python36-'
-  else
-    raise "Platform family not recognized: #{node['platform_family']}"
-  end
-  return package
-end
-
 def path_to_python_env
-  return "/home/django/python"
+  return '/opt/python/3.7.4'
 end
 
 def path_to_pip
