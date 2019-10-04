@@ -18,6 +18,7 @@ python_installation 'Python Install' do
   version node[tcb]['python']['version_to_install'] if node[tcb]['python']['version_to_install']
   openssl_directory default_openssl_directory
   sqlite_directory default_sqlite_directory
+  build_shared true # Better for mod_wsgi compilation
 end
 
 # This is a kludge because wsgi fails to build on CentOS
