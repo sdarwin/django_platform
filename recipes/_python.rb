@@ -30,7 +30,7 @@ wsgi_version =
   else
     ''
   end
-code = "#{path_to_python_binary} -m pip.__main__ install mod_wsgi#{wsgi_version}"
+code = "#{path_to_django_python_binary} -m pip.__main__ install mod_wsgi#{wsgi_version}"
 bash 'Compile WSGI' do
   code code
   only_if { install_wsgi }
@@ -43,7 +43,7 @@ node[tcb]['python']['packages_to_install'].each do |package, version|
     version version if version
     user django_user
     group django_group
-    python path_to_python_binary
+    python path_to_django_python_binary
   end
 end
 

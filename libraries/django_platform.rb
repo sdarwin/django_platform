@@ -42,7 +42,7 @@ module DjangoPlatform
       return "/opt/python/#{node[TCB]['python']['version_to_install']}"
     end
 
-    def path_to_python_binary
+    def path_to_django_python_binary
       # Must match python_install
       File.join(path_to_python_env, 'bin/python')
     end
