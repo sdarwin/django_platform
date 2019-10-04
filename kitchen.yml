@@ -19,15 +19,13 @@ provisioner:
   product_version: 15.3.14
   install_strategy: once
   attributes:
+    firewall:
+      enable_ssh: true
     se_baseline:
       chef_client_version: '15.3.14'
       configure_monitoring: false
     nix_baseline:
       chef_client_version: '15.3.14'
-      firewall:
-        additional_rules:
-          - name: 'Allow all SSH'
-            port: 22
       initial_reboot: true
     http_platform:
       apache:
