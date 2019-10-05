@@ -9,5 +9,6 @@ default['django_platform']['app_repo']['rel_path_to_site_directory'] = 'default_
 default['django_platform']['app_repo']['rel_path_to_static_directory'] = 'static'
 default['django_platform']['app_repo']['rel_path_to_sqlite_db'] = 'db.sqlite3'
 
+default['django_platform']['app_repo']['git_protocol'] = 'https://'
 default['django_platform']['app_repo']['git_user'] = 'calsev'
 default['django_platform']['app_repo']['git_repo'] = 'django_default_site'

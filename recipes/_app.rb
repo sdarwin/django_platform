@@ -28,7 +28,7 @@ all_git_hosts.each do |host, _|
   end
 end
 
-repo_url = "git@#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
+repo_url = "#{app_repo['git_protocol']}#{app_repo['git_host']}:#{app_repo['git_user']}/#{app_repo['git_repo']}"
 
 git path_to_app_repo do
   user django_user

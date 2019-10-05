@@ -2,6 +2,8 @@
 
 tcb = 'django_platform'
 
+default[tcb]['app_repo']['git_protocol'] = 'git@'
+
 default[tcb]['app_repo']['git_host'] = 'github.com'
 
 default[tcb]['app_repo']['git_user'] = nil

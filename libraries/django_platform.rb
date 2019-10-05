@@ -136,8 +136,6 @@ module DjangoPlatform
     end
 
     def vault_secret(bag, item, key)
-      validate_secret_attributes(bag, item, key)
-
       # Will raise 404 error if not found
       item = chef_vault_item(
         bag,
@@ -149,6 +147,12 @@ module DjangoPlatform
       raise 'Unable to retrieve item key' if secret.nil?
 
       return secret
+    end
+
+    def vault_secret_key
+      validate_secret_attributes(bag, item, key)
+
+      return vault_secret(object['vault_data_bag'], object['vault_bag_item'], object['vault_item_key'])
     end
 
     def vault_secret_hash(object)

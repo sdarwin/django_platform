@@ -88,6 +88,10 @@ This cookbook assumes the django application is contained in a git repo.
 Due to limitations of the built-in [git resource](https://docs.chef.io/resource_git.html), only SSH access is supported.
 Submodules will be checked out recursively, and these can use HTTP.
 
+* `node['django_platform']['app_repo']['git_protocol']`.
+Defaults to `'git@'`.
+The protocol to use to fetch the git repo that contains the Django application.
+
 * `node['django_platform']['app_repo']['git_host']`.
 Defaults to `'github.com'`.
 The url of the git server from which to fetch the Django application.
@@ -258,20 +262,20 @@ Defaults to `true`.
 If false, the django user will be configured with a shell, mostly for development and debugging.
 
 # SSH private key for git user
+
+If the app repo will be fetched using git (`node['django_platform']['app_repo']['git_protocol']`), the attributes relating to private key must be set or an exception is raised.
+
 * `node['django_platform']['git_ssh_key']['vault_data_bag']`.
 Defaults to `nil`.
 The name of the vault data bag from which to fetch the SSH key.
-Must be set or an exception is raised.
 
 * `node['django_platform']['git_ssh_key']['vault_bag_item']`.
 Defaults to `nil`.
 The item inside the data bag (json file).
-Must be set or an exception is raised.
 
 * `node['django_platform']['git_ssh_key']['vault_item_key']`.
 Defaults to `nil`.
 The hash key for referencing the SSH key within the json object.
-Must be set or an exception is raised.
 
 ## Examples
 
