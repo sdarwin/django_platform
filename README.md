@@ -83,6 +83,10 @@ Django forms use a CSRF token to mitigate cross-site forgery attacks.
 This requires the referrer to be included in the header.
 This setting provides the referrer only for HTTPS traffic to mitigate other vulnerability; HTTP is redirected to HTTPS by the default [http_platform](https://github.com/ualaska-it/http_platform) configuration.
 
+On RHEL-based distros, SE Linux must be set to permissive to perform some actions.
+To do this the [selinux cookbook](https://github.com/chef-cookbooks/selinux) is used.
+The state for SE Linux is determined by `node['selinux']['state']` and is set to `'permissive'` by default in this cookbook.
+
 ### App
 
 __Git checkout__
