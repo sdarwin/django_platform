@@ -13,6 +13,9 @@ It then deploys a Django application from a git repository.
 
 Django is run on an Apache instance that is configured using [http_platform](https://github.com/ualaska-it/http_platform).
 
+As OpenSSL, SQLite, and Python are built from source, build times can be long, especially for Python 3.7.
+The first run after changing Python version can take more than a half hour.
+
 ## Requirements
 
 ### Chef
