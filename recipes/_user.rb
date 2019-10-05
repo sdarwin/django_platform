@@ -37,6 +37,6 @@ file '/home/django/.ssh/id_rsa' do
   group django_group
   mode '0700'
   sensitive true
-  content vault_secret_key(bag, item, key)
+  content(lazy { vault_secret_key(bag, item, key) })
   not_if { node[tcb]['app_repo']['git_protocol'].match?(/http/) }
 end
