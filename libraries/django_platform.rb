@@ -149,10 +149,10 @@ module DjangoPlatform
       return secret
     end
 
-    def vault_secret_key
+    def vault_secret_key(bag, item, key)
       validate_secret_attributes(bag, item, key)
 
-      return vault_secret(object['vault_data_bag'], object['vault_bag_item'], object['vault_item_key'])
+      return vault_secret(bag, item, key)
     end
 
     def vault_secret_hash(object)
