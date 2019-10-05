@@ -20,7 +20,7 @@ provisioner:
   install_strategy: once
   attributes:
     firewall:
-      enable_ssh: true
+      allow_ssh: true
     se_baseline:
       chef_client_version: '15.3.14'
       configure_monitoring: false
