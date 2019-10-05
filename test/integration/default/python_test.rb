@@ -16,19 +16,6 @@ end
 describe package('gcc') do
   it { should be_installed }
 end
-
-python_dev_package =
-  if node['platform_family'] == 'debian'
-    'python3-dev'
-  else
-    'python36-devel'
-  end
-
-describe package(python_dev_package) do
-  it { should be_installed }
-  its(:version) { should match python_version(node) }
-end
-
 describe file(File.join(path_to_python_env, 'bin/activate')) do
   it { should exist }
   it { should be_file }
