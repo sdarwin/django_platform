@@ -239,11 +239,6 @@ Django support for Python and SQLite can be found [here](https://www.djangoproje
 
 The version of Pip is fixed using a poise-python attribute.
 
-* `default['poise-python']['options']['pip_version']`.
-Defaults to '18.0'.
-The version of Pip to install; Set to `true` for the latest.
-As of poise-python v1.7.0, Pip 18.1 breaks the install, so this version should not be updated until poise-python is updated.
-
 * `node['django_platform']['python']['packages_to_install']`.
 Defaults to
 ```
