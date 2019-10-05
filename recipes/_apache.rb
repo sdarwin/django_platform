@@ -6,20 +6,21 @@ include_recipe 'http_platform::default'
 # This is used for pip install of wsgi
 package apache_dev_package_name
 
-if platform_family?('rhel')
-  wsgi_socket_prefix = '/var/run/wsgi'
-elsif platform_family?('debian')
-  wsgi_socket_prefix = '/var/run/apache2/wsgi'
-else
-  wsgi_socket_prefix = '/var/run/wsgi'
-end
+wsgi_socket_prefix =
+  if platform_family?('rhel')
+    '/var/run/wsgi'
+  elsif platform_family?('debian')
+    '/var/run/apache2/wsgi'
+  else
+    '/var/run/wsgi'
+  end
 
 var_map = {
   path_to_manage_dir: File.join(path_to_app_repo, rel_path_to_manage_directory),
   path_to_static_directory: File.join(path_to_app_repo, rel_path_to_static_directory),
   path_to_python_env: path_to_python_env,
   path_to_wsgi_py: File.join(path_to_app_repo, rel_path_to_site_directory, 'wsgi.py'),
-  wsgi_socket_prefix:  wsgi_socket_prefix
+  wsgi_socket_prefix: wsgi_socket_prefix
 }
 
 template 'Django Host' do
