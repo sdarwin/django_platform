@@ -38,5 +38,5 @@ file '/home/django/.ssh/id_rsa' do
   mode '0700'
   sensitive true
   content vault_secret_key(bag, item, key)
-  not_if { node[TCB]['app_repo']['git_protocol'].match?(/http/) }
+  not_if { node[tcb]['app_repo']['git_protocol'].match?(/http/) }
 end
