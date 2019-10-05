@@ -19,6 +19,9 @@ build: off
 test_script:
   - CHEF_LICENSE="accept" chef exec rubocop
   - foodcritic .
-#  - berks install
+  - foodcritic test/fixtures/cookbooks/account_site
+  - foodcritic test/fixtures/cookbooks/faculty_site
+  - foodcritic test/fixtures/cookbooks/test_harness
+  - berks install
   - chef exec rspec --fail-fast -fd
 #  - KITCHEN_YAML="kitchen.appveyor.yml" kitchen test --no-color --destroy=always
