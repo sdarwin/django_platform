@@ -47,6 +47,11 @@ module DjangoPlatform
       File.join(path_to_python_env, 'bin/python')
     end
 
+    def path_to_django_pip_binary
+      # Must match python_install
+      File.join(path_to_python_env, 'bin/pip')
+    end
+
     def path_to_venv_activate
       return File.join(path_to_python_env, 'bin/activate')
     end
