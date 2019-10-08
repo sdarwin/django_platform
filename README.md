@@ -15,6 +15,7 @@ Django is run on an Apache instance that is configured using [http_platform](htt
 
 As OpenSSL, SQLite, and Python are built from source, build times can be long, especially for Python 3.7.
 The first run after changing Python version can take more than a half hour.
+On burstable instance types, CPU credits tend to deplete on small instances (smaller than an EC2 t3.medium).
 
 ## Requirements
 
