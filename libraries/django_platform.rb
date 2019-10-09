@@ -81,6 +81,20 @@ module DjangoPlatform
       return hosts
     end
 
+    def git_repo_host
+      return "#{node[TCB]['app_repo']['git_protocol']}#{node[TCB]['app_repo']['git_host']}"
+    end
+
+    def git_repo_delimiter
+      return ':' if node[TCB]['app_repo']['git_protocol'].match?(/git/)
+
+      return '/'
+    end
+
+    def git_repo_url
+      "#{git_repo_host}#{git_repo_delimiter}#{node[TCB]['app_repo']['git_user']}/#{node[TCB]['app_repo']['git_repo']}"
+    end
+
     def rel_path_to_site_directory
       site_dir = node[TCB]['app_repo']['rel_path_to_site_directory']
       raise 'node[\'django_platform\'][\'app_repo\'][\'rel_path_to_site_directory\'] must be set' if site_dir.nil?
