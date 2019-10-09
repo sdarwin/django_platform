@@ -132,7 +132,7 @@ module DjangoPlatform
     end
 
     def sqlite_db?
-      db_attr = app_repo['rel_path_to_sqlite_db']
+      db_attr = node[TCB]['app_repo']['rel_path_to_sqlite_db']
       return db_attr && !db_attr.empty?
     end
 
