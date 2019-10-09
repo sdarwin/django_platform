@@ -28,6 +28,14 @@ describe pip('django-python3-ldap', path_to_pip) do
   it { should be_installed }
 end
 
+describe pip('django-widget-tweaks', path_to_pip) do
+  it { should be_installed }
+end
+
+describe pip('ldap3', path_to_pip) do
+  it { should be_installed }
+end
+
 describe pip('requests', path_to_pip) do
   it { should be_installed }
 end
