@@ -66,7 +66,7 @@ module DjangoPlatform
       return '/usr/lib64/httpd/modules'
     end
 
-    def python_revision
+    def django_python_revision
       version_array = node[TCB]['python']['version_to_install'].split('.')
       revision = "#{version_array[0]}#{version_array[1]}"
       return revision

@@ -21,40 +21,27 @@ python_installation 'Python Install' do
   build_shared true # Better for mod_wsgi compilation
 end
 
-# This is a kludge because wsgi fails to build on CentOS
-# However, running the same command succeeds?!
 packages = node[tcb]['python']['packages_to_install']
-install_wsgi = !packages['mod_wsgi'].nil?
-wsgi_version =
-  if install_wsgi && !packages['mod_wsgi'].empty?
-    "==#{packages['mod_wsgi']}"
-  else
-    ''
-  end
-code = "#{path_to_django_python_binary} -m pip.__main__ install mod_wsgi#{wsgi_version}"
-bash 'Compile WSGI' do
-  code code
-  only_if { install_wsgi }
-  not_if 'apachectl -M | grep wsgi'
-  notifies :restart, 'service[apache2]', :delayed
-end
-
-node[tcb]['python']['packages_to_install'].each do |package, version|
-  python_package package do
-    version version if version
-    user django_user
-    group django_group
-    python path_to_django_python_binary
+packages.each do |package, version|
+  code = "#{path_to_django_pip_binary} install #{package}"
+  code += "==#{version}" unless version.empty?
+  match = "#{path_to_django_pip_binary} list | grep #{package}"
+  match += " | grep #{version}" unless version.empty?
+  bash "Python Package #{package}" do
+    code code
+    not_if match
+    notifies :restart, 'service[apache2]', :delayed
   end
 end
 
-python_revision = python_revision
-module_name = "mod_wsgi-py#{python_revision}.cpython-#{python_revision}m-x86_64-linux-gnu.so"
+python_rev = django_python_revision
+module_name = "mod_wsgi-py#{python_rev}.cpython-#{python_rev}m-x86_64-linux-gnu.so"
 
 if node[tcb]['python']['packages_to_install'].include?('mod_wsgi')
   bash 'Install WSGI' do
     code "#{path_to_wsgi_installer} install-module"
-    not_if "[ -f #{File.join(path_to_apache_mod_libs, module_name)} ]"
+    # not_if "[ -f #{File.join(path_to_apache_mod_libs, module_name)} ]"
+    not_if 'apachectl -M | grep -q wsgi'
     notifies :restart, 'service[apache2]', :delayed
   end
 
