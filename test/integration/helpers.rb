@@ -52,7 +52,7 @@ def path_to_conf_directory(node)
 end
 
 def path_to_host_directory(node)
-  return File.join(path_to_base_conf_dir(node), 'conf.d')
+  return File.join(path_to_base_conf_dir(node), 'conf-available')
 end
 
 def path_to_http_host(node)
