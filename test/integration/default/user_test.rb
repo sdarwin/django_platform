@@ -36,12 +36,3 @@ describe directory('/home/django/.ssh') do
   it { should be_owned_by django_user }
   it { should be_grouped_into django_group }
 end
-
-describe file('/home/django/.ssh/id_rsa') do
-  it { should exist }
-  it { should be_file }
-  it { should be_mode 0o700 }
-  it { should be_owned_by django_user }
-  it { should be_grouped_into django_group }
-  its(:content) { should match(/BEGIN OPENSSH PRIVATE KEY|BEGIN RSA PRIVATE KEY/) }
-end

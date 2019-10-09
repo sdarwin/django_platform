@@ -107,6 +107,10 @@ def path_to_python_env
   return '/opt/python/3.7.4'
 end
 
+def path_to_python
+  return File.join(path_to_python_env, 'bin/python')
+end
+
 def path_to_pip
   return File.join(path_to_python_env, 'bin/pip')
 end

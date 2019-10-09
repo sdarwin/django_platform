@@ -87,6 +87,7 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/default
+        - test/integration/git_ssh
         - test/integration/account
     attributes:
     includes:
@@ -103,6 +104,7 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/default
+        - test/integration/git_ssh
         - test/integration/faculty
     attributes:
     includes:
