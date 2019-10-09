@@ -65,3 +65,37 @@ describe file(path_to_django_conf_link(node)) do
   it { should be_grouped_into 'root' }
   its(:link_path) { should eq path_to_django_conf(node) }
 end
+
+# Make sure the end result is a working server
+
+describe service(apache_service(node)) do
+  it { should be_installed }
+  it { should be_enabled }
+  it { should be_running }
+end
+
+describe bash('apachectl configtest') do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should match 'Syntax OK' } # Yep, output is on stderr
+  its(:stdout) { should eq '' }
+end
+
+pages = [
+  {
+    page: '',
+    status: 200,
+    content: 'doctype html'
+  },
+  {
+    page: '/admin',
+    status: 301,
+    content: ''
+  }
+]
+
+pages.each do |page|
+  describe http("https://localhost#{page[:page]}", ssl_verify: false) do
+    its(:status) { should cmp page[:status] }
+    its(:body) { should match(page[:content]) }
+  end
+end

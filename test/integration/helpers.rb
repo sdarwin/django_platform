@@ -41,6 +41,12 @@ def apache_shell(node)
   return shell
 end
 
+def apache_service(node)
+  return 'apache2' if node['platform_family'] == 'debian'
+
+  return 'httpd'
+end
+
 def path_to_base_conf_dir(node)
   return '/etc/apache2' if node['platform_family'] == 'debian'
 
