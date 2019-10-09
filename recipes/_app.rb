@@ -54,8 +54,6 @@ end
 unless app_repo['rel_path_to_pip_requirements'].nil?
   pip_requirements 'Application requirements' do
     path File.join(path_to_app_repo, app_repo['rel_path_to_pip_requirements'])
-    user django_user
-    group django_group
     python path_to_django_python_binary
     only_if { node[tcb]['app_repo']['git_repo_updated'] }
   end
