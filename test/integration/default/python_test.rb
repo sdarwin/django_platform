@@ -16,13 +16,6 @@ end
 describe package('gcc') do
   it { should be_installed }
 end
-describe file(File.join(path_to_python_env, 'bin/activate')) do
-  it { should exist }
-  it { should be_file }
-  it { should be_mode 0o644 }
-  it { should be_owned_by django_user }
-  it { should be_grouped_into django_group }
-end
 
 describe pip('pip', path_to_pip) do
   it { should be_installed }
