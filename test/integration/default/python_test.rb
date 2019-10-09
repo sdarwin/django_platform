@@ -66,3 +66,9 @@ describe bash("ls #{apache_lib_dir}") do
   its(:stderr) { should eq '' }
   its(:stdout) { should match 'mod_wsgi' }
 end
+
+describe bash('apachectl -M') do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should eq '' }
+  its(:stdout) { should match 'wsgi_module' }
+end
