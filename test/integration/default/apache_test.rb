@@ -51,7 +51,7 @@ describe file(path_to_django_conf(node)) do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
   # rubocop:disable Metrics/LineLength
-  its(:content) { should match('WSGIDaemonProcess django python-home=/home/django/python python-path=/home/django/repo/app') }
+  its(:content) { should match("WSGIDaemonProcess django python-home=#{path_to_python_env} python-path=/home/django/repo/app") }
   # rubocop:enable Metrics/LineLength
 end
 
