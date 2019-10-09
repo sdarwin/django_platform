@@ -25,7 +25,6 @@ provisioner:
       apache:
         install_test_suite: true
     django_platform:
-      configure_postgres: true
       django_is_system_user: false
 
 verifier:
