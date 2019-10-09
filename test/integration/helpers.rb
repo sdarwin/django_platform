@@ -103,6 +103,14 @@ def postgresql_service(node)
   return service
 end
 
+def path_to_openssl
+  return '/opt/openssl/1.1.1d/bin/openssl'
+end
+
+def path_to_sqlite
+  return '/opt/sqlite/3300000/bin/sqlite3'
+end
+
 def path_to_python_env
   return '/opt/python/3.7.4'
 end
