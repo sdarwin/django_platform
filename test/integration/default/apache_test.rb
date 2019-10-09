@@ -53,6 +53,8 @@ describe file(path_to_django_conf(node)) do
   # rubocop:disable Metrics/LineLength
   its(:content) { should match("WSGIDaemonProcess django python-home=#{path_to_python_env} python-path=/home/django/repo/app") }
   # rubocop:enable Metrics/LineLength
+  its(:content) { should match('WSGISocketPrefix /var/run/apache2/wsgi') } if node['platform_family'] == 'debian'
+  its(:content) { should match('WSGISocketPrefix /var/run/wsgi') } unless node['platform_family'] == 'debian'
 end
 
 describe file(path_to_django_conf_link(node)) do

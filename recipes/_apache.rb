@@ -7,9 +7,7 @@ include_recipe 'http_platform::default'
 package apache_dev_package_name
 
 wsgi_socket_prefix =
-  if platform_family?('rhel')
-    '/var/run/wsgi'
-  elsif platform_family?('debian')
+  if platform_family?('debian')
     '/var/run/apache2/wsgi'
   else
     '/var/run/wsgi'
