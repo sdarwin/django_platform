@@ -82,6 +82,7 @@ suites:
   # These may be useful as examples, but are of little use for testing by contributors
   - name: account
     run_list:
+      - recipe[chef_run_recorder::default]
       - recipe[account_site::default]
     data_bags_path: 'test/data_bags'
     verifier:
@@ -99,6 +100,7 @@ suites:
       - oracle-6.10
   - name: faculty
     run_list:
+      - recipe[chef_run_recorder::default]
       - recipe[faculty_site::default]
     data_bags_path: 'test/data_bags'
     verifier:
