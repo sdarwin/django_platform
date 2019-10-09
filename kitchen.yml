@@ -70,6 +70,7 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/default
+        - test/integration/django_default
     attributes:
     includes:
       - ubuntu-18.04
