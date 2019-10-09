@@ -110,11 +110,11 @@ directory path_to_app_repo do
   user django_user
   group django_group
   mode '0770'
-  only_if { app_repo['rel_path_to_sqlite_db'] }
+  only_if { sqlite_db? }
 end
 file path_to_sqlite_db do
   user django_user
   group django_group
   mode '0660'
-  only_if { app_repo['rel_path_to_sqlite_db'] }
+  only_if { sqlite_db? }
 end
