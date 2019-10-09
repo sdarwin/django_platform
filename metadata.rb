@@ -25,6 +25,7 @@ supports 'oracle', '>= 6.0'
 
 chef_version '>= 14.0' if respond_to?(:chef_version)
 
+depends 'chef_run_recorder'
 depends 'chef-vault'
 depends 'http_platform'
 depends 'openssl_install'
