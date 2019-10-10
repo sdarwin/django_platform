@@ -84,7 +84,7 @@ pages = [
   {
     page: '',
     status: 200,
-    content: 'doctype html'
+    content: /doctype html/i
   },
   {
     page: '/admin',
