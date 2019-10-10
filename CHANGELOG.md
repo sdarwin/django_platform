@@ -2,8 +2,9 @@
 
 ## 2.0.0
 
-* Updated to apache2 7 cookbook
-* Added Appveyor pipeline
+* Update to apache2 7 cookbook
+* Enable HTTPS checkout of repo
+* Add Appveyor pipeline
 * Cleanup for Supermarket
 
 ## 1.0.1
