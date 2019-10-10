@@ -1,9 +1,10 @@
 ---
 driver:
   name: ec2
-  region: us-west-1
-  instance_type: t3a.small
-  security_group_ids: ['kitchen_test_sg']
+  region: eu-central-1
+  instance_type: t2.large
+  aws_ssh_key_id: frankfurtkeypair
+  security_group_ids: ['open']
   tags:
     Name: Django Platform
     Service: Infrastructure
@@ -26,6 +27,8 @@ provisioner:
         install_test_suite: true
     django_platform:
       django_is_system_user: false
+    chef-vault:
+      databags_fallback: true
 
 verifier:
   name: inspec
@@ -52,58 +55,59 @@ platforms:
   - name: windows-2008r2sp1
 
 suites:
-  - name: default
-    run_list:
-      - recipe[chef_run_recorder::default]
-      - recipe[test_harness::default]
-    data_bags_path: 'test/data_bags'
-    verifier:
-      inspec_tests:
-        - test/integration/default
-        - test/integration/django_default
-    attributes:
-    includes:
-      - ubuntu-18.04
-      - ubuntu-16.04
-      - debian-9
-      - centos-7
-      - oracle-7.6
-      - oracle-6.10
+        #  - name: default
+        #    run_list:
+        #      - recipe[chef_run_recorder::default]
+        #      - recipe[test_harness::default]
+        #    data_bags_path: 'test/data_bags'
+        #    verifier:
+        #      inspec_tests:
+        #        - test/integration/default
+        #        - test/integration/django_default
+        #    attributes:
+        #    includes:
+        #      - ubuntu-18.04
+        #      - ubuntu-16.04
+        #      - debian-9
+        #      - centos-7
+        #      - oracle-7.6
+        #      - oracle-6.10
   # These are private Django apps that are deployed with this cookbook
   # These may be useful as examples, but are of little use for testing by contributors
-  - name: account
-    run_list:
-      - recipe[chef_run_recorder::default]
-      - recipe[account_site::default]
-    data_bags_path: 'test/data_bags'
-    verifier:
-      inspec_tests:
-        - test/integration/default
-        - test/integration/git_ssh
-        - test/integration/account
-    attributes:
-    includes:
-      - ubuntu-18.04
-      - ubuntu-16.04
-      - debian-9
-      - centos-7
-      - oracle-7.6
-      - oracle-6.10
+  #  - name: account
+  #    run_list:
+  #      - recipe[chef_run_recorder::default]
+  #      - recipe[account_site::default]
+  #    data_bags_path: 'test/data_bags'
+  #    verifier:
+  #      inspec_tests:
+  #        - test/integration/default
+  #        - test/integration/git_ssh
+  #        - test/integration/account
+  #    attributes:
+  #    includes:
+  #      - ubuntu-18.04
+  #      - ubuntu-16.04
+  #      - debian-9
+  #      - centos-7
+  #      - oracle-7.6
+  #      - oracle-6.10
   - name: faculty
     run_list:
-      - recipe[chef_run_recorder::default]
-      - recipe[faculty_site::default]
+      #- recipe[chef_run_recorder::default]
+      #- recipe[faculty_site::default]
+      - recipe[django-website::default]
     data_bags_path: 'test/data_bags'
     verifier:
       inspec_tests:
-        - test/integration/default
-        - test/integration/git_ssh
-        - test/integration/faculty
+              #  - test/integration/default
+              #- test/integration/git_ssh
+      #  - test/integration/faculty
     attributes:
     includes:
       - ubuntu-18.04
-      - ubuntu-16.04
-      - debian-9
-      - centos-7
-      - oracle-7.6
-      - oracle-6.10
+        #- ubuntu-16.04
+        #- debian-9
+        #- centos-7
+        #- oracle-7.6
+        #- oracle-6.10
