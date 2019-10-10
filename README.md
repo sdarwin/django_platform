@@ -93,12 +93,13 @@ The state for SE Linux is determined by `node['selinux']['state']` and is set to
 __Git checkout__
 
 This cookbook assumes the django application is contained in a git repo.
-Due to limitations of the built-in [git resource](https://docs.chef.io/resource_git.html), only SSH access is supported.
-Submodules will be checked out recursively, and these can use HTTP.
+Both SSH and HTTPS access are supported.
+Submodules will be checked out recursively, and these can also use SSH or HTTPS.
 
 * `node['django_platform']['app_repo']['git_protocol']`.
 Defaults to `'git@'`.
 The protocol to use to fetch the git repo that contains the Django application.
+Valid values are 'git@' and 'https://'.
 
 * `node['django_platform']['app_repo']['git_host']`.
 Defaults to `'github.com'`.
@@ -115,7 +116,7 @@ The name of the repo within the git organization; must be set or an exception is
 * `node['django_platform']['app_repo']['git_revision']`.
 Defaults to `'master'`.
 The branch, tag, or commit to check out.
-This is often changed during development and testing, e.g. 'staging', 'deploy'.
+This is often changed during development and testing, e.g. to 'staging', 'deploy'.
 
 * `node['django_platform']['app_repo']['git_submodule_hosts']`.
 Defaults to `['github.com']`.
@@ -216,8 +217,7 @@ RHEL and Django approaches don't align well.
 The latest 2.2 LTS release of Django requires Python 3.5 and SQLite 3.8 or higher.
 RHEL + EPEL provides Python 3.6, but it is compiled with an old SQLite 3.7.
 For comparison, Ubuntu 16 comes with only Python 3.5, but it is compiled with SQLite 3.11.
-For consistency, a local Python install is used.
-The version to install is controlled by one attribute.
+For consistency, and to support recent Django versions on a wider variety of platforms, a local Python install is used.
 
 * `node['django_platform']['openssl']['version_to_install']`.
 Defaults to `nil`,
@@ -227,7 +227,7 @@ If nil, the default version for [openssl_install](https://github.com/UAlaska-IT/
 * `node['django_platform']['sqlite']['version_to_install']`.
 Defaults to `nil`,
 The version of SQLite to install.
-If nil, the default version for [sqlite_install](https://github.com/UAlaska-IT/openssl_install) will be used.
+If nil, the default version for [sqlite_install](https://github.com/UAlaska-IT/sqlite_install) will be used.
 
 * `node['django_platform']['python']['version_to_install']`.
 Defaults to `3.7.4`,
@@ -235,10 +235,10 @@ The version of Python to install.
 
 Note:
 
-* Compile times for a full Python stack can be long, the first run will take a while.
-Django support for Python and SQLite can be found [here](https://www.djangoproject.com/download/#supported-versions).
+* Compile times for a full Python stack can be long, so the first run will take a while.
+* Django support for Python and SQLite can be found [here](https://www.djangoproject.com/download/#supported-versions).
 
-The version of Pip is fixed using a poise-python attribute.
+The Pip packages to install are set using a single attribute.
 
 * `node['django_platform']['python']['packages_to_install']`.
 Defaults to
@@ -255,7 +255,7 @@ Defaults to
 }
 ```
 A Hash of package name to version.
-If version is empty, the latest version will be installed
+If version is empty, the latest version will be installed.
 Clients should merge this attribute rather than overwrite because mod_wsgi and Django are required for the server to function.
 
 ### User
@@ -266,15 +266,15 @@ If false, the django user will be configured with a shell, mostly for developmen
 
 # SSH private key for git user
 
-If the app repo will be fetched using git (`node['django_platform']['app_repo']['git_protocol']`), the attributes relating to private key must be set or an exception is raised.
+If the app repo will be fetched using SSH (`node['django_platform']['app_repo']['git_protocol']`), the attributes relating to the SSH private key must be set or an exception is raised.
 
 * `node['django_platform']['git_ssh_key']['vault_data_bag']`.
 Defaults to `nil`.
-The name of the vault data bag from which to fetch the SSH key.
+The name of the vault data bag (directory) from which to fetch the SSH key.
 
 * `node['django_platform']['git_ssh_key']['vault_bag_item']`.
 Defaults to `nil`.
-The item inside the data bag (json file).
+The item (json file) inside the data bag.
 
 * `node['django_platform']['git_ssh_key']['vault_item_key']`.
 Defaults to `nil`.
@@ -284,6 +284,8 @@ The hash key for referencing the SSH key within the json object.
 
 This is an application cookbook; no custom resources are provided.
 See recipes and attributes for details of what this cookbook does.
+
+Cookbooks for two sample deployments are included in test/fixtures/cookbooks.
 
 ## Development
 
