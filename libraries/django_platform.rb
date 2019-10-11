@@ -49,7 +49,7 @@ module DjangoPlatform
 
     def path_to_system_python
       # Must match python_install
-      return "/opt/python/#{node[TCB]['python']['version_to_install']}" if source_install?
+      return "/opt/python/#{node[TCB]['python']['version_to_install']}/bin/python" if source_install?
 
       return '/usr/bin/python3'
     end

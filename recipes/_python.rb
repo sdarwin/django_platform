@@ -2,23 +2,19 @@
 
 tcb = 'django_platform'
 
-include_recipe 'openssl_install::default'
-include_recipe 'sqlite_install::default'
-include_recipe 'python_install::default'
+include_recipe "#{tcb}::_python_source" if source_install?
+include_recipe "#{tcb}::_python_package" unless source_install?
 
-openssl_installation 'OpenSSL Install' do
-  version node[tcb]['openssl']['version_to_install'] if node[tcb]['openssl']['version_to_install']
-end
-
-sqlite_installation 'SQLite Install' do
-  version node[tcb]['sqlite']['version_to_install'] if node[tcb]['sqlite']['version_to_install']
-end
-
-python_installation 'Python Install' do
-  version node[tcb]['python']['version_to_install'] if node[tcb]['python']['version_to_install']
-  openssl_directory default_openssl_directory
-  sqlite_directory default_sqlite_directory
-  build_shared true # Better for mod_wsgi compilation
+# poise-python is busted:
+# Python package detection does not work on Ubuntu or CentOS
+# Virtual environment creation is broken in CentOS
+# Pip install is broken as of Pip 19
+# We use it only to manage packages
+bash 'Django Environment' do
+  code "#{path_to_system_python} -m venv #{path_to_python_env}"
+  user django_user
+  group django_group
+  not_if { File.exist?("#{path_to_python_env}/bin/activate") }
 end
 
 packages = node[tcb]['python']['packages_to_install']
