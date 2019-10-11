@@ -13,8 +13,9 @@ It then deploys a Django application from a git repository.
 
 Django is run on an Apache instance that is configured using [http_platform](https://github.com/ualaska-it/http_platform).
 
-As OpenSSL, SQLite, and Python are built from source, build times can be long, especially for Python 3.7.
-The first run after changing Python version can take more than a half hour.
+It is optional to install OpenSSL, SQLite, and Python from packages or sources, see `node['django_platform']['python']['install_method']`.
+Build times for install from source can be long, especially for Python 3.7.
+The source build after changing Python version can take more than a half hour.
 On burstable instance types, CPU credits tend to deplete on small instances (smaller than an EC2 t3.medium).
 
 ## Requirements
@@ -217,7 +218,19 @@ RHEL and Django approaches don't align well.
 The latest 2.2 LTS release of Django requires Python 3.5 and SQLite 3.8 or higher.
 RHEL + EPEL provides Python 3.6, but it is compiled with an old SQLite 3.7.
 For comparison, Ubuntu 16 comes with only Python 3.5, but it is compiled with SQLite 3.11.
-For consistency, and to support recent Django versions on a wider variety of platforms, a local Python install is used.
+
+Where possible, it is advisable to use system packages because they are better supported.
+However, running newer Django versions on older distros can require installing custom libraries.
+This cookbook can be used to build a custom python install.
+The install method is controlled by a single switch.
+
+* `node['django_platform']['python']['install_method']`.
+Defaults to 'package'.
+The method used to install Python and dependencies.
+Allowable values are 'package' and 'source'.
+
+When source install is chosen, the attributes below control the versions of Python and dependencies to install.
+The attributes below are ignored for package install.
 
 * `node['django_platform']['openssl']['version_to_install']`.
 Defaults to `nil`,
