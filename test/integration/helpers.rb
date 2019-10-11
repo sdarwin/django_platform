@@ -124,11 +124,11 @@ def python_version(node)
   return '3.6'
 end
 
-def python_package(node)
+def python_package(_node)
   return 'python3'
 end
 
-def python_package_prefix(node)
+def python_package_prefix(_node)
   return 'python3-'
 end
 
