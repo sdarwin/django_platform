@@ -6,13 +6,9 @@ module DjangoPlatform
     TCB = 'django_platform'
 
     def apache_user
-      user =
-        if node['platform_family'] == 'debian'
-          'www-data'
-        else
-          'apache'
-        end
-      return user
+      return 'www-data' if node['platform_family'] == 'debian'
+
+      return 'apache'
     end
 
     def django_user
@@ -24,13 +20,38 @@ module DjangoPlatform
     end
 
     def apache_dev_package_name
-      package =
-        if node['platform_family'] == 'debian'
-          'apache2-dev'
-        else
-          'httpd-devel'
-        end
-      return package
+      return 'apache2-dev' if node['platform_family'] == 'debian'
+
+      'httpd-devel'
+    end
+
+    def source_install?
+      return node[TCB]['python']['install_method'] == 'source'
+    end
+
+    def python_package_name
+      return 'python3' if node['platform_family'] == 'debian'
+
+      return 'python36'
+    end
+
+    def python_dev_package_name
+      return 'python3-dev' if node['platform_family'] == 'debian'
+
+      return 'python36-devel'
+    end
+
+    def python_package_prefix
+      return 'python3-' if node['platform_family'] == 'debian'
+
+      return 'python36-'
+    end
+
+    def path_to_system_python
+      # Must match python_install
+      return "/opt/python/#{node[TCB]['python']['version_to_install']}" if source_install?
+
+      return '/usr/bin/python3'
     end
 
     def path_to_app_repo
@@ -38,8 +59,7 @@ module DjangoPlatform
     end
 
     def path_to_python_env
-      # Must match python_install
-      return "/opt/python/#{node[TCB]['python']['version_to_install']}"
+      return '/home/django/env'
     end
 
     def path_to_django_python_binary
