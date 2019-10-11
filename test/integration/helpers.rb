@@ -125,21 +125,17 @@ def python_version(node)
 end
 
 def python_package(node)
-  return 'python3' if node['platform_family'] == 'debian'
-
-  return 'python36'
+  return 'python3'
 end
 
 def python_package_prefix(node)
-  return 'python3-' if node['platform_family'] == 'debian'
-
-  return 'python36-'
+  return 'python3-'
 end
 
 def python_dev_package(node)
   return 'python3-dev' if node['platform_family'] == 'debian'
 
-  return 'python36-devel'
+  return 'python3-devel'
 end
 
 def path_to_python_env

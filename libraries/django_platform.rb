@@ -30,21 +30,17 @@ module DjangoPlatform
     end
 
     def python_package_name
-      return 'python3' if node['platform_family'] == 'debian'
-
-      return 'python36'
+      return 'python3'
     end
 
     def python_dev_package_name
       return 'python3-dev' if node['platform_family'] == 'debian'
 
-      return 'python36-devel'
+      return 'python3-devel'
     end
 
     def python_package_prefix
-      return 'python3-' if node['platform_family'] == 'debian'
-
-      return 'python36-'
+      return 'python3-'
     end
 
     def path_to_system_python
