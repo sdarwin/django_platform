@@ -118,7 +118,8 @@ def path_to_sqlite
 end
 
 def python_version(node)
-  return '3.5' if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
+  debian35 = node['platform_version'] == '16.04' || node['platform_version'] == '9'
+  return '3.5' if node['platform_family'] == 'debian' && debian35
 
   return '3.6'
 end

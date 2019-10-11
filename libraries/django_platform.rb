@@ -93,7 +93,8 @@ module DjangoPlatform
 
     def package_python_revision
       # This is going to be a pain to sync as platforms release
-      return '35' if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
+      debian35 = node['platform_version'] == '16.04' || node['platform_version'] == '9'
+      return '35' if node['platform_family'] == 'debian' && debian35
 
       return '36'
     end
