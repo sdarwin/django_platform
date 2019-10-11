@@ -135,6 +135,12 @@ def python_package_prefix(node)
   return 'python36-'
 end
 
+def python_dev_package(node)
+  return 'python3-dev' if node['platform_family'] == 'debian'
+
+  return 'python36-devel'
+end
+
 def path_to_python_env
   return '/home/django/env'
 end
