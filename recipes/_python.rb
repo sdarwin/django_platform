@@ -25,6 +25,8 @@ packages.each do |package, version|
   match += " | grep #{version}" unless version.empty?
   bash "Python Package #{package}" do
     code code
+    user django_user
+    group django_group
     not_if match
     notifies :restart, 'service[apache2]', :delayed
   end
