@@ -16,7 +16,7 @@ describe pip('setuptools', path_to_pip) do
   it { should be_installed }
 end
 
-describe pip('mod_wsgi', path_to_pip) do
+describe pip(wsgi_package_name(node), path_to_pip) do
   it { should be_installed }
   its('version') { should match(/^4\./) }
 end

@@ -153,3 +153,9 @@ end
 def path_to_pip
   return File.join(path_to_python_env, 'bin/pip')
 end
+
+def wsgi_package_name(node)
+  return 'mod-wsgi' if node['platform'] == 'ubuntu'
+
+  return 'mod_wsgi'
+end
