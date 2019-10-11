@@ -32,9 +32,6 @@ packages.each do |package, version|
   end
 end
 
-python_rev = django_python_revision
-module_name = "mod_wsgi-py#{python_rev}.cpython-#{python_rev}m-x86_64-linux-gnu.so"
-
 if node[tcb]['python']['packages_to_install'].include?('mod_wsgi')
   bash 'Install WSGI' do
     code "#{path_to_wsgi_installer} install-module"
@@ -44,6 +41,6 @@ if node[tcb]['python']['packages_to_install'].include?('mod_wsgi')
   end
 
   apache2_module 'wsgi' do
-    mod_name module_name
+    mod_name wsgi_module_name
   end
 end

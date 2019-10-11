@@ -86,10 +86,27 @@ module DjangoPlatform
       return '/usr/lib64/httpd/modules'
     end
 
-    def django_python_revision
+    def source_python_revision
       version_array = node[TCB]['python']['version_to_install'].split('.')
-      revision = "#{version_array[0]}#{version_array[1]}"
-      return revision
+      return "#{version_array[0]}#{version_array[1]}"
+    end
+
+    def package_python_revision
+      # This is going to be a pain to sync as platforms release
+      return '35' if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
+
+      return '36'
+    end
+
+    def django_python_revision
+      return source_python_revision if source_install?
+
+      return package_python_revision
+    end
+
+    def wsgi_module_name
+      python_rev = django_python_revision
+      return "mod_wsgi-py#{python_rev}.cpython-#{python_rev}m-x86_64-linux-gnu.so"
     end
 
     def all_git_hosts
