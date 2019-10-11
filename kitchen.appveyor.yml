@@ -15,7 +15,6 @@ provisioner:
       apache:
         install_test_suite: true
     django_platform:
-      configure_postgres: true
       django_is_system_user: false
 
 verifier:
@@ -26,7 +25,6 @@ platforms:
   - name: ubuntu-16.04
   - name: ubuntu-14.04
   - name: debian-9
-  - name: debian-8
   - name: centos-7
   - name: centos-6
   - name: oracle-7.6
@@ -39,40 +37,22 @@ platforms:
   - name: windows-2019
     driver:
       image_id: ami-004a782f694e8dde2
-    transport:
-      name: winrm
   - name: windows-2016
-    transport:
-      name: winrm
   - name: windows-2012r2
-    transport:
-      name: winrm
   - name: windows-2008r2sp1
-    transport:
-      name: winrm
 
 suites:
-  - name: account
+  - name: package
     run_list:
-      - recipe[se-nix-baseline::default]
-      - recipe[account_site::default]
+      - recipe[chef_run_recorder::default]
+      - recipe[test_harness::default]
     data_bags_path: 'test/data_bags'
     verifier:
       inspec_tests:
         - test/integration/default
-        - test/integration/account
+        - test/integration/install_package
+        - test/integration/django_default
     attributes:
     includes:
       - ubuntu-18.04
-  - name: faculty
-    run_list:
-      - recipe[se-nix-baseline::default]
-      - recipe[faculty_site::default]
-    data_bags_path: 'test/data_bags'
-    verifier:
-      inspec_tests:
-        - test/integration/default
-        - test/integration/faculty
-    attributes:
-    includes:
       - centos-7
