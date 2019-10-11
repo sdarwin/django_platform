@@ -117,8 +117,26 @@ def path_to_sqlite
   return '/opt/sqlite/3300000/bin/sqlite3'
 end
 
+def python_version(node)
+  return '3.5' if node['platform_family'] == 'debian' && node['platform_version'] == '16.04'
+
+  return '3.6'
+end
+
+def python_package(node)
+  return 'python3' if node['platform_family'] == 'debian'
+
+  return 'python36'
+end
+
+def python_package_prefix(node)
+  return 'python3-' if node['platform_family'] == 'debian'
+
+  return 'python36-'
+end
+
 def path_to_python_env
-  return '/opt/python/3.7.4'
+  return '/home/django/env'
 end
 
 def path_to_python
