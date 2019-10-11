@@ -56,7 +56,7 @@ unless app_repo['rel_path_to_pip_requirements'].nil?
     path File.join(path_to_app_repo, app_repo['rel_path_to_pip_requirements'])
     user django_user
     group django_group
-    virtualenv path_to_python_env
+    python path_to_django_python_binary
     only_if { node[tcb]['app_repo']['git_repo_updated'] }
   end
 end
@@ -68,7 +68,7 @@ end
 python_execute 'Migrate App Data' do
   command manage_command('migrate')
   cwd path_to_app_repo
-  virtualenv path_to_python_env
+  python path_to_django_python_binary
   user django_user
   group django_group
   only_if { node[tcb]['app_repo']['git_repo_updated'] }
@@ -77,7 +77,7 @@ end
 python_execute 'Collect Static' do
   command manage_command('collectstatic --noinput')
   cwd path_to_app_repo
-  virtualenv path_to_python_env
+  python path_to_django_python_binary
   user django_user
   group django_group
   only_if { node[tcb]['app_repo']['git_repo_updated'] }
@@ -89,7 +89,7 @@ app_repo['additional_management_commands'].each do |code|
   python_execute "Manage Command: #{cmd}" do
     command cmd
     cwd path_to_app_repo
-    virtualenv path_to_python_env
+    python path_to_django_python_binary
     user django_user
     group django_group
     only_if { node[tcb]['app_repo']['git_repo_updated'] }
