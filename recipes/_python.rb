@@ -12,8 +12,6 @@ include_recipe "#{tcb}::_python_package" unless source_install?
 # We use it only to manage packages
 bash 'Django Environment' do
   code "#{path_to_system_python} -m venv #{path_to_python_env}"
-  user django_user
-  group django_group
   not_if { File.exist?("#{path_to_python_env}/bin/activate") }
 end
 
@@ -25,8 +23,6 @@ packages.each do |package, version|
   match += " | grep #{version}" unless version.empty?
   bash "Python Package #{package}" do
     code code
-    user django_user
-    group django_group
     not_if match
     notifies :restart, 'service[apache2]', :delayed
   end
