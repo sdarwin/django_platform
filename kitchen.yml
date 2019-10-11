@@ -52,7 +52,7 @@ platforms:
   - name: windows-2008r2sp1
 
 suites:
-  - name: default
+  - name: package
     run_list:
       - recipe[chef_run_recorder::default]
       - recipe[test_harness::default]
@@ -60,8 +60,30 @@ suites:
     verifier:
       inspec_tests:
         - test/integration/default
+        - test/integration/install_package
         - test/integration/django_default
     attributes:
+    includes:
+      - ubuntu-18.04
+      - ubuntu-16.04
+      - debian-9
+      - centos-7
+      - oracle-7.6
+      - oracle-6.10
+  - name: source
+    run_list:
+      - recipe[chef_run_recorder::default]
+      - recipe[test_harness::default]
+    data_bags_path: 'test/data_bags'
+    verifier:
+      inspec_tests:
+        - test/integration/default
+        - test/integration/install_source
+        - test/integration/django_default
+    attributes:
+      django_platform:
+        python:
+          install_method: 'source'
     includes:
       - ubuntu-18.04
       - ubuntu-16.04
