@@ -18,9 +18,9 @@ end
 packages = node[tcb]['python']['packages_to_install']
 packages.each do |package, version|
   code = "#{path_to_django_pip_binary} install #{package}"
-  code += "==#{version}" unless version.empty?
+  code += "==#{version}" unless version.nil? || version.empty?
   match = "#{path_to_django_pip_binary} list | grep #{package}"
-  match += " | grep #{version}" unless version.empty?
+  match += " | grep #{version}" unless version.nil? || version.empty?
   bash "Python Package #{package}" do
     code code
     not_if match

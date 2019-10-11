@@ -55,4 +55,24 @@ suites:
     attributes:
     includes:
       - ubuntu-18.04
+  - name: package-old
+    run_list:
+      - recipe[chef_run_recorder::default]
+      - recipe[test_harness::default]
+    data_bags_path: 'test/data_bags'
+    verifier:
+      inspec_tests:
+        - test/integration/default
+        - test/integration/install_package
+        - test/integration/django_default
+    attributes:
+      django_platform:
+        python:
+          packages_to_install:
+            - pip: ''
+            - wheel: ''
+            - setuptools: ''
+            - mod_wsgi: ''
+            - Django: '2.1'
+    includes:
       - centos-7
