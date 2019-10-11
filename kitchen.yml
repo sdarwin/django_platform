@@ -81,11 +81,11 @@ suites:
       django_platform:
         python:
           packages_to_install:
-            - pip: ''
-            - wheel: ''
-            - setuptools: ''
-            - mod_wsgi: ''
-            - Django: '2.1'
+            pip: ''
+            wheel: ''
+            setuptools: ''
+            mod_wsgi: ''
+            Django: '2.1'
     includes:
       - centos-7
       - oracle-7.6
