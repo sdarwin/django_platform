@@ -2,7 +2,7 @@
 
 # Django 2.1 requires python 3.5 and CentOS 7 ships with 3.3, so we must install EPEL python
 
-include_recipe 'yum-epel::default'
+include_recipe 'yum-epel::default' if node['platform_family'] == 'rhel' && node['platform_version'].to_f < 8
 
 package python_package_name
 package "#{python_package_prefix}venv" do
