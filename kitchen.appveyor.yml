@@ -11,9 +11,6 @@ provisioner:
   attributes:
     firewall:
       allow_ssh: true
-    http_platform:
-      apache:
-        install_test_suite: true
     django_platform:
       django_is_system_user: false
 
