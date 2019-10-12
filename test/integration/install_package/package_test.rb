@@ -33,3 +33,8 @@ describe package(python_dev_package(node)) do
   it { should be_installed }
   its(:version) { should match python_version(node) }
 end
+
+describe pip('Django', path_to_pip) do
+  it { should be_installed }
+  its('version') { should match(django_version(node)) }
+end

@@ -21,11 +21,6 @@ describe pip(wsgi_package_name(node), path_to_pip) do
   its('version') { should match(/^4\./) }
 end
 
-describe pip('Django', path_to_pip) do
-  it { should be_installed }
-  its('version') { should match(django_version(node)) }
-end
-
 apache_lib_dir =
   if node['platform_family'] == 'debian'
     '/usr/lib/apache2/modules'

@@ -25,3 +25,8 @@ describe file(path_to_python) do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
 end
+
+describe pip('Django', path_to_pip) do
+  it { should be_installed }
+  its('version') { should match('2.2') }
+end
