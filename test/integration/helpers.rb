@@ -157,7 +157,7 @@ def wsgi_package_name(node)
 end
 
 def django_version(node)
-  return '2.2' if node['platform_family'] == 'debian' || python_version(node).to_f > 3.6
+  return '2.2' if node['platform_family'] == 'debian' || python_version(node).to_f > 3.5
 
   return '2.1'
 end
